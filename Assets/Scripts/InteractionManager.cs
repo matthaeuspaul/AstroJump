@@ -41,7 +41,10 @@ public class InteractionManager : MonoBehaviour
     }
 
     public void Interact(CallbackContext ctx)
-        {
-        if (ctx.performed) { }     
+    {
+        if (ctx.performed && interactable != null) 
+        { 
+            interactable.Interact();
+        }     
     }
 }
