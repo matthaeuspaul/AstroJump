@@ -3,54 +3,46 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class Gun : MonoBehaviour
 {
+    [Header("Gun Stats")]
     public float damage = 10f;
     public float range = 100f;
 
     public Camera fpsCam;
+    public ParticleSystem muzzleFlash;
 
-    LayerMask layerMask;
-
-    void Awake()
+    public void Attack(CallbackContext context)
     {
-        layerMask = LayerMask.GetMask("Default");
-    }
-
-    void FixedUpdate()
-    {
-        void Attack(CallbackContext ctx)
+        Debug.Log("Attack called. Phase: {ctx.phase}");
+        if (context.performed)
         {
-            if (ctx.performed)
-                Debug.Log("M1 pressed");
-            {
-                Shoot();
-            }
+            Debug.Log("Left mouse pressed");
+            Shoot();
         }
     }
-    
-    void Shoot() {
+
+    public void Shoot()
+    {
+        muzzleFlash.Play();
+        Debug.Log("Shoot called");
         RaycastHit hit;
+        Ray ray = fpsCam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
-        if (Physics.Raycast(transform.position, transform.forward , out hit, Mathf.Infinity, layerMask))
-
+        if (Physics.Raycast(ray, out hit, range))
         {
-            Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.forward * 1000, Color.white);
-            Debug.Log("Did not Hit");
-        }
-
-        /* if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
-        {
-            Debug.Log(hit.transform.name);
+            Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.yellow);
+            Debug.Log($"Hit: {hit.transform.name}");
 
             Target target = hit.transform.GetComponent<Target>();
             if (target != null)
             {
+                Debug.Log($"Target hit. Damage: {damage}");
                 target.TakeDamage(damage);
             }
-        } */
+        }
+        else
+        {
+            Debug.DrawRay(ray.origin, ray.direction * range, Color.red);
+            Debug.Log("No hit");
+        }
     }
 }
