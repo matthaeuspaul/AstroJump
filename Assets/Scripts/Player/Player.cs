@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 public class Player : MonoBehaviour
@@ -6,13 +7,17 @@ public class Player : MonoBehaviour
     // Player components
 
     private Rigidbody _rb; // Reference to the Rigidbody component for physics-based movement
+    private PlayerInput _playerinput; // Reference to the PlayerInput component for handling input actions
     private Vector2 _movementInput; // Input for player movement, using Vector2 for 2D input (x, y)
     private Transform _camTransform; // Reference to the camera transform for movement direction
+    [SerializeField] GameObject _pauseMenu; // Reference to the pause menu GameObject
     [HideInInspector] public float _speed; // Default walking speed
     public bool isGrounded { get; private set; } // Flag to check if the player is on the ground
     public bool isAirborne { get; private set; } // Flag to check if the player is in the air (not grounded)
     public bool isRunning { get; private set; } // Flag to check if the player is running
 
+    private float _lastPause = -1f; // Timestamp of the last pause action to prevent rapid toggling
+    private const float pauseCooldown = 0.2f; // Cooldown time between pause actions
 
     [Header("Movement")]
     [SerializeField] public float _walkSpeed; // Walking speed for the player
@@ -31,9 +36,11 @@ public class Player : MonoBehaviour
 
     // Current state of the player
     private IPlayerState _currentState;
+    private IPlayerState _previousGameplayState; // To store the previous state before pausing
     public WalkingState walkingState { get; private set; } 
     public RunningState runningState { get; private set; }
     public AirborneState airborneState { get; private set; }
+    public PausedState pausedState { get; private set; }
 
     // Read only components for Player States to access
     public Vector2 movementInput => _movementInput;
@@ -43,11 +50,13 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>(); // Get the Rigidbody component attached to the player
+        _playerinput = GetComponent<PlayerInput>(); // Get the PlayerInput component attached to the player
         _camTransform = Camera.main.transform; // Get the main camera's transform for movement direction
         // Initialize states
         walkingState = new WalkingState(this);
         runningState = new RunningState(this);
         airborneState = new AirborneState(this);
+        pausedState = new PausedState(this, _pauseMenu, _playerinput);
         _currentState = walkingState; // Set the initial state to walking
         _currentState.Enter(); // Call the Enter method of the initial state
     }
@@ -71,6 +80,11 @@ public class Player : MonoBehaviour
     }
     public void TransitionToState(IPlayerState newState)
     {
+        if (_currentState != pausedState)
+        {
+            // Store the current state as the previous gameplay state before pausing
+            _previousGameplayState = _currentState; 
+        }
         // Transition to a new state
         _currentState?.Exit();
         _currentState = newState;
@@ -121,4 +135,30 @@ public class Player : MonoBehaviour
             TransitionToState(walkingState);
         }
     }
+    public void Pause(CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            // Prevent rapid toggling of pause state caused by the action Map switch and holding the escape Button
+            if (Time.unscaledTime - _lastPause < pauseCooldown)
+                return;
+            _lastPause = Time.unscaledTime;
+            // Toggle between paused and previous gameplay state
+            if (_currentState == pausedState)
+            {
+                TransitionToState(_previousGameplayState);
+            }
+            else
+            {
+                TransitionToState(pausedState);
+            }
+        }
+    }
+    public void Resume()
+    {
+        if (_currentState == pausedState)
+        {
+            TransitionToState(_previousGameplayState);
+        }
+    } 
 }
