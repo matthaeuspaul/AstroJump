@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using static UnityEngine.InputSystem.InputAction;
+using UnityEngine.VFX;
 
 public class Gun : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Gun : MonoBehaviour
 
     public Camera fpsCam;
     public Transform muzzlePoint;
-    public ParticleSystem muzzleFlash;
+    public VisualEffect muzzleFlash;
     public GameObject impactEffect;
 
     [Header("Tracer Settings")]
@@ -30,13 +31,11 @@ public class Gun : MonoBehaviour
             Debug.Log("Start continuous shooting");
             isShooting = true;
 
-            // Stoppe vorherige Coroutine falls sie noch läuft
             if (fireCoroutine != null)
             {
                 StopCoroutine(fireCoroutine);
             }
 
-            // Starte Coroutine für kontinuierliches Schießen
             fireCoroutine = StartCoroutine(ContinuousFire());
         }
         else if (context.canceled)
@@ -44,7 +43,6 @@ public class Gun : MonoBehaviour
             Debug.Log("Stop shooting");
             isShooting = false;
 
-            // Stoppt die Coroutine
             if (fireCoroutine != null)
             {
                 StopCoroutine(fireCoroutine);
@@ -66,7 +64,12 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        muzzleFlash.Play();
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.Stop();
+            muzzleFlash.Reinit();
+            muzzleFlash.Play();
+        }
         Debug.Log("Shoot called");
 
         RaycastHit hit;
@@ -98,7 +101,6 @@ public class Gun : MonoBehaviour
             targetPoint = ray.origin + ray.direction * range;
         }
 
-        // Tracer von Mündung zum Zielpunkt spawnen
         SpawnTracer(tracerStartPoint, targetPoint);
     }
 
