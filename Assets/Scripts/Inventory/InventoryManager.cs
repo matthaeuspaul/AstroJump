@@ -7,15 +7,13 @@ public class InventoryManager : MonoBehaviour
 {
     public List<InventorySlot> inventorySlots = new List<InventorySlot>();
 
-    private bool slotIsOccupied = false;
     public void AddItem(ItemData itemData)
     {
         foreach (var slot in inventorySlots)
         {
-            if (!slotIsOccupied) 
+            if (!slot.slotIsOccupied) 
             {
-                SpawnNewItem(itemData, slot);
-                slotIsOccupied = true; 
+                SpawnNewItem(itemData, slot); 
                 break;
             }
         }
@@ -26,16 +24,29 @@ public class InventoryManager : MonoBehaviour
     void SpawnNewItem(ItemData itemData, InventorySlot slot)
     {
         // Zeige das entsprechende Sprite im Slot
-        Debug.Log($"Spawning item {itemData.image } in slot {slot.slotIndex}");
+        slot.SpawnItem(itemData);
     }
-   
+
     public void RemoveItem(ItemData itemData) // einfach weg machen
     {
-        Debug.Log($"Item {itemData.itemName} removed from inventory.");
+        foreach (var slot in inventorySlots)
+        {
+            if (slot.slotIsOccupied && slot.currentItem == itemData)
+            {
+                ClearItem(itemData, slot);
+                break;
+            }
+        }
     }
 
     public void UseItem(ItemData itemData) // aus inventar nehmen und benutzen
     {
         Debug.Log($"Item {itemData.itemName} used.");
+    }
+
+    void ClearItem(ItemData itemData, InventorySlot slot)
+    {
+        // Zeige das entsprechende Sprite im Slot
+        slot.ClearItem(itemData);
     }
 }
