@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a5c5b71b59e9b4bb28cd8b93473d9b, type: 3}
   m_Name: ItemXY
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  itemType: 1
-  image: {fileID: 0}
+  prefab: {fileID: 6052665596443679477, guid: 5f0ba82b03ab7364daa4653dd01121aa, type: 3}
+  itemName: Apple
+  itemType: 0
+  image: {fileID: 21300000, guid: 60c1d42986dc0094c808b9e135f31ba2, type: 3}
   isStackable: 0
   maxStackSize: 0

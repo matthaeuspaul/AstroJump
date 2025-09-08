@@ -9,8 +9,10 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(ItemData itemData)
     {
+        // Finde den ersten freien Slot
         foreach (var slot in inventorySlots)
         {
+            // Wenn der Slot frei ist, füge das Item hinzu
             if (!slot.slotIsOccupied) 
             {
                 SpawnNewItem(itemData, slot); 
@@ -29,8 +31,10 @@ public class InventoryManager : MonoBehaviour
 
     public void RemoveItem(ItemData itemData) // einfach weg machen
     {
+        // Finde den Slot mit dem entsprechenden Item
         foreach (var slot in inventorySlots)
         {
+            // Wenn der Slot das Item enthält, entferne es
             if (slot.slotIsOccupied && slot.currentItem == itemData)
             {
                 ClearItem(itemData, slot);
