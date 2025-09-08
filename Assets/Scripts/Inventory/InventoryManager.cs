@@ -5,14 +5,23 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public List<InventorySlot> inventorySlots = new List<InventorySlot>();
+    [SerializeField] private List<InventorySlot> inventorySlots = new List<InventorySlot>();
+    private InventorySlot selectedSlot;
+    private Transform cameraTransform;
 
+    private void Start()
+    {
+        SelectSlot(0) ;
+        cameraTransform = Camera.main.transform;
+    }
+
+    // Add item to inventory
     public void AddItem(ItemData itemData)
     {
-        // Finde den ersten freien Slot
+        // find the first free slot
         foreach (var slot in inventorySlots)
         {
-            // Wenn der Slot frei ist, füge das Item hinzu
+            // if slot is free, spawn item there
             if (!slot.slotIsOccupied) 
             {
                 SpawnNewItem(itemData, slot); 
@@ -23,34 +32,57 @@ public class InventoryManager : MonoBehaviour
         Debug.Log($"Item {itemData.itemName} added to inventory.");
     }
 
+    // Spawn item in slot
     void SpawnNewItem(ItemData itemData, InventorySlot slot)
     {
-        // Zeige das entsprechende Sprite im Slot
+        // show the corresponding sprite in the slot
         slot.SpawnItem(itemData);
     }
 
-    public void RemoveItem(ItemData itemData) // einfach weg machen
+    public void SelectSlot(int slotIndex)
     {
-        // Finde den Slot mit dem entsprechenden Item
-        foreach (var slot in inventorySlots)
+        selectedSlot?.DebugSelect(false); // deselect previous slot
+        selectedSlot = inventorySlots[slotIndex];
+        selectedSlot.DebugSelect(true); // select new slot
+    }
+
+    public void UseSelectedItem() // use item from inventory
+    {
+        if (selectedSlot.slotIsOccupied)
         {
-            // Wenn der Slot das Item enthält, entferne es
-            if (slot.slotIsOccupied && slot.currentItem == itemData)
-            {
-                ClearItem(itemData, slot);
-                break;
-            }
+            selectedSlot.UseItem();
+        }
+        else
+        {
+            Debug.Log("No item in the selected slot to use.");
         }
     }
 
-    public void UseItem(ItemData itemData) // aus inventar nehmen und benutzen
+    public void DropItem()
     {
-        Debug.Log($"Item {itemData.itemName} used.");
+        if (!selectedSlot.slotIsOccupied)
+        {
+            Debug.Log("No item in the selected slot to drop.");
+            return;
+        }
+
+        // Here you would typically instantiate the item in the game world
+        Instantiate(selectedSlot.currentItem.itemPrefab, cameraTransform.position + cameraTransform.forward * 3f, cameraTransform.rotation); 
+
+        Debug.Log($"Item {selectedSlot.currentItem.itemName} dropped from inventory.");
+        ClearItem();
     }
 
-    void ClearItem(ItemData itemData, InventorySlot slot)
+    private void ClearItem()
     {
-        // Zeige das entsprechende Sprite im Slot
-        slot.ClearItem(itemData);
+        if (selectedSlot.slotIsOccupied)
+        {
+            selectedSlot.ClearItem();
+        }
+        else
+        {
+            Debug.Log("No item in the selected slot to use.");
+        }
+
     }
 }

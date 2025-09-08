@@ -15,10 +15,24 @@ public class InventorySlot : MonoBehaviour
         itemImage.sprite = itemData.image;
     }
 
-    public void ClearItem(ItemData itemData)
+    public void ClearItem()
     {
         slotIsOccupied = false;
         currentItem = null;
         itemImage.sprite = null;
+    }
+
+    public void UseItem() // use item from inventory
+    {
+        Debug.Log($"Item {currentItem.itemName} used.");
+        ClearItem();
+    }
+
+    public void DebugSelect(bool isSelected)
+    {
+        if (isSelected)
+            GetComponent<Image>().color = Color.yellow;
+        else
+            GetComponent<Image>().color = Color.white;
     }
 }

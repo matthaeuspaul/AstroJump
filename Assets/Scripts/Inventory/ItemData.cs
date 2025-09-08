@@ -9,6 +9,7 @@ public class ItemData : ScriptableObject
     public Sprite image;
     public bool isStackable;
     public int maxStackSize;
+    public GameObject itemPrefab;
 
     public enum ItemType
     {
