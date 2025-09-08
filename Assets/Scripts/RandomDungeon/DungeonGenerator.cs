@@ -23,10 +23,18 @@ public class DungeonGenerator : MonoBehaviour
     private TileInstance[,] tileGrid;      // Internal representation of the grid
     private bool[,] visited;       // Tracks visited cells during generation
 
+    [Header("Spawn and Exit Settings")]
+    [SerializeField] private int minDistanceBetweenSpawnAndExit = 20; // Minimum distance between spawn and exit points
+    [SerializeField] private List<TileData> spawnTiles; // List of tiles suitable for spawn point
+    private TileInstance spawnTile;    // TileInstance for the spawn point
+    private TileInstance exitTile;     // TileInstance for the exit point
+    
+
     public void Start()
     {
         // Generate the level only on the server
         GenerateLevel();
+        SelectSpawnAndExit();
     }
 
     private void GenerateLevel()
@@ -233,6 +241,102 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
     }
+     private bool isTileEmpty(TileInstance tile)
+      {
+          var data = tile.tileData;
+
+      return  !data.hasDoor && 
+              !data.hasGenerator && 
+              !data.hasLever && 
+              !data.hasLightActive && 
+              !data.hasLightInactive && 
+              !data.hasPortal && 
+              !data.hasTrap;
+     }
+
+    private TileData GetMatchingTile(TileData originalTile)
+    {
+        foreach (var tile in spawnTiles)
+        {
+            if (tile.topOpen == originalTile.topOpen &&
+                tile.bottomOpen == originalTile.bottomOpen &&
+                tile.leftOpen == originalTile.leftOpen &&
+                tile.rightOpen == originalTile.rightOpen)
+            {
+                return tile; // Return the first matching tile found
+            }
+        }
+        return null; // No matching tile found
+    }
+    private void SelectSpawnAndExit() { 
+
+        List<TileInstance> emptyTile = new List<TileInstance>();
+        int attempts = 0;
+        int maxAttempts = 100;
+
+        // Collect all empty tiles
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                var tile = tileGrid[x, y];
+                if (tile != null && isTileEmpty(tile))
+                {
+                    emptyTile.Add(tile);
+                }
+            }
+        }
+        if (emptyTile.Count < 2)
+        {
+            Debug.LogWarning("Not enough empty tiles to place spawn and exit.");
+            return;
+        }
+        // Randomly select spawn and exit tiles and ensuring minimum distance
+
+        do
+        {
+            spawnTile = emptyTile[Random.Range(0, emptyTile.Count)];
+            exitTile = emptyTile[Random.Range(0, emptyTile.Count)];
+            attempts++;
+        }
+        while (Vector2Int.Distance(spawnTile.gridPosition, exitTile.gridPosition) < minDistanceBetweenSpawnAndExit);
+
+        if (attempts >= maxAttempts)
+        {
+            Debug.LogWarning("Could not find suitable spawn and exit tiles with the required distance.");
+        }
+        // Replace spawn tile with a matching spawn tile from the spawnTiles list
+        var matchingSpawnTile = GetMatchingTile(spawnTile.tileData);
+
+        spawnTile.tileData = matchingSpawnTile ?? spawnTile.tileData; // Use matching tile or original if none found
+
+        if (spawnTile.instance != null)
+        {
+            Destroy(spawnTile.instance); // Remove the old instance
+            spawnTile.instance = Instantiate(spawnTile.tileData.prefab, spawnTile.worldPosition, Quaternion.identity, transform);
+            spawnTile.instance.name = $"Spawn_{spawnTile.gridPosition.x}_{spawnTile.gridPosition.y}_{spawnTile.tileData.name}";
+        }
+
+        /*   // Mark spawn and exit tiles in the scene (for example, change their color)
+           if (spawnTile.instance != null)
+           {
+               var renderer = spawnTile.instance.GetComponent<Renderer>();
+               if (renderer != null)
+               {
+                   renderer.material.color = Color.green; // Mark spawn tile in green
+               }
+           }
+           if (exitTile.instance != null)
+           {
+               var renderer = exitTile.instance.GetComponent<Renderer>();
+               if (renderer != null)
+               {
+                   renderer.material.color = Color.red; // Mark exit tile in red
+               }
+           }
+        */
+    }
+
 
     // ask ki to give me a methode to visualize the connections between tiles
     /* private void OnDrawGizmos()

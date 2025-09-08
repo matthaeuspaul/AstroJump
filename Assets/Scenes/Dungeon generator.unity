@@ -1828,6 +1828,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 28449c1ca8f5a614ab64661b9590dc99, type: 2}
   - {fileID: 11400000, guid: b5dc48720e401f243839161dbe6e993e, type: 2}
   - {fileID: 11400000, guid: 320ae33c711adfa43a5fd9e495e769f2, type: 2}
+  minDistanceBetweenSpawnAndExit: 20
+  spawnTiles:
+  - {fileID: 11400000, guid: 8111c9420cf602f4b9c778653b785172, type: 2}
+  - {fileID: 11400000, guid: e5748b494db0e37428e690c705b6b202, type: 2}
+  - {fileID: 11400000, guid: e409dfd55b454e645975c3c1a7dc79af, type: 2}
+  - {fileID: 11400000, guid: 756017ea122778846bae456cbcd33f95, type: 2}
+  - {fileID: 11400000, guid: 54f8d768e1a264549b8d4be8c62c54f1, type: 2}
+  - {fileID: 11400000, guid: 5bcd0e8cab1d41847b90eb74ec321f71, type: 2}
+  - {fileID: 11400000, guid: 7838c6bb1374d0a4cbbe3f074d704e7e, type: 2}
+  - {fileID: 11400000, guid: 1e37e4f06f63c044eae1ab6945b4d846, type: 2}
+  - {fileID: 11400000, guid: 72f7d3078be704c4a86a7559063464ff, type: 2}
+  - {fileID: 11400000, guid: 254adb4a6ed50874faf45928ba820dca, type: 2}
+  - {fileID: 11400000, guid: 313fb4b3619855f458dff14d996311c9, type: 2}
+  - {fileID: 11400000, guid: eff892efd9832664baffa29f9d4a178f, type: 2}
+  - {fileID: 11400000, guid: 79f68c91cee93a84198d2a59778b4a5a, type: 2}
+  - {fileID: 11400000, guid: ded360ac01f81cd409625217938c9362, type: 2}
+  - {fileID: 11400000, guid: b5aaf223218e905478979704638c64a4, type: 2}
 --- !u!4 &1344427408
 Transform:
   m_ObjectHideFlags: 0
