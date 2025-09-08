@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56c74ca0da8800419d9f94eb37b7618, type: 3}
   m_Name: OnlyRight
   m_EditorClassIdentifier: Assembly-CSharp::TileData
+  spawnChanceTicket: 1
   prefab: {fileID: 1024103105621275262, guid: 9ffe0f371bc8cfd4b8c54889fe30f80a, type: 3}
   topOpen: 0
   bottomOpen: 0

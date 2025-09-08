@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56c74ca0da8800419d9f94eb37b7618, type: 3}
   m_Name: BotClosed
   m_EditorClassIdentifier: Assembly-CSharp::TileData
+  spawnChanceTicket: 1
   prefab: {fileID: 6947818720136048502, guid: 84cdf764f6602a74bb5a44783e0399b7, type: 3}
   topOpen: 1
   bottomOpen: 0

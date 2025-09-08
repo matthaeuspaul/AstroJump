@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56c74ca0da8800419d9f94eb37b7618, type: 3}
   m_Name: Floor1
   m_EditorClassIdentifier: Assembly-CSharp::TileData
+  spawnChanceTicket: 20
   prefab: {fileID: 665762413742456017, guid: 1a04d202e68f9794e88bf858b234cfe8, type: 3}
   topOpen: 1
   bottomOpen: 1

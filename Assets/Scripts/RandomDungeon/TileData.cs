@@ -4,7 +4,7 @@ using UnityEngine;
 public class TileData : ScriptableObject
 {
     // Basic tile properties
-
+    public int spawnChanceTicket = 1;        // Number of tickets for this tile
     public GameObject prefab; // Prefab for the tile
     public bool topOpen;      // Is the top side open
     public bool bottomOpen;   // Is the bottom side open

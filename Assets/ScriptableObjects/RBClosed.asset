@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56c74ca0da8800419d9f94eb37b7618, type: 3}
   m_Name: RBClosed
   m_EditorClassIdentifier: Assembly-CSharp::TileData
+  spawnChanceTicket: 1
   prefab: {fileID: 8368831661057545714, guid: f8f23e9e3f1dcf6448c1d5670af4bd89, type: 3}
   topOpen: 1
   bottomOpen: 0

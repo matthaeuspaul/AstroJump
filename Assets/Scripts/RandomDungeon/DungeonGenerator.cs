@@ -94,7 +94,8 @@ public class DungeonGenerator : MonoBehaviour
         {
             if (IsTileValid(item, x, y))
             {
-                spawnableObjects.Add(item); // Add valid tile to the list
+                for (int i = 0; i < item.spawnChanceTicket; i++) // Add the tile based on its spawn chance tickets
+                    spawnableObjects.Add(item); // Add valid tile to the list
             }
         }
         if (spawnableObjects.Count > 0) // If there are valid tiles, randomly select one
