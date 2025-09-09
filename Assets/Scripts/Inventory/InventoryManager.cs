@@ -6,20 +6,24 @@ using UnityEngine.InputSystem;
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField] private List<InventorySlot> inventorySlots = new List<InventorySlot>();
-    private InventorySlot selectedSlot;
-    private Transform cameraTransform;
-    private PlayerInput playerInput;
+    [SerializeField] private List<InventorySlot> inventorySlots = new List<InventorySlot>(); // List of inventory slots
+    private InventorySlot selectedSlot; // Currently selected slot
+    private Transform cameraTransform; // Reference to the main camera's transform
+    private PlayerInput playerInput; // Reference to PlayerInput component
 
     private void Start()
     {
-        SelectSlot(0) ;
-        cameraTransform = Camera.main.transform;
+        SelectSlot(0); // Select the first slot by default
+        cameraTransform = Camera.main.transform; // Cache the main camera's transform
         Subscribe();
     }
 
+    // <summary>
+    // Subscribe to input events
+    // </summary>
     private void Subscribe()
     {
+        
         if (playerInput == null)
         {
             playerInput = FindFirstObjectByType<PlayerInput>();
@@ -34,6 +38,9 @@ public class InventoryManager : MonoBehaviour
         playerInput.actions["DropItem"].performed += ctx => DropItem();
     }
 
+    // <summary>
+    // Unsubscribe from input events
+    // </summary>
     private void Unsubscribe()
     {
         playerInput.actions["ItemSelectionSlot1"].performed -= ctx => SelectSlot(0);
@@ -48,13 +55,13 @@ public class InventoryManager : MonoBehaviour
 
     }
 
+    // <summary>
     // Add item to inventory
+    // </summary>
     public void AddItem(ItemData itemData)
     {
-        // find the first free slot
         foreach (var slot in inventorySlots)
         {
-            // if slot is free, spawn item there
             if (!slot.slotIsOccupied) 
             {
                 SpawnNewItem(itemData, slot); 
@@ -65,13 +72,17 @@ public class InventoryManager : MonoBehaviour
         Debug.Log($"Item {itemData.itemName} added to inventory.");
     }
 
-    // Spawn item in slot
+    // <summary>
+    // Spawn new item in the specified slot
+    // </summary>
     void SpawnNewItem(ItemData itemData, InventorySlot slot)
     {
-        // show the corresponding sprite in the slot
         slot.SpawnItem(itemData);
     }
 
+    // <summary>
+    // Select inventory slot by index
+    // </summary>
     public void SelectSlot(int slotIndex)
     {
         selectedSlot?.DebugSelect(false); // deselect previous slot
@@ -79,7 +90,10 @@ public class InventoryManager : MonoBehaviour
         selectedSlot.DebugSelect(true); // select new slot
     }
 
-    public void UseSelectedItem() // use item from inventory
+    // <summary>
+    // Use item from selected slot
+    // </summary>
+    public void UseSelectedItem() 
     {
         if (!selectedSlot.slotIsOccupied)
         {
@@ -90,6 +104,9 @@ public class InventoryManager : MonoBehaviour
         selectedSlot.UseItem();
     }
 
+    // <summary>
+    // Drop item from selected slot
+    // </summary>
     public void DropItem()
     {
         if (!selectedSlot.slotIsOccupied)
@@ -98,13 +115,15 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        // Here you would typically instantiate the item in the game world
         Instantiate(selectedSlot.currentItem.itemPrefab, cameraTransform.position + cameraTransform.forward * 3f, cameraTransform.rotation); 
 
         Debug.Log($"Item {selectedSlot.currentItem.itemName} dropped from inventory.");
         ClearItem();
     }
 
+    // <summary>
+    // Clear item from selected slot
+    // </summary>
     private void ClearItem()
     {
         if (!selectedSlot.slotIsOccupied)
@@ -116,6 +135,9 @@ public class InventoryManager : MonoBehaviour
         selectedSlot.ClearItem();
     }
 
+    // <summary>
+    // Cleanup on destroy
+    // </summary>
     private void OnDestroy()
     {
         Unsubscribe();

@@ -1,9 +1,10 @@
 using UnityEngine;
 
-
+// ScriptableObject to hold item data
 [CreateAssetMenu(menuName = "Inventory/Item")]
 public class ItemData : ScriptableObject
 {
+    // Item properties
     public string itemName;
     public ItemType itemType;
     public Sprite image;

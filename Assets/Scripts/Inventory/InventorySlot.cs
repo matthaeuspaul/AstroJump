@@ -8,6 +8,10 @@ public class InventorySlot : MonoBehaviour
     public ItemData currentItem;
 
     [SerializeField] Image itemImage;
+
+    // <summary>
+    // Spawn item in the inventory slot
+    // </summary>
     public void SpawnItem(ItemData itemData)
     {
         slotIsOccupied = true;
@@ -15,6 +19,9 @@ public class InventorySlot : MonoBehaviour
         itemImage.sprite = itemData.image;
     }
 
+    // <summary>
+    // Clear item from the inventory slot
+    // </summary>
     public void ClearItem()
     {
         slotIsOccupied = false;
@@ -22,12 +29,18 @@ public class InventorySlot : MonoBehaviour
         itemImage.sprite = null;
     }
 
+    // <summary>
+    // Use item from the inventory slot
+    // </summary>
     public void UseItem() // use item from inventory
     {
         Debug.Log($"Item {currentItem.itemName} used.");
         ClearItem();
     }
 
+    // <summary>
+    // Debug method to visually indicate selection state
+    // </summary>
     public void DebugSelect(bool isSelected)
     {
         if (isSelected)
