@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class InventoryManager : MonoBehaviour
@@ -8,11 +9,43 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private List<InventorySlot> inventorySlots = new List<InventorySlot>();
     private InventorySlot selectedSlot;
     private Transform cameraTransform;
+    private PlayerInput playerInput;
 
     private void Start()
     {
         SelectSlot(0) ;
         cameraTransform = Camera.main.transform;
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        if (playerInput == null)
+        {
+            playerInput = FindFirstObjectByType<PlayerInput>();
+        }
+        playerInput.actions["ItemSelectionSlot1"].performed += ctx => SelectSlot(0);
+        playerInput.actions["ItemSelectionSlot2"].performed += ctx => SelectSlot(1);
+        playerInput.actions["ItemSelectionSlot3"].performed += ctx => SelectSlot(2);
+        playerInput.actions["ItemSelectionSlot4"].performed += ctx => SelectSlot(3);
+        playerInput.actions["ItemSelectionSlot5"].performed += ctx => SelectSlot(4);
+        playerInput.actions["ItemSelectionSlot6"].performed += ctx => SelectSlot(5);
+        playerInput.actions["ItemSelectionSlot7"].performed += ctx => SelectSlot(6);
+        playerInput.actions["DropItem"].performed += ctx => DropItem();
+    }
+
+    private void Unsubscribe()
+    {
+        playerInput.actions["ItemSelectionSlot1"].performed -= ctx => SelectSlot(0);
+        playerInput.actions["ItemSelectionSlot2"].performed -= ctx => SelectSlot(1);
+        playerInput.actions["ItemSelectionSlot3"].performed -= ctx => SelectSlot(2);
+        playerInput.actions["ItemSelectionSlot4"].performed -= ctx => SelectSlot(3);
+        playerInput.actions["ItemSelectionSlot5"].performed -= ctx => SelectSlot(4);
+        playerInput.actions["ItemSelectionSlot6"].performed -= ctx => SelectSlot(5);
+        playerInput.actions["ItemSelectionSlot7"].performed -= ctx => SelectSlot(6);
+        playerInput.actions["DropItem"].performed -= ctx => DropItem();
+
+
     }
 
     // Add item to inventory
@@ -48,14 +81,13 @@ public class InventoryManager : MonoBehaviour
 
     public void UseSelectedItem() // use item from inventory
     {
-        if (selectedSlot.slotIsOccupied)
-        {
-            selectedSlot.UseItem();
-        }
-        else
+        if (!selectedSlot.slotIsOccupied)
         {
             Debug.Log("No item in the selected slot to use.");
+            return;
         }
+
+        selectedSlot.UseItem();
     }
 
     public void DropItem()
@@ -75,14 +107,17 @@ public class InventoryManager : MonoBehaviour
 
     private void ClearItem()
     {
-        if (selectedSlot.slotIsOccupied)
-        {
-            selectedSlot.ClearItem();
-        }
-        else
+        if (!selectedSlot.slotIsOccupied)
         {
             Debug.Log("No item in the selected slot to use.");
+            return;
         }
 
+        selectedSlot.ClearItem();
+    }
+
+    private void OnDestroy()
+    {
+        Unsubscribe();
     }
 }
