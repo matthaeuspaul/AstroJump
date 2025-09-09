@@ -21,6 +21,7 @@ MonoBehaviour:
   hasTrap: 0
   hasLever: 0
   hasDoor: 0
+  hasSpawnPoint: 1
   hasPortal: 0
   hasGenerator: 0
   hasLightActive: 0
