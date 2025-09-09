@@ -24,6 +24,7 @@ public class DungeonGenerator : MonoBehaviour
     private bool[,] visited;       // Tracks visited cells during generation
 
     [Header("Spawn and Exit Settings")]
+    // never change minDistanceBetweenSpawnAndExit to a value higher than width or height (unity crash)
     [SerializeField] private int minDistanceBetweenSpawnAndExit = 20; // Minimum distance between spawn and exit points
     [SerializeField] private List<TileData> spawnTiles; // List of tiles suitable for spawn point
     private TileInstance spawnTile;    // TileInstance for the spawn point
@@ -317,7 +318,7 @@ public class DungeonGenerator : MonoBehaviour
             spawnTile.instance.name = $"Spawn_{spawnTile.gridPosition.x}_{spawnTile.gridPosition.y}_{spawnTile.tileData.name}";
         }
 
-        /*   // Mark spawn and exit tiles in the scene (for example, change their color)
+           // Mark spawn and exit tiles in the scene (for example, change their color)
            if (spawnTile.instance != null)
            {
                var renderer = spawnTile.instance.GetComponent<Renderer>();
@@ -334,7 +335,7 @@ public class DungeonGenerator : MonoBehaviour
                    renderer.material.color = Color.red; // Mark exit tile in red
                }
            }
-        */
+        
     }
 
 
