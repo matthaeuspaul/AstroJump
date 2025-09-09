@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7877056665222195894}
   - component: {fileID: 5618211240166319016}
   m_Layer: 6
-  m_Name: Cube
+  m_Name: Cube (wip_item)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
