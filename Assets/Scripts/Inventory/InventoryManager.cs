@@ -43,6 +43,7 @@ public class InventoryManager : MonoBehaviour
     // </summary>
     private void Unsubscribe()
     {
+        if (playerInput = null) return;
         playerInput.actions["ItemSelectionSlot1"].performed -= ctx => SelectSlot(0);
         playerInput.actions["ItemSelectionSlot2"].performed -= ctx => SelectSlot(1);
         playerInput.actions["ItemSelectionSlot3"].performed -= ctx => SelectSlot(2);
@@ -51,8 +52,6 @@ public class InventoryManager : MonoBehaviour
         playerInput.actions["ItemSelectionSlot6"].performed -= ctx => SelectSlot(5);
         playerInput.actions["ItemSelectionSlot7"].performed -= ctx => SelectSlot(6);
         playerInput.actions["DropItem"].performed -= ctx => DropItem();
-
-
     }
 
     // <summary>
