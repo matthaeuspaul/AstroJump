@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     private PlayerInput _playerinput; // Reference to the PlayerInput component for handling input actions
     private Vector2 _movementInput; // Input for player movement, using Vector2 for 2D input (x, y)
     private Transform _camTransform; // Reference to the camera transform for movement direction
+    private Animator animator; // Reference to the Animator component for handling animations
+    private string currentAnimation = ""; // Current animation state
     [SerializeField] GameObject _pauseMenu; // Reference to the pause menu GameObject
     [HideInInspector] public float _speed; // Default walking speed
     public bool isGrounded { get; private set; } // Flag to check if the player is on the ground
@@ -30,7 +32,6 @@ public class Player : MonoBehaviour
     [Header("Ground Detection")]
     [SerializeField] private float height; // Height of the player for ground detection, used to determine how far down to check for ground
     [SerializeField] private LayerMask Ground; // LayerMask for ground detection
-
 
     //State Machine Stuff
 
@@ -65,19 +66,58 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen and hide it
     }
     private void Update()
     {
+        HandlePlayerRotation(); // Handle mouse look for camera movement
         // Check if the player is grounded
         isGrounded = Physics.Raycast(transform.position, Vector3.down, height / 2 + 0.1f, Ground);
         _currentState?.Update(); // Call the Update method of the current state
+
+        CheckAnimation(); // Update the player's animation based on movement input
     }
     private void FixedUpdate()
     {
         SpeedControl(); // Control the player's speed to not exceed the maximum speed
         _currentState?.FixedUpdate(); // Call the FixedUpdate method of the current state
     }
+
+    private void CheckAnimation()
+    {
+        if (_movementInput.y == 1)
+            ChangeAnimation("Walking");
+        else if (_movementInput.y == -1)
+            ChangeAnimation("Walking_Backwards");
+        else if (_movementInput.x == 1)
+            ChangeAnimation("Walking_Right");
+        else if (_movementInput.x == -1)
+            ChangeAnimation("Walking_Left");
+        else
+            ChangeAnimation("Idle");
+    }
+
+    public void ChangeAnimation(string animation, float crossfade = 0.2f)
+    {
+        if (currentAnimation != animation)
+        {
+            currentAnimation = animation;
+            animator.CrossFade(animation, crossfade);
+        }
+    }
+
+    private void HandlePlayerRotation()
+    {
+
+        if (_camTransform != null)
+        {
+            // Rotate the player to face the same direction as the camera on the Y axis
+            float cameraYRotation = _camTransform.eulerAngles.y;
+            transform.rotation = Quaternion.Euler(0f, cameraYRotation, 0f);
+        }
+    }
+
     public void TransitionToState(IPlayerState newState)
     {
         if (_currentState != pausedState)
@@ -113,6 +153,7 @@ public class Player : MonoBehaviour
         if (ctx.performed && isGrounded)
         {
             _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse); // Apply an upward force to the Rigidbody for jumping
+            ChangeAnimation("Jumping", 0.1f); // Change to jumping animation
         }
     }
     public void Run(CallbackContext ctx)
