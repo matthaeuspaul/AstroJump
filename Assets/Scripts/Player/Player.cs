@@ -30,7 +30,10 @@ public class Player : MonoBehaviour
     [SerializeField] public float _airMultiplier; // Multiplier for air control, affects movement speed while in the air
 
     [Header("Ground Detection")]
-    [SerializeField] private float height; // Height of the player for ground detection, used to determine how far down to check for ground
+    [SerializeField] private Collider leftFootCollider; // Reference to the left foot collider for ground detection
+    [SerializeField] private Collider rightFootCollider; // Reference to the right foot collider for ground detection
+    [SerializeField] private float groundCheckRadius = 0.3f; // Radius for ground detection sphere
+    [SerializeField] private float groundCheckDistance = 0.1f; // Distance for ground detection raycast
     [SerializeField] private LayerMask Ground; // LayerMask for ground detection
 
     //State Machine Stuff
@@ -69,33 +72,32 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen and hide it
     }
+
     private void Update()
     {
-        HandlePlayerRotation(); // Handle mouse look for camera movement
-        // Check if the player is grounded
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, height / 2 + 0.1f, Ground);
-        _currentState?.Update(); // Call the Update method of the current state
+        HandlePlayerRotation();
 
-        CheckAnimation(); // Update the player's animation based on movement input
+        // Check both foot colliders for ground detection
+        Vector3 leftFootPos = leftFootCollider.bounds.center - new Vector3(0, leftFootCollider.bounds.extents.y, 0);
+        Vector3 rightFootPos = rightFootCollider.bounds.center - new Vector3(0, rightFootCollider.bounds.extents.y, 0);
+
+        bool leftGrounded = Physics.SphereCast(leftFootPos, groundCheckRadius, Vector3.down, out RaycastHit leftHit, groundCheckDistance, Ground);
+        bool rightGrounded = Physics.SphereCast(rightFootPos, groundCheckRadius, Vector3.down, out RaycastHit rightHit, groundCheckDistance, Ground);
+
+        // Grounded if either foot is grounded
+        isGrounded = leftGrounded || rightGrounded;
+
+        // Debug to visualize ground checks
+        Debug.DrawRay(leftFootPos, Vector3.down * groundCheckDistance, leftGrounded ? Color.green : Color.red);
+        Debug.DrawRay(rightFootPos, Vector3.down * groundCheckDistance, rightGrounded ? Color.green : Color.red);
+
+        _currentState?.Update();
     }
+
     private void FixedUpdate()
     {
         SpeedControl(); // Control the player's speed to not exceed the maximum speed
         _currentState?.FixedUpdate(); // Call the FixedUpdate method of the current state
-    }
-
-    private void CheckAnimation()
-    {
-        if (_movementInput.y == 1)
-            ChangeAnimation("Walking");
-        else if (_movementInput.y == -1)
-            ChangeAnimation("Walking_Backwards");
-        else if (_movementInput.x == 1)
-            ChangeAnimation("Walking_Right");
-        else if (_movementInput.x == -1)
-            ChangeAnimation("Walking_Left");
-        else
-            ChangeAnimation("Idle");
     }
 
     public void ChangeAnimation(string animation, float crossfade = 0.2f)
@@ -149,13 +151,22 @@ public class Player : MonoBehaviour
 
     public void Jump(CallbackContext ctx)
     {
-        // Jump only if the player is grounded
         if (ctx.performed && isGrounded)
         {
-            _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse); // Apply an upward force to the Rigidbody for jumping
-            ChangeAnimation("Jumping", 0.1f); // Change to jumping animation
+            _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+
+            // Animation basierend auf aktuellem Zustand wählen
+            if (isRunning)
+            {
+                ChangeAnimation("Running_Jump", 0.1f);
+            }
+            else
+            {
+                ChangeAnimation("Jumping", 0.1f);
+            }
         }
     }
+
     public void Run(CallbackContext ctx)
     {
         // prevent switching states when in air

@@ -37,4 +37,7 @@ public class PausedState : IPlayerState
     public void Update()
     {
     }
+
+    public void HandleAnimation() { /* No animations to handle in paused state */ }
+
 }

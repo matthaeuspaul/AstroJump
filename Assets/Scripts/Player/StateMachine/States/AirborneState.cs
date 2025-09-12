@@ -24,13 +24,11 @@ public class AirborneState : IPlayerState
     {
         MoveInAir(); // Call the method to handle movement while in the air
     }
-
     public void Update()
     {
-        // Check if the player has landed on the ground
         if (_player.isGrounded)
         {
-            // Transition to the appropriate state based on whether the player is running or walking
+            // Zum entsprechenden State wechseln - die werden die Landung handhaben
             if (_player.isRunning)
             {
                 _player.TransitionToState(_player.runningState);
@@ -39,6 +37,33 @@ public class AirborneState : IPlayerState
             {
                 _player.TransitionToState(_player.walkingState);
             }
+        }
+        HandleAnimation();
+    }
+
+    public void HandleAnimation()
+    {
+        float verticalVelocity = _player.rb.linearVelocity.y;
+
+        // Wenn wir springen und uns bewegen
+        if (verticalVelocity > 0.5f && _player.movementInput.magnitude > 0.1f && _player.isRunning)
+        {
+            _player.ChangeAnimation("Running_Jump");
+        }
+        // Normaler Sprung (stehend oder gehend)
+        else if (verticalVelocity > 0.5f)
+        {
+            _player.ChangeAnimation("Jumping");
+        }
+        // Fallen
+        else if (verticalVelocity < -0.5f)
+        {
+            _player.ChangeAnimation("Falling");
+        }
+        // Peak des Sprungs (wenig vertikale Geschwindigkeit)
+        else
+        {
+            _player.ChangeAnimation("Jumping");
         }
     }
 

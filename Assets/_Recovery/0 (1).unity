@@ -4745,10 +4745,7 @@ MonoBehaviour:
   _runSpeed: 8
   _jumpForce: 8
   _airMultiplier: 0.6
-  leftFootCollider: {fileID: 6452705233622468241}
-  rightFootCollider: {fileID: 3661821582681167530}
-  groundCheckRadius: 0.8
-  groundCheckDistance: 0.1
+  height: 2
   Ground:
     serializedVersion: 2
     m_Bits: 8
