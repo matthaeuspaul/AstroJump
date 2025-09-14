@@ -18,7 +18,13 @@ public class TileData : ScriptableObject
     public bool hasDoor;            // Does the tile have a door
     public bool hasSpawnPoint;      // Does the tile have a spawn point
     public bool hasPortal;          // Does the tile have a portal
+    public bool hasPressurePlate;   // Does the tile have a pressure plate
     public bool hasGenerator;       // Does the tile have a generator
     public bool hasLightActive;     // Does the tile have an active light
     public bool hasLightInactive;   // Does the tile have an inactive light
+
+    // activator or receiver
+
+    public bool isActivator;        // Is the tile an activator (e.g., lever, pressure plate)
+    public bool isReceiver;         // Is the tile a receiver (e.g., door, trap)
 }

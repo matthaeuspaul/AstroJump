@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f56c74ca0da8800419d9f94eb37b7618, type: 3}
-  m_Name: OnlyBot
+  m_Name: ExitBotClosed
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   spawnChanceTicket: 1
-  prefab: {fileID: 8159109286448610132, guid: 2865b565a1d2de743a5fdc11f1aa5c77, type: 3}
-  topOpen: 0
-  bottomOpen: 1
-  leftOpen: 0
-  rightOpen: 0
+  prefab: {fileID: 4176202643229708663, guid: 0bf81789392c53c45b5e9b128c5cae39, type: 3}
+  topOpen: 1
+  bottomOpen: 0
+  leftOpen: 1
+  rightOpen: 1
   hasTrap: 0
   hasLever: 0
   hasDoor: 0
-  hasPortal: 0
+  hasSpawnPoint: 0
+  hasPortal: 1
   hasGenerator: 0
   hasLightActive: 0
   hasLightInactive: 0

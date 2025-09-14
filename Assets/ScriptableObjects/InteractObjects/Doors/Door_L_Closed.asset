@@ -10,18 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f56c74ca0da8800419d9f94eb37b7618, type: 3}
-  m_Name: OnlyTop
+  m_Name: Door_L_Closed
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   spawnChanceTicket: 1
-  prefab: {fileID: 8158749561856826437, guid: 3986da812b18a084884f705eb57c1d74, type: 3}
+  prefab: {fileID: 412157103028387038, guid: a47e34cf5a11f6f42b0bcdfe8bb1e9dc, type: 3}
   topOpen: 1
-  bottomOpen: 0
+  bottomOpen: 1
   leftOpen: 0
-  rightOpen: 0
+  rightOpen: 1
   hasTrap: 0
   hasLever: 0
-  hasDoor: 0
+  hasDoor: 1
+  hasSpawnPoint: 0
   hasPortal: 0
+  hasPressurePlate: 0
   hasGenerator: 0
   hasLightActive: 0
   hasLightInactive: 0
+  isActivator: 0
+  isReceiver: 1

@@ -10,19 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f56c74ca0da8800419d9f94eb37b7618, type: 3}
-  m_Name: Floor1
+  m_Name: Lever_L_Closed
   m_EditorClassIdentifier: Assembly-CSharp::TileData
-  spawnChanceTicket: 20
-  prefab: {fileID: 665762413742456017, guid: 1a04d202e68f9794e88bf858b234cfe8, type: 3}
+  spawnChanceTicket: 1
+  prefab: {fileID: 9163766158121778033, guid: 73db21da9c8ee114eb23a8c141003095, type: 3}
   topOpen: 1
   bottomOpen: 1
-  leftOpen: 1
+  leftOpen: 0
   rightOpen: 1
   hasTrap: 0
-  hasLever: 0
+  hasLever: 1
   hasDoor: 0
   hasSpawnPoint: 0
   hasPortal: 0
+  hasPressurePlate: 0
   hasGenerator: 0
   hasLightActive: 0
   hasLightInactive: 0
+  isActivator: 1
+  isReceiver: 0

@@ -1812,6 +1812,7 @@ MonoBehaviour:
   width: 30
   height: 30
   minMapSize: 10
+  tileSize: 1
   tileOptions:
   - {fileID: 11400000, guid: 689b5563626bc804dbb724887a5d6bac, type: 2}
   - {fileID: 11400000, guid: 2cf7a8214ce45be4682aeab31b18f0d8, type: 2}
@@ -1845,6 +1846,37 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 79f68c91cee93a84198d2a59778b4a5a, type: 2}
   - {fileID: 11400000, guid: ded360ac01f81cd409625217938c9362, type: 2}
   - {fileID: 11400000, guid: b5aaf223218e905478979704638c64a4, type: 2}
+  exitTiles:
+  - {fileID: 11400000, guid: f25299a5bf92092498edbc2e77dd0989, type: 2}
+  - {fileID: 11400000, guid: 9ad08184d2d8fe04bb04d93db013df00, type: 2}
+  - {fileID: 11400000, guid: 06a5fbd7f175ec5419d0bf5c74e08845, type: 2}
+  - {fileID: 11400000, guid: bb2ece929613054479478319f82465d3, type: 2}
+  - {fileID: 11400000, guid: f8b031ccd47fc2641a487f4414c73782, type: 2}
+  - {fileID: 11400000, guid: 76ae4fb047baee747b48a021f812474e, type: 2}
+  - {fileID: 11400000, guid: cfb556ba2f464b045b7c521ae9966333, type: 2}
+  - {fileID: 11400000, guid: 5640e7a32273c3e42a9463e77c75847b, type: 2}
+  - {fileID: 11400000, guid: a7cbd86c59b216f4aa003669840a2c31, type: 2}
+  - {fileID: 11400000, guid: e3e0b511cdddf424b83b1445f117a913, type: 2}
+  - {fileID: 11400000, guid: a96982c575284d14485a2b69dbc150b3, type: 2}
+  - {fileID: 11400000, guid: 368f61564b6b1cd43bbf5cb3c0480f32, type: 2}
+  - {fileID: 11400000, guid: c13a41c1844cd6a4494ae09dc0e9e885, type: 2}
+  - {fileID: 11400000, guid: baff4c415779fd24dbfbb3f48a70bc2a, type: 2}
+  - {fileID: 11400000, guid: 0b736f06b79dab84ea9ea277e2e040f0, type: 2}
+  interactableTiles:
+  - {fileID: 11400000, guid: 18acd25286b12844cb13ce2573a9081d, type: 2}
+  - {fileID: 11400000, guid: 53d7c3c7db987a14ea8dd3671c1208f3, type: 2}
+  - {fileID: 11400000, guid: daf28b132f3ea9248abe9db8f88e172b, type: 2}
+  - {fileID: 11400000, guid: a1f23ebd9fdbc11468d0d3d74fe3efe9, type: 2}
+  - {fileID: 11400000, guid: 5ba53e5548948cf49b1e2b451fd97a25, type: 2}
+  - {fileID: 11400000, guid: 86d7727625a04d546b67fb093765a386, type: 2}
+  - {fileID: 11400000, guid: 922ba1c7f8bee3d4e86f258c32aedf94, type: 2}
+  - {fileID: 11400000, guid: 8b66c4d19a469ee448b3cfc6175b5080, type: 2}
+  - {fileID: 11400000, guid: bc2bd33304213434180eee558ba883c5, type: 2}
+  - {fileID: 11400000, guid: 1057ba847d50c454aa30c348125b470a, type: 2}
+  - {fileID: 11400000, guid: 7e444e81201a8d14ba314ab5bfd7e5d2, type: 2}
+  - {fileID: 11400000, guid: 664286f35e2d1be4f8abdd5b32290c2d, type: 2}
+  - {fileID: 11400000, guid: 8795ef28f2fff624c8cf6bbfde2e83f8, type: 2}
+  - {fileID: 11400000, guid: 014443f7b0d064449a7f93abc891c51e, type: 2}
 --- !u!4 &1344427408
 Transform:
   m_ObjectHideFlags: 0

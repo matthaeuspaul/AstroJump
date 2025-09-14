@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f56c74ca0da8800419d9f94eb37b7618, type: 3}
-  m_Name: OnlyLeft
+  m_Name: OnlyTop
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   spawnChanceTicket: 1
-  prefab: {fileID: 9152775275332535670, guid: 8114c772972652a4bae32fac0f9cfe90, type: 3}
-  topOpen: 0
+  prefab: {fileID: 8158749561856826437, guid: 3986da812b18a084884f705eb57c1d74, type: 3}
+  topOpen: 1
   bottomOpen: 0
-  leftOpen: 1
+  leftOpen: 0
   rightOpen: 0
   hasTrap: 0
   hasLever: 0
   hasDoor: 0
+  hasSpawnPoint: 0
   hasPortal: 0
   hasGenerator: 0
   hasLightActive: 0
