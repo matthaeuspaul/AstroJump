@@ -12,10 +12,12 @@ public class WalkingState : IPlayerState
     {
         // Set the player's speed to the walking speed when entering the walking state
         _player._speed = _player._walkSpeed;
+        /*
         if (_player.rb.linearVelocity.y < -5f) // Schwellenwert nach Bedarf anpassen
         {
             _player.ChangeAnimation("Falling_Land", 0.1f);
         }
+        */
         Debug.Log("Entered Walking State"); // Log message for debugging purposes
     }
 

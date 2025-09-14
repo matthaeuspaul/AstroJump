@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
@@ -12,6 +14,7 @@ public class Player : MonoBehaviour
     private Transform _camTransform; // Reference to the camera transform for movement direction
     private Animator animator; // Reference to the Animator component for handling animations
     private string currentAnimation = ""; // Current animation state
+    [SerializeField] private Collider weaponCollider; // Reference to the weapon collider
     [SerializeField] GameObject _pauseMenu; // Reference to the pause menu GameObject
     [HideInInspector] public float _speed; // Default walking speed
     public bool isGrounded { get; private set; } // Flag to check if the player is on the ground
@@ -30,11 +33,10 @@ public class Player : MonoBehaviour
     [SerializeField] public float _airMultiplier; // Multiplier for air control, affects movement speed while in the air
 
     [Header("Ground Detection")]
-    [SerializeField] private Collider leftFootCollider; // Reference to the left foot collider for ground detection
-    [SerializeField] private Collider rightFootCollider; // Reference to the right foot collider for ground detection
+    [SerializeField] private Transform groundCheck; // Position from where to check for ground
     [SerializeField] private float groundCheckRadius = 0.3f; // Radius for ground detection sphere
-    [SerializeField] private float groundCheckDistance = 0.1f; // Distance for ground detection raycast
     [SerializeField] private LayerMask Ground; // LayerMask for ground detection
+
 
     //State Machine Stuff
 
@@ -76,20 +78,11 @@ public class Player : MonoBehaviour
     private void Update()
     {
         HandlePlayerRotation();
-
-        // Check both foot colliders for ground detection
-        Vector3 leftFootPos = leftFootCollider.bounds.center - new Vector3(0, leftFootCollider.bounds.extents.y, 0);
-        Vector3 rightFootPos = rightFootCollider.bounds.center - new Vector3(0, rightFootCollider.bounds.extents.y, 0);
-
-        bool leftGrounded = Physics.SphereCast(leftFootPos, groundCheckRadius, Vector3.down, out RaycastHit leftHit, groundCheckDistance, Ground);
-        bool rightGrounded = Physics.SphereCast(rightFootPos, groundCheckRadius, Vector3.down, out RaycastHit rightHit, groundCheckDistance, Ground);
-
-        // Grounded if either foot is grounded
-        isGrounded = leftGrounded || rightGrounded;
-
-        // Debug to visualize ground checks
-        Debug.DrawRay(leftFootPos, Vector3.down * groundCheckDistance, leftGrounded ? Color.green : Color.red);
-        Debug.DrawRay(rightFootPos, Vector3.down * groundCheckDistance, rightGrounded ? Color.green : Color.red);
+        
+        // Ground dectection with SphereCheck
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, Ground);
+        // Debug visualization
+        Debug.DrawRay(groundCheck.position, Vector3.down * groundCheckRadius, isGrounded ? Color.green : Color.red);
 
         _currentState?.Update();
     }
@@ -148,6 +141,47 @@ public class Player : MonoBehaviour
         // Read the movement input from the input system
         _movementInput = ctx.ReadValue<Vector2>();
     }
+
+    public void Attack(CallbackContext ctx)
+    {
+        Debug.Log("Attack called");
+        // Only allow attacking when grounded and idle or walking
+        if (ctx.performed && isGrounded && !isRunning)
+        {
+            // Trigger attack animation
+            ChangeAnimation("Sword_Attack", 0.1f);
+
+            /*
+            // Length of the attack animation
+            float length = animator.runtimeAnimatorController.animationClips
+            .First(c => c.name == "Sword_Attack1").length;
+
+            StartCoroutine(ResetToIdle(length));
+            */
+        }
+    }
+
+    public void EnableWeaponCOllider()
+    {
+        // Enable the weapon collider during the attack animation
+        weaponCollider.enabled = true;
+    }
+
+    public void DisableWeaponCollider()
+    {
+        // Disable the weapon collider after the attack animation
+        weaponCollider.enabled = false;
+    }
+
+
+
+    /*
+    private IEnumerator ResetToIdle(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ChangeAnimation("Idle");
+    }
+    */
 
     public void Jump(CallbackContext ctx)
     {

@@ -43,6 +43,7 @@ public class AirborneState : IPlayerState
 
     public void HandleAnimation()
     {
+        /*
         float verticalVelocity = _player.rb.linearVelocity.y;
 
         // Wenn wir springen und uns bewegen
@@ -64,7 +65,7 @@ public class AirborneState : IPlayerState
         else
         {
             _player.ChangeAnimation("Jumping");
-        }
+        } */
     }
 
     private void MoveInAir()

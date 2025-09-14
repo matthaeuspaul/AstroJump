@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7916006397152243435}
   - component: {fileID: 8231423519395668723}
   - component: {fileID: 102752925043530669}
+  - component: {fileID: 169599622920679603}
   m_Layer: 0
   m_Name: Sword_placeholder
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1193761445125822100}
@@ -113,6 +114,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &169599622920679603
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5221709157998614303}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.095849596, y: 0.85867196, z: 0.06027124}
+  m_Center: {x: -0.0010686021, y: 0.56711096, z: 0.00000019490832}
 --- !u!1 &7447320251715932097
 GameObject:
   m_ObjectHideFlags: 0
