@@ -23,6 +23,7 @@ public class ItemData : ScriptableObject
     {
         Heal,
         Damage,
+        FillOxygen,
         Buff,
         Debuff
     }
