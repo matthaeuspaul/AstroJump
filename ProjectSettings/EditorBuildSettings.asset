@@ -11,6 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Planet1.unity
     guid: d42e26b1fc56e684cb74ad44b455477c
+  - enabled: 1
+    path: Assets/Scenes/SceneSwap1.unity
+    guid: 1ccc294d6d253714992bf754fadf31c7
+  - enabled: 1
+    path: Assets/Scenes/SceneSwap2.unity
+    guid: 67179e07b70c86f418363772caea9aef
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 6162c060fbc3c9d418783e30dad16af2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
