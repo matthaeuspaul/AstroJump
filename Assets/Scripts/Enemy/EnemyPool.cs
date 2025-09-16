@@ -36,9 +36,10 @@ public class EnemyPool : MonoBehaviour
         // Reset-Logik aufrufen, falls vorhanden
         var enemyScript = enemy.GetComponent<Enemy>();
         if (enemyScript != null)
+        {
             enemyScript.ResetEnemy();
-
-        enemy.GetComponent<Enemy>().target = playerTransform;
+            enemyScript.target = playerTransform; // Hier wird das Ziel gesetzt!
+        }
 
         return enemy;
     }
