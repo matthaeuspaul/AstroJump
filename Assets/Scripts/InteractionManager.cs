@@ -9,11 +9,6 @@ public class InteractionManager : MonoBehaviour
     private IInteractable interactable;
     private Camera mainCamera;
 
-    private void Awake()
-    {
-        mainCamera = Camera.main;
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -22,6 +17,8 @@ public class InteractionManager : MonoBehaviour
 
     public void CheckForInteraction()
         {
+        if (mainCamera == null) mainCamera = Camera.main;
+
         Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * interactionRange, Color.red);
