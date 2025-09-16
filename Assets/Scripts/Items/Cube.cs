@@ -1,7 +1,6 @@
 using UnityEngine;
 using System;
 
-
 public class Cube : MonoBehaviour, IInteractable
 {
     [SerializeField] private ItemData ItemData; // Reference to the ItemData ScriptableObject
