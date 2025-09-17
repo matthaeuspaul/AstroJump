@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2244568093989310150}
   - component: {fileID: -112033121086083891}
   - component: {fileID: 2332880185925306777}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnergyOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
