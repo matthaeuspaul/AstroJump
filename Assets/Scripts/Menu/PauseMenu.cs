@@ -2,7 +2,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private Player _player; // Reference to the Player script for accessing player state
+    private Player _player; // Reference to the Player script for accessing player state
+
+    private void Awake()
+    {
+        _player = GameObject.FindWithTag("Player").GetComponent<Player>(); // Find the Player object and get its Player script component
+    }
 
     public void ResumeGame()
     {

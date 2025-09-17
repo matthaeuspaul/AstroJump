@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     private Rigidbody _rb; // Reference to the Rigidbody component for physics-based movement
     private PlayerInput _playerinput; // Reference to the PlayerInput component for handling input actions
     private Vector2 _movementInput; // Input for player movement, using Vector2 for 2D input (x, y)
-    private Transform _camTransform; // Reference to the camera transform for movement direction
+    private Transform _camTransform => Camera.main.transform; // Reference to the camera transform for movement direction
+
     [SerializeField] GameObject _pauseMenu; // Reference to the pause menu GameObject
     [HideInInspector] public float _speed; // Default walking speed
     public bool isGrounded { get; private set; } // Flag to check if the player is on the ground
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>(); // Get the Rigidbody component attached to the player
         _playerinput = GetComponent<PlayerInput>(); // Get the PlayerInput component attached to the player
-        _camTransform = Camera.main.transform; // Get the main camera's transform for movement direction
+       // _camTransform = Camera.main.transform; // Get the main camera's transform for movement direction
         // Initialize states
         walkingState = new WalkingState(this);
         runningState = new RunningState(this);
