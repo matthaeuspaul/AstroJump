@@ -283,7 +283,7 @@ Transform:
   m_GameObject: {fileID: 222361005}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4978135, z: 0.121}
+  m_LocalPosition: {x: -3.34185, y: 36.54, z: 4.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1638,7 +1638,7 @@ Transform:
   m_GameObject: {fileID: 1144733971}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4978135, z: 0.121}
+  m_LocalPosition: {x: -3.34185, y: 36.54, z: 4.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1809,8 +1809,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c321d07d906024da1d0421d16dfb20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DungeonGenerator
-  width: 30
-  height: 30
+  width: 20
+  height: 20
   minMapSize: 10
   tileSize: 1
   tileOptions:
@@ -1877,6 +1877,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 664286f35e2d1be4f8abdd5b32290c2d, type: 2}
   - {fileID: 11400000, guid: 8795ef28f2fff624c8cf6bbfde2e83f8, type: 2}
   - {fileID: 11400000, guid: 014443f7b0d064449a7f93abc891c51e, type: 2}
+  wallTiles: []
 --- !u!4 &1344427408
 Transform:
   m_ObjectHideFlags: 0

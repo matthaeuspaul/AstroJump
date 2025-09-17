@@ -29,7 +29,7 @@ public class DungeonGenerator : MonoBehaviour
 
     [Header("Spawn and Exit Settings")]
     // never change minDistanceBetweenSpawnAndExit to a value higher than width or height (unity crash)
-    [SerializeField] private int minDistanceBetweenSpawnAndExit = 20; // Minimum distance between spawn and exit points
+    [SerializeField] private int minDistanceBetweenSpawnAndExit = 15; // Minimum distance between spawn and exit points
     [SerializeField] private List<TileData> spawnTiles; // List of tiles suitable for spawn point
     [SerializeField] private List<TileData> exitTiles;  // List of tiles suitable for exit point
     private TileInstance spawnTile;    // TileInstance for the spawn point
