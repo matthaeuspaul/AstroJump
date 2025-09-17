@@ -1,5 +1,7 @@
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
+using UnityEngine.UI;
+using TMPro;
 
 public class InteractionManager : MonoBehaviour
 {
@@ -24,7 +26,7 @@ public class InteractionManager : MonoBehaviour
 
         // Cast a ray from the center of the screen
         Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-        RaycastHit hit;
+        RaycastHit hit;       
         Debug.DrawRay(ray.origin, ray.direction * interactionRange, Color.red); // Visualize the ray in the editor
         // Perform the raycast
         if (Physics.Raycast(ray, out hit, interactionRange, interactableLayer))
@@ -33,6 +35,7 @@ public class InteractionManager : MonoBehaviour
             interactable = hit.collider.GetComponent<IInteractable>();
             if (interactable != null)
             {
+                // show some UI prompt here if needed
                 Debug.Log("Interactable object detected: " + hit.collider.name);
             }
         }
