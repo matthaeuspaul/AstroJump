@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private List<InventorySlot> inventorySlots = new List<InventorySlot>(); // List of inventory slots
-    private InventorySlot selectedSlot; // Currently selected slot
+    public InventorySlot selectedSlot { get; private set; } // Currently selected slot
     private Transform cameraTransform; // Reference to the main camera's transform
     private PlayerInput playerInput; // Reference to PlayerInput component
 
@@ -43,7 +43,7 @@ public class InventoryManager : MonoBehaviour
     // </summary>
     private void Unsubscribe()
     {
-        if (playerInput = null) return;
+        if (playerInput == null) return;
         playerInput.actions["ItemSelectionSlot1"].performed -= ctx => SelectSlot(0);
         playerInput.actions["ItemSelectionSlot2"].performed -= ctx => SelectSlot(1);
         playerInput.actions["ItemSelectionSlot3"].performed -= ctx => SelectSlot(2);
@@ -123,7 +123,7 @@ public class InventoryManager : MonoBehaviour
     // <summary>
     // Clear item from selected slot
     // </summary>
-    private void ClearItem()
+    public void ClearItem()
     {
         if (!selectedSlot.slotIsOccupied)
         {

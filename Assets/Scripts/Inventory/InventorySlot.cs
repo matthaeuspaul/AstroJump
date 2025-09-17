@@ -3,11 +3,11 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    public bool slotIsOccupied = false;
-    public int slotIndex;
-    public ItemData currentItem;
+    public bool slotIsOccupied = false; // Is the slot occupied
+    public int slotIndex; // Index of the slot
+    public ItemData currentItem; // Current item in the slot
 
-    [SerializeField] Image itemImage;
+    [SerializeField] Image itemImage; // UI Image to display the item
 
     // <summary>
     // Spawn item in the inventory slot

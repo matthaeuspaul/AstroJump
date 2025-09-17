@@ -6,11 +6,11 @@ public class Consumable : MonoBehaviour, IInteractable
 {
     [SerializeField] private ItemData ItemData; // Reference to the ItemData ScriptableObject
 
-    // This method is called when the player interacts with the wip_Item
+    // This method is called when the player interacts with a consumable item
     public void Interact() 
     {
         if(!PlayerStatsManager.instance.Use(ItemData)) return;
-        // Destroy wip_Item in scene
+        // Destroy consumable item in scene
         Destroy(gameObject);
 
         Debug.Log("Cube interacted with at " + DateTime.Now);

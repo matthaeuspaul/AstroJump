@@ -11,7 +11,7 @@ public class ItemData : ScriptableObject
     public Sprite image;
     public bool isStackable;
     public int maxStackSize;
-    public GameObject itemPrefab;
+    public GameObject itemPrefab;    
 
     public enum ItemType
     {
@@ -25,7 +25,8 @@ public class ItemData : ScriptableObject
         Heal,
         Damage,
         FillOxygen,
+        Use, 
         Buff,
-        Debuff
+     //   Debuff
     }
 }

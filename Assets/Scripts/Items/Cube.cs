@@ -23,8 +23,6 @@ public class Cube : MonoBehaviour, IInteractable
 
         // Destroy "Cube"(wip_Item) in scene
         Destroy(gameObject);
-
-        Debug.Log("Cube interacted with at " + DateTime.Now);
     }
 
 
