@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RTClosed
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   spawnChanceTicket: 1
-  prefab: {fileID: 3220309553966467733, guid: d39d9e96391c72449824deac3aa86b70, type: 3}
+  prefab: {fileID: 4273886108442782876, guid: dd1b5b9cb4a7b0f4a9746752f52f9199, type: 3}
   topOpen: 0
   bottomOpen: 1
   leftOpen: 1
@@ -23,6 +23,9 @@ MonoBehaviour:
   hasDoor: 0
   hasSpawnPoint: 0
   hasPortal: 0
+  hasPressurePlate: 0
   hasGenerator: 0
   hasLightActive: 0
   hasLightInactive: 0
+  isActivator: 0
+  isReceiver: 0

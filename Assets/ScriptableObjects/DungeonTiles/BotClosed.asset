@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BotClosed
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   spawnChanceTicket: 1
-  prefab: {fileID: 6947818720136048502, guid: 84cdf764f6602a74bb5a44783e0399b7, type: 3}
+  prefab: {fileID: 7087444516974224412, guid: 0422d924dc71005428a50519ecdd22d2, type: 3}
   topOpen: 1
   bottomOpen: 0
   leftOpen: 1
@@ -23,6 +23,9 @@ MonoBehaviour:
   hasDoor: 0
   hasSpawnPoint: 0
   hasPortal: 0
+  hasPressurePlate: 0
   hasGenerator: 0
   hasLightActive: 0
   hasLightInactive: 0
+  isActivator: 0
+  isReceiver: 0

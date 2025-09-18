@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Floor
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   spawnChanceTicket: 20
-  prefab: {fileID: 665762413742456017, guid: 1a04d202e68f9794e88bf858b234cfe8, type: 3}
+  prefab: {fileID: 4736183877355347180, guid: ded21659830a7cc438c0e273a18ccaee, type: 3}
   topOpen: 1
   bottomOpen: 1
   leftOpen: 1
@@ -23,6 +23,9 @@ MonoBehaviour:
   hasDoor: 0
   hasSpawnPoint: 0
   hasPortal: 0
+  hasPressurePlate: 0
   hasGenerator: 0
   hasLightActive: 0
   hasLightInactive: 0
+  isActivator: 0
+  isReceiver: 0

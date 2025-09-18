@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EixtOnlyBot
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   spawnChanceTicket: 1
-  prefab: {fileID: 4881264355333465861, guid: 45d094b4a666b1e4f895e1a4c6691714, type: 3}
+  prefab: {fileID: 3317529259720674038, guid: 0e01f89cf9453f84da53bd385dc8c440, type: 3}
   topOpen: 0
   bottomOpen: 1
   leftOpen: 0
@@ -23,6 +23,9 @@ MonoBehaviour:
   hasDoor: 0
   hasSpawnPoint: 0
   hasPortal: 1
+  hasPressurePlate: 0
   hasGenerator: 0
   hasLightActive: 0
   hasLightInactive: 0
+  isActivator: 0
+  isReceiver: 0

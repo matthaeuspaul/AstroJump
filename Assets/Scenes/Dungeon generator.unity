@@ -1812,7 +1812,7 @@ MonoBehaviour:
   width: 20
   height: 20
   minMapSize: 10
-  tileSize: 1
+  tileSize: 2.8
   tileOptions:
   - {fileID: 11400000, guid: 689b5563626bc804dbb724887a5d6bac, type: 2}
   - {fileID: 11400000, guid: 2cf7a8214ce45be4682aeab31b18f0d8, type: 2}
@@ -1829,7 +1829,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 28449c1ca8f5a614ab64661b9590dc99, type: 2}
   - {fileID: 11400000, guid: b5dc48720e401f243839161dbe6e993e, type: 2}
   - {fileID: 11400000, guid: 320ae33c711adfa43a5fd9e495e769f2, type: 2}
-  minDistanceBetweenSpawnAndExit: 20
+  minDistanceBetweenSpawnAndExit: 15
   spawnTiles:
   - {fileID: 11400000, guid: 8111c9420cf602f4b9c778653b785172, type: 2}
   - {fileID: 11400000, guid: e5748b494db0e37428e690c705b6b202, type: 2}
@@ -1862,21 +1862,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c13a41c1844cd6a4494ae09dc0e9e885, type: 2}
   - {fileID: 11400000, guid: baff4c415779fd24dbfbb3f48a70bc2a, type: 2}
   - {fileID: 11400000, guid: 0b736f06b79dab84ea9ea277e2e040f0, type: 2}
-  interactableTiles:
-  - {fileID: 11400000, guid: 18acd25286b12844cb13ce2573a9081d, type: 2}
-  - {fileID: 11400000, guid: 53d7c3c7db987a14ea8dd3671c1208f3, type: 2}
-  - {fileID: 11400000, guid: daf28b132f3ea9248abe9db8f88e172b, type: 2}
-  - {fileID: 11400000, guid: a1f23ebd9fdbc11468d0d3d74fe3efe9, type: 2}
-  - {fileID: 11400000, guid: 5ba53e5548948cf49b1e2b451fd97a25, type: 2}
-  - {fileID: 11400000, guid: 86d7727625a04d546b67fb093765a386, type: 2}
-  - {fileID: 11400000, guid: 922ba1c7f8bee3d4e86f258c32aedf94, type: 2}
-  - {fileID: 11400000, guid: 8b66c4d19a469ee448b3cfc6175b5080, type: 2}
-  - {fileID: 11400000, guid: bc2bd33304213434180eee558ba883c5, type: 2}
-  - {fileID: 11400000, guid: 1057ba847d50c454aa30c348125b470a, type: 2}
-  - {fileID: 11400000, guid: 7e444e81201a8d14ba314ab5bfd7e5d2, type: 2}
-  - {fileID: 11400000, guid: 664286f35e2d1be4f8abdd5b32290c2d, type: 2}
-  - {fileID: 11400000, guid: 8795ef28f2fff624c8cf6bbfde2e83f8, type: 2}
-  - {fileID: 11400000, guid: 014443f7b0d064449a7f93abc891c51e, type: 2}
+  interactableTiles: []
   wallTiles: []
 --- !u!4 &1344427408
 Transform:

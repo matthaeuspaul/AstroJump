@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OnlyTop
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   spawnChanceTicket: 1
-  prefab: {fileID: 8158749561856826437, guid: 3986da812b18a084884f705eb57c1d74, type: 3}
+  prefab: {fileID: 3626818612284887286, guid: 4880c63d84de4c340ae282d4337dcbac, type: 3}
   topOpen: 1
   bottomOpen: 0
   leftOpen: 0
@@ -23,6 +23,9 @@ MonoBehaviour:
   hasDoor: 0
   hasSpawnPoint: 0
   hasPortal: 0
+  hasPressurePlate: 0
   hasGenerator: 0
   hasLightActive: 0
   hasLightInactive: 0
+  isActivator: 0
+  isReceiver: 0

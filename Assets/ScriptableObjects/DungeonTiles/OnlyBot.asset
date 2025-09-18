@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OnlyBot
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   spawnChanceTicket: 1
-  prefab: {fileID: 8159109286448610132, guid: 2865b565a1d2de743a5fdc11f1aa5c77, type: 3}
+  prefab: {fileID: 7933547998046607748, guid: 7addf20ba1f6a5147a10d08aadc1fd88, type: 3}
   topOpen: 0
   bottomOpen: 1
   leftOpen: 0
@@ -23,6 +23,9 @@ MonoBehaviour:
   hasDoor: 0
   hasSpawnPoint: 0
   hasPortal: 0
+  hasPressurePlate: 0
   hasGenerator: 0
   hasLightActive: 0
   hasLightInactive: 0
+  isActivator: 0
+  isReceiver: 0

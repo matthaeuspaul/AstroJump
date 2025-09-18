@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LeftClosed
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   spawnChanceTicket: 1
-  prefab: {fileID: 4145101758558346357, guid: f86a60476c4ade440aa43b69d3a715ab, type: 3}
+  prefab: {fileID: 1917597124412098323, guid: 5989e0db514e5c54f93f038ee06b544a, type: 3}
   topOpen: 1
   bottomOpen: 1
   leftOpen: 0
@@ -23,6 +23,9 @@ MonoBehaviour:
   hasDoor: 0
   hasSpawnPoint: 0
   hasPortal: 0
+  hasPressurePlate: 0
   hasGenerator: 0
   hasLightActive: 0
   hasLightInactive: 0
+  isActivator: 0
+  isReceiver: 0

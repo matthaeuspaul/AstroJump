@@ -16,9 +16,9 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     [Header("Grid Settings")]
-    [SerializeField] private int width = 100;   // Width of the grid
-    [SerializeField] private int height = 100;  // Height of the grid
-    [SerializeField] private int minMapSize = 20;
+    [SerializeField] private int width = 20;   // Width of the grid
+    [SerializeField] private int height = 20;  // Height of the grid
+    [SerializeField] private int minMapSize = 10;
 
     [Header("Tile Settings")]
     [SerializeField] private float tileSize; // Size of each tile (for positioning)
@@ -47,7 +47,7 @@ public class DungeonGenerator : MonoBehaviour
         GenerateLevel();
         SelectSpawnAndExit();
         VisualizePath();
-        PlaceInteractableElements();
+       // PlaceInteractableElements();
         //FindMainPath(spawnTile, exitTile);
 
     }
