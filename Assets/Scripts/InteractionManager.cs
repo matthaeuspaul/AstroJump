@@ -11,6 +11,15 @@ public class InteractionManager : MonoBehaviour
     private IInteractable interactable; // Currently focused interactable object
     private Camera mainCamera; // Reference to the main camera
 
+    [SerializeField] private GameObject interactionPromptObject; // UI element to show interaction prompts
+    private TMP_Text interactionText; // Text component for displaying prompts
+
+
+    private void Start()
+    {
+        interactionText = interactionPromptObject.GetComponentInChildren<TMP_Text>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -35,13 +44,15 @@ public class InteractionManager : MonoBehaviour
             interactable = hit.collider.GetComponent<IInteractable>();
             if (interactable != null)
             {
-                // show some UI prompt here if needed
+                interactionText.text = interactable.GetInteractionPrompt();
+                interactionPromptObject.SetActive(true);
                 Debug.Log("Interactable object detected: " + hit.collider.name);
             }
         }
         else
         {
             interactable = null;
+            interactionPromptObject.SetActive(false);
         }
     }
 

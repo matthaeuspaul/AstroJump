@@ -520,10 +520,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 529954037}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &632793568
 MonoBehaviour:
@@ -572,10 +572,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 44.75
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -588,7 +588,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1311,7 +1311,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6052665596443679477, guid: 5f0ba82b03ab7364daa4653dd01121aa, type: 3}
       propertyPath: m_Name
-      value: Cube (wip_item)
+      value: BaseItem
       objectReference: {fileID: 0}
     - target: {fileID: 7991494952948674885, guid: 5f0ba82b03ab7364daa4653dd01121aa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2033,6 +2033,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4042650223064160670, guid: 110a51ca5e528274198f057538444a4b, type: 3}
+      propertyPath: interactionPromptObject
+      value: 
+      objectReference: {fileID: 529954036}
     - target: {fileID: 1263093603863243524, guid: 110a51ca5e528274198f057538444a4b, type: 3}
       propertyPath: m_ActionEvents.Array.data[21].m_PersistentCalls.m_Calls.Array.size
       value: 0

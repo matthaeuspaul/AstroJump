@@ -20,7 +20,6 @@ public class PowerGenerator : MonoBehaviour, IInteractable
         {   
             isActivated = true; // activate only once
             generatorObject.SetActive(true); // Activate the generator object
-            Debug.Log("Power Generator activated with " + requiredItem.itemName + " at " + DateTime.Now);
 
 ///TODO: set exit zone active
 
@@ -29,7 +28,7 @@ public class PowerGenerator : MonoBehaviour, IInteractable
         }
         else
         {
-            Debug.Log("Cannot interact with Power Generator. Requires EnergyOrb.");
+            Debug.Log("You need a " + requiredItem.itemName + " to activate the generator.");
         }
     }
 
@@ -43,4 +42,5 @@ public class PowerGenerator : MonoBehaviour, IInteractable
         var selectedItem = InvMan.selectedSlot.currentItem; // Get the currently selected item in the inventory
         return selectedItem != null && selectedItem.itemName == requiredItem.itemName; // Check if the selected item matches the required item
     }
+
 }
