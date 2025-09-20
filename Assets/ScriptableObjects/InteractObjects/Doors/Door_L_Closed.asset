@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Door_L_Closed
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   spawnChanceTicket: 1
-  prefab: {fileID: 412157103028387038, guid: a47e34cf5a11f6f42b0bcdfe8bb1e9dc, type: 3}
+  prefab: {fileID: 2203418848296163104, guid: b45e80349a9e4414c974aa0d331fa8d0, type: 3}
   topOpen: 1
   bottomOpen: 1
   leftOpen: 0

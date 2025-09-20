@@ -9,7 +9,7 @@ public class AdvancedWall_Randomizer : WallRandomizer
 
     //  On awake set random wall prefab from first and second array active and deactivate the rest in both arrays
 
-    public void Awake()
+    protected override void Awake()
     {
         // First array
         List<int> ticketPool = new List<int>();

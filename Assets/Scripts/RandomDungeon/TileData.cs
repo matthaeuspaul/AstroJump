@@ -14,7 +14,7 @@ public class TileData : ScriptableObject
     // Interactive elements
 
     public bool hasTrap;            // Does the tile have a trap
-    public bool hasLever;           //  Does the tile have a lever
+    public bool hasSwitch;           //  Does the tile have a lever
     public bool hasDoor;            // Does the tile have a door
     public bool hasSpawnPoint;      // Does the tile have a spawn point
     public bool hasPortal;          // Does the tile have a portal

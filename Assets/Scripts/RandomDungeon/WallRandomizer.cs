@@ -9,7 +9,7 @@ public class WallRandomizer : MonoBehaviour
 
     public int[] ticketCount;
     // On awak set a random wall prefab from the array active and deactivate the rest 
-    public void Awake()
+    protected virtual void Awake()
     {
 
         List<int> ticketPool = new List<int>();

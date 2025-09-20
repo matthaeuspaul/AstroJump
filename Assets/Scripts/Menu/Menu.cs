@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField] private Player _player; // Reference to the Player script for accessing player state
+    private Player _player; // Reference to the Player script for accessing player state
 
     public void ResumeGame()
     {

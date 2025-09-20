@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Generator_L_Closed
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   spawnChanceTicket: 1
-  prefab: {fileID: 6583219843223977402, guid: f22096d29ffbe4448b7d6cf5bd61c2a2, type: 3}
+  prefab: {fileID: 7378563222268081904, guid: f1bfe38abf6dd044ba825c488b941ff1, type: 3}
   topOpen: 1
   bottomOpen: 1
   leftOpen: 0

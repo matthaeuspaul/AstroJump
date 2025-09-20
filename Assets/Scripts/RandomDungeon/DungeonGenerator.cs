@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class DungeonGenerator : MonoBehaviour
@@ -41,13 +42,24 @@ public class DungeonGenerator : MonoBehaviour
     [Header("Wal List")]
     [SerializeField] private List<TileData> wallTiles; // List of wall tiles to block paths
 
+    [Header("Roof Settings")]
+    [SerializeField] private GameObject roofTiles; // List of roof tiles to cover the level
+    [SerializeField] private float wallHeight = 2.6f; // Height at which to place the roof
+
+    [Header("Player Spawn")]
+    [SerializeField] private GameObject playerPrefab; // Player prefab to spawn at the start
+    [SerializeField] private CinemachineCamera cinemachineCamera; // Reference to the Cinemachine camera for player follow
+    [SerializeField] private CinemachineCamera cinemachineMinimap; // Reference to the Cinemachine camera for minimap follow
+
+
     public void Start()
     {
         // Generate the level only on the server
         GenerateLevel();
         SelectSpawnAndExit();
         VisualizePath();
-       // PlaceInteractableElements();
+        PlaceInteractableElements();
+        //PlaceRoof();
         //FindMainPath(spawnTile, exitTile);
 
     }
@@ -274,7 +286,7 @@ public class DungeonGenerator : MonoBehaviour
 
         return !data.hasDoor &&
                 !data.hasGenerator &&
-                !data.hasLever &&
+                !data.hasSwitch &&
                 !data.hasLightActive &&
                 !data.hasLightInactive &&
                 !data.hasPortal &&
@@ -341,6 +353,9 @@ public class DungeonGenerator : MonoBehaviour
         ReplaceWithMatchingTile(spawnTile, spawnTiles);
         // Replace exit tile with a matching exit tile from the exitTiles list
         ReplaceWithMatchingTile(exitTile, exitTiles);
+
+        // Spawn the player at the spawn tile position
+        SpawnPlayerAtStart();
     }
 
     private void ReplaceWithMatchingTile(TileInstance tileInstance, List<TileData> replaceList)
@@ -442,10 +457,15 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     if (tile.instance != null)
                     {
-                        var renderer = tile.instance.GetComponent<Renderer>();
-                        if (renderer != null)
+                        // Get all renderers in the tile instance and its children
+                        Renderer[] renderer = tile.instance.GetComponentsInChildren<Renderer>();
+
+                        foreach (Renderer rend in renderer)
                         {
-                            renderer.material.color = Color.blue; // Mark path tiles in blue
+                            if (rend != null)
+                            {
+                                rend.material.color = Color.blue; // Mark path tiles in blue
+                            }
                         }
                     }
                 }
@@ -594,8 +614,8 @@ public class DungeonGenerator : MonoBehaviour
             ReplaceTileWith(receiverTile, receiverTileData);
             placed++;
 
-            LinkItems activatorLink = activatorTile.instance.GetComponent<LinkItems>();
-            LinkItems receiverLink = receiverTile.instance.GetComponent<LinkItems>();
+            LinkItems activatorLink = activatorTile.instance.GetComponentInChildren<LinkItems>();
+            LinkItems receiverLink = receiverTile.instance.GetComponentInChildren<LinkItems>();
 
             if (activatorLink != null && receiverLink != null)
             {
@@ -649,7 +669,7 @@ public class DungeonGenerator : MonoBehaviour
 
             var data = neighbor.tileData;
 
-            if (data.hasDoor || data.hasLever || data.hasTrap
+            if (data.hasDoor || data.hasSwitch || data.hasTrap
                 || data.hasGenerator || data.hasPortal || data.hasSpawnPoint || data.hasPressurePlate)
 
             {
@@ -775,5 +795,59 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     #endregion
+
+    #region Spawn Player
+
+    private void SpawnPlayerAtStart()
+    {
+        if (playerPrefab != null && spawnTile != null)
+        {
+            Vector3 spawnPosition = spawnTile.worldPosition + new Vector3(0, 1, 0); // Adjust Y position as needed
+            Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
+
+        }
+        else
+        {
+            Debug.LogWarning("Player prefab or spawn tile is not set.");
+        }
+        if (cinemachineCamera != null)
+        {
+            cinemachineCamera.Follow = GameObject.FindGameObjectWithTag("TrackingPoint").transform;
+            cinemachineMinimap.Follow = GameObject.FindGameObjectWithTag("TrackingPoint").transform;
+        }
+        else
+        {
+            Debug.LogWarning("Cinemachine camera reference is not set.");
+        }
+    }
+
+
+    #endregion
+
+    #region Place Roof
+
+    // Place roof over the entire dungeon area
+    // Use roof tiles from roofTiles list
+
+    private void PlaceRoof()
+    {
+          if (roofTiles == null)
+          {
+              Debug.LogWarning("No roof tiles available to place.");
+              return;
+          }
+          for (int x = 0; x < width; x++)
+          {
+              for (int y = 0; y < height; y++)
+              {
+                  Vector3 position = new Vector3(x * tileSize, wallHeight, y * tileSize); // Adjust Y position for roof height
+                  Instantiate(roofTiles, position, Quaternion.identity, transform);
+              }
+          }
+    }
+
+
+    #endregion
+
 
 }
