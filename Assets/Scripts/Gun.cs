@@ -13,7 +13,7 @@ public class Gun : MonoBehaviour
     public Camera fpsCam;
     public Transform muzzlePoint;
     public VisualEffect muzzleFlash;
-    public GameObject impactEffect;
+    public VisualEffect impactEffect;
 
     [Header("Tracer Settings")]
     [SerializeField] private GameObject tracerPrefab;
@@ -89,8 +89,8 @@ public class Gun : MonoBehaviour
                 target.TakeDamage(damage);
             }
 
-            GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(impactGO, 2f);
+            VisualEffect impactVFX = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impactVFX, 2f);
 
             targetPoint = hit.point;
         }

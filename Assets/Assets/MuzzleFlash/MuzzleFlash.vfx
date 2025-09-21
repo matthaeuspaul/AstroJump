@@ -54,7 +54,7 @@ MonoBehaviour:
     x: -502
     y: 294
     width: 2970
-    height: 2181
+    height: 2180
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1656,7 +1656,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
+      m_SerializableObject: 2
     m_Space: -1
   m_Property:
     name: LoopDuration
@@ -3231,7 +3231,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
+      m_SerializableObject: 2
     m_Space: -1
   m_Property:
     name: LoopDuration
@@ -4066,7 +4066,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Mesh, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":202654714004163051,"guid":"ca5133d7c2524eb43912dbb6a795526c","type":3}}'
+      m_SerializableObject: 
     m_Space: -1
   m_Property:
     name: mesh

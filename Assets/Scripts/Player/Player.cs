@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private Transform _camTransform; // Reference to the camera transform for movement direction
     [SerializeField] GameObject _pauseMenu; // Reference to the pause menu GameObject
     [HideInInspector] public float _speed; // Default walking speed
+    public Gun gun; // Reference to the Gun component for shooting mechanics
     public bool isGrounded { get; private set; } // Flag to check if the player is on the ground
     public bool isAirborne { get; private set; } // Flag to check if the player is in the air (not grounded)
     public bool isRunning { get; private set; } // Flag to check if the player is running
@@ -37,7 +38,7 @@ public class Player : MonoBehaviour
     // Current state of the player
     private IPlayerState _currentState;
     private IPlayerState _previousGameplayState; // To store the previous state before pausing
-    public WalkingState walkingState { get; private set; } 
+    public WalkingState walkingState { get; private set; }
     public RunningState runningState { get; private set; }
     public AirborneState airborneState { get; private set; }
     public PausedState pausedState { get; private set; }
@@ -83,7 +84,7 @@ public class Player : MonoBehaviour
         if (_currentState != pausedState)
         {
             // Store the current state as the previous gameplay state before pausing
-            _previousGameplayState = _currentState; 
+            _previousGameplayState = _currentState;
         }
         // Transition to a new state
         _currentState?.Exit();
@@ -119,7 +120,7 @@ public class Player : MonoBehaviour
     {
         // prevent switching states when in air
         if (!isGrounded)
-        { 
+        {
             isRunning = ctx.performed;
             return;
         }
@@ -160,5 +161,13 @@ public class Player : MonoBehaviour
         {
             TransitionToState(_previousGameplayState);
         }
-    } 
+    }
+
+    public void Attack(InputAction.CallbackContext ctx)
+    {
+        if (gun != null)
+        {
+            gun.Attack(ctx); // Call the Attack method of the Gun component when the attack input is performed
+        }
+    }
 }
