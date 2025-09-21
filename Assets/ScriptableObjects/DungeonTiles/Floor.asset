@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56c74ca0da8800419d9f94eb37b7618, type: 3}
   m_Name: Floor
   m_EditorClassIdentifier: Assembly-CSharp::TileData
-  spawnChanceTicket: 20
+  spawnChanceTicket: 7
   prefab: {fileID: 4736183877355347180, guid: ded21659830a7cc438c0e273a18ccaee, type: 3}
   topOpen: 1
   bottomOpen: 1
   leftOpen: 1
   rightOpen: 1
   hasTrap: 0
-  hasLever: 0
+  hasSwitch: 0
   hasDoor: 0
   hasSpawnPoint: 0
   hasPortal: 0

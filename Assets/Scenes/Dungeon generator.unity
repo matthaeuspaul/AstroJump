@@ -456,6 +456,72 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!1 &869265745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 869265748}
+  - component: {fileID: 869265747}
+  - component: {fileID: 869265746}
+  m_Layer: 0
+  m_Name: DeathPlane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &869265746
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869265745}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &869265747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869265745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d5201334aae03418c632b67de44a0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeathPlane
+--- !u!4 &869265748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869265745}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 24.7, y: -3, z: 20.2}
+  m_LocalScale: {x: 150, y: 1, z: 150}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &882829483
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,7 +846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DungeonGenerator
   width: 20
   height: 20
-  minMapSize: 10
+  minMapSize: 12
   tileSize: 2.8
   tileOptions:
   - {fileID: 11400000, guid: 689b5563626bc804dbb724887a5d6bac, type: 2}
@@ -832,14 +898,30 @@ MonoBehaviour:
   - {fileID: 11400000, guid: baff4c415779fd24dbfbb3f48a70bc2a, type: 2}
   - {fileID: 11400000, guid: 0b736f06b79dab84ea9ea277e2e040f0, type: 2}
   interactableTiles:
-  - {fileID: 11400000, guid: 7e444e81201a8d14ba314ab5bfd7e5d2, type: 2}
-  - {fileID: 11400000, guid: 664286f35e2d1be4f8abdd5b32290c2d, type: 2}
-  - {fileID: 11400000, guid: 8795ef28f2fff624c8cf6bbfde2e83f8, type: 2}
-  - {fileID: 11400000, guid: 014443f7b0d064449a7f93abc891c51e, type: 2}
-  - {fileID: 11400000, guid: 922ba1c7f8bee3d4e86f258c32aedf94, type: 2}
-  - {fileID: 11400000, guid: 8b66c4d19a469ee448b3cfc6175b5080, type: 2}
-  - {fileID: 11400000, guid: bc2bd33304213434180eee558ba883c5, type: 2}
-  - {fileID: 11400000, guid: 1057ba847d50c454aa30c348125b470a, type: 2}
+  - {fileID: 11400000, guid: 7c38047c6ecf9e14895e8ecd049c5fa9, type: 2}
+  - {fileID: 11400000, guid: aae6a2ca1310d8a419ca08d7fea3fd5d, type: 2}
+  - {fileID: 11400000, guid: ef6fb705162052547886dcb57faea8d3, type: 2}
+  - {fileID: 11400000, guid: 4700096c7f5fbe447866c3660dbb3948, type: 2}
+  - {fileID: 11400000, guid: 4ad37dca50997584b8edd0097fa2d653, type: 2}
+  - {fileID: 11400000, guid: 06fb92110f0350848864d7e6cbe61276, type: 2}
+  - {fileID: 11400000, guid: b95b008980a8eea4e8b42530393dadca, type: 2}
+  - {fileID: 11400000, guid: a4eba327575a16c4ca98a89dfdf58e38, type: 2}
+  - {fileID: 11400000, guid: 75da2b10f1bb0ea47bb5004ea9185c38, type: 2}
+  - {fileID: 11400000, guid: 79a38371b4f95b843a9eb3e2068f2f52, type: 2}
+  - {fileID: 11400000, guid: 0bce2b687d4a8304695d02d9452d8956, type: 2}
+  - {fileID: 11400000, guid: a57fdb024453694439021e08e5f1e58a, type: 2}
+  - {fileID: 11400000, guid: 429c6212018015f4ca0cb6992fa9fb39, type: 2}
+  - {fileID: 11400000, guid: 03d6eacc147295c4588b8c8f9f2f1a8e, type: 2}
+  - {fileID: 11400000, guid: 07229802950ffa447890e9880b335cd6, type: 2}
+  - {fileID: 11400000, guid: c1c10ed2f080b7a4e89e96ce8133317b, type: 2}
+  - {fileID: 11400000, guid: 981d84c87bfba154588b0599ef857b00, type: 2}
+  - {fileID: 11400000, guid: 595d05625622e914192db4fc642fe804, type: 2}
+  - {fileID: 11400000, guid: 02c7ac17e0da00a41a2cae0ade147676, type: 2}
+  - {fileID: 11400000, guid: 5ae82c8d030067a4f944b77e5487e8b6, type: 2}
+  - {fileID: 11400000, guid: b1e0f18ebb16e0349a2a72676cb555ae, type: 2}
+  - {fileID: 11400000, guid: 72fd55a9d80390f4f8c00a05cd22dcb9, type: 2}
+  - {fileID: 11400000, guid: f9b1361ad766661409ccc9711e8d1cad, type: 2}
+  - {fileID: 11400000, guid: 1a6f2f5ed9be4c24e97f098a92c464f9, type: 2}
   - {fileID: 11400000, guid: 281e2a1b49320df429d8f5884b6fdaff, type: 2}
   - {fileID: 11400000, guid: 0980e62bfed05b04eb73971fb64efa66, type: 2}
   - {fileID: 11400000, guid: 4382a35e80804d54eb5e615fcaa9c0af, type: 2}
@@ -855,23 +937,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 12836f20d762ab342abd8abcf7381e8f, type: 2}
   - {fileID: 11400000, guid: 64bda9025f09e6441900a68da4fd0294, type: 2}
   - {fileID: 11400000, guid: 18acd25286b12844cb13ce2573a9081d, type: 2}
-  - {fileID: 11400000, guid: 0bce2b687d4a8304695d02d9452d8956, type: 2}
-  - {fileID: 11400000, guid: a57fdb024453694439021e08e5f1e58a, type: 2}
-  - {fileID: 11400000, guid: 429c6212018015f4ca0cb6992fa9fb39, type: 2}
-  - {fileID: 11400000, guid: 03d6eacc147295c4588b8c8f9f2f1a8e, type: 2}
-  - {fileID: 11400000, guid: 07229802950ffa447890e9880b335cd6, type: 2}
-  - {fileID: 11400000, guid: c1c10ed2f080b7a4e89e96ce8133317b, type: 2}
-  - {fileID: 11400000, guid: 981d84c87bfba154588b0599ef857b00, type: 2}
-  - {fileID: 11400000, guid: 595d05625622e914192db4fc642fe804, type: 2}
-  - {fileID: 11400000, guid: 02c7ac17e0da00a41a2cae0ade147676, type: 2}
-  - {fileID: 11400000, guid: 5ae82c8d030067a4f944b77e5487e8b6, type: 2}
-  - {fileID: 11400000, guid: b1e0f18ebb16e0349a2a72676cb555ae, type: 2}
-  - {fileID: 11400000, guid: 72fd55a9d80390f4f8c00a05cd22dcb9, type: 2}
-  - {fileID: 11400000, guid: f9b1361ad766661409ccc9711e8d1cad, type: 2}
-  - {fileID: 11400000, guid: 1a6f2f5ed9be4c24e97f098a92c464f9, type: 2}
-  - {fileID: 11400000, guid: 4ad37dca50997584b8edd0097fa2d653, type: 2}
-  - {fileID: 11400000, guid: a4eba327575a16c4ca98a89dfdf58e38, type: 2}
-  wallTiles: []
+  - {fileID: 11400000, guid: 7e444e81201a8d14ba314ab5bfd7e5d2, type: 2}
+  - {fileID: 11400000, guid: 664286f35e2d1be4f8abdd5b32290c2d, type: 2}
+  - {fileID: 11400000, guid: 8795ef28f2fff624c8cf6bbfde2e83f8, type: 2}
+  - {fileID: 11400000, guid: 014443f7b0d064449a7f93abc891c51e, type: 2}
+  generatorTiles:
+  - {fileID: 11400000, guid: 922ba1c7f8bee3d4e86f258c32aedf94, type: 2}
+  - {fileID: 11400000, guid: 8b66c4d19a469ee448b3cfc6175b5080, type: 2}
+  - {fileID: 11400000, guid: bc2bd33304213434180eee558ba883c5, type: 2}
+  - {fileID: 11400000, guid: 1057ba847d50c454aa30c348125b470a, type: 2}
+  minGenerDisFromExit: 7
   roofTiles: {fileID: 327597008420607642, guid: e7158d8975255874b88365592ac57b72, type: 3}
   wallHeight: 2.6
   playerPrefab: {fileID: 974084379840817454, guid: aeffa44e68898db4c96369e80031ea2d, type: 3}
@@ -1367,3 +1442,4 @@ SceneRoots:
   - {fileID: 1773959268}
   - {fileID: 1643147749}
   - {fileID: 360612554}
+  - {fileID: 869265748}

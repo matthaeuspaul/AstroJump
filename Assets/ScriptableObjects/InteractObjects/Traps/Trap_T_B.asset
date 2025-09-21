@@ -19,7 +19,7 @@ MonoBehaviour:
   leftOpen: 1
   rightOpen: 1
   hasTrap: 1
-  hasLever: 0
+  hasSwitch: 0
   hasDoor: 0
   hasSpawnPoint: 0
   hasPortal: 0

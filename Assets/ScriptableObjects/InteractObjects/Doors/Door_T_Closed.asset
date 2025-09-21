@@ -16,10 +16,10 @@ MonoBehaviour:
   prefab: {fileID: 8505316518387584499, guid: 827005b12d511f04e89ef7f69dbd8588, type: 3}
   topOpen: 0
   bottomOpen: 1
-  leftOpen: 1
-  rightOpen: 1
+  leftOpen: 0
+  rightOpen: 0
   hasTrap: 0
-  hasLever: 0
+  hasSwitch: 0
   hasDoor: 1
   hasSpawnPoint: 0
   hasPortal: 0

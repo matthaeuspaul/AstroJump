@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   spawnChanceTicket: 1
   prefab: {fileID: 2203418848296163104, guid: b45e80349a9e4414c974aa0d331fa8d0, type: 3}
-  topOpen: 1
-  bottomOpen: 1
+  topOpen: 0
+  bottomOpen: 0
   leftOpen: 0
   rightOpen: 1
   hasTrap: 0
-  hasLever: 0
+  hasSwitch: 0
   hasDoor: 1
   hasSpawnPoint: 0
   hasPortal: 0

@@ -835,8 +835,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4ad37dca50997584b8edd0097fa2d653, type: 2}
   - {fileID: 11400000, guid: a4eba327575a16c4ca98a89dfdf58e38, type: 2}
   wallTiles: []
-  roofTiles:
-  - {fileID: 11400000, guid: acd6dc0d88a779144b5382e5b3f6e90f, type: 2}
+  roofTiles: {fileID: 0}
   wallHeight: 2.6
   playerPrefab: {fileID: 974084379840817454, guid: aeffa44e68898db4c96369e80031ea2d, type: 3}
   cinemachineCamera: {fileID: 1402937283}
@@ -1974,7 +1973,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 10, z: 0}
+  FollowOffset: {x: 0, y: 8, z: 0}
 --- !u!114 &1344777731
 MonoBehaviour:
   m_ObjectHideFlags: 0

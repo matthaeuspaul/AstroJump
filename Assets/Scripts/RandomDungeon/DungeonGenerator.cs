@@ -16,6 +16,8 @@ public class DungeonGenerator : MonoBehaviour
         right
     }
 
+    public static Vector3 globalSpawnPosition;
+
     [Header("Grid Settings")]
     [SerializeField] private int width = 20;   // Width of the grid
     [SerializeField] private int height = 20;  // Height of the grid
@@ -38,12 +40,11 @@ public class DungeonGenerator : MonoBehaviour
 
     [Header("Interactable Settings")]
     [SerializeField] private List<TileData> interactableTiles; // List of tiles suitable for interactive elements
-
-    [Header("Wal List")]
-    [SerializeField] private List<TileData> wallTiles; // List of wall tiles to block paths
+    [SerializeField] private List<TileData> generatorTiles; // List of generator tiles
+    [SerializeField] private int minGenerDisFromExit; // minimum distance for generator placement to exit 
 
     [Header("Roof Settings")]
-    [SerializeField] private GameObject roofTiles; // List of roof tiles to cover the level
+    [SerializeField] private GameObject roofTiles; // Roof tile to cover the level
     [SerializeField] private float wallHeight = 2.6f; // Height at which to place the roof
 
     [Header("Player Spawn")]
@@ -329,9 +330,9 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
         }
-        if (emptyTile.Count < 2)
+        if (emptyTile.Count < 3)
         {
-            Debug.LogWarning("Not enough empty tiles to place spawn and exit.");
+            Debug.LogWarning("Not enough empty tiles to place spawn, exit and generator.");
             return;
         }
         // Randomly select spawn and exit tiles and ensuring minimum distance
@@ -354,9 +355,66 @@ public class DungeonGenerator : MonoBehaviour
         // Replace exit tile with a matching exit tile from the exitTiles list
         ReplaceWithMatchingTile(exitTile, exitTiles);
 
+        // Find a place for the generator and link it to the exit
+
+        TileInstance generatorTile = FindGeneratorPlacement(emptyTile, exitTile);
+        if (generatorTile != null)
+        {
+            TileData generatorData = generatorTiles[Random.Range(0, generatorTiles.Count)];
+            ReplaceTileWith(generatorTile, generatorData);
+
+            // Link generator to exit with uniqueID
+            string uniqueID = System.Guid.NewGuid().ToString();
+            generatorTile.uniqueID = uniqueID;
+            exitTile.uniqueID = uniqueID;
+
+            var generatorLink = generatorTile.instance.GetComponentInChildren<LinkItems>();
+            var exitLink = exitTile.instance.GetComponentInChildren<LinkItems>();
+
+            if (generatorLink != null && exitLink != null)
+            {
+                generatorLink.linkedItemID = uniqueID;
+                exitLink.linkedItemID = uniqueID;
+
+                generatorLink.linkedPartner = exitLink;
+                exitLink.linkedPartner = generatorLink;
+            }
+            else
+            {
+                Debug.LogWarning("LinkItems component is missing on exit or generator prefab");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Failed to place Generator tile");
+        }
+
         // Spawn the player at the spawn tile position
         SpawnPlayerAtStart();
     }
+
+    private TileInstance FindGeneratorPlacement(List<TileInstance> emptyTiles, TileInstance exit)
+    {
+        List<TileInstance> candidates = new List<TileInstance>();
+
+        foreach (var tile in emptyTiles)
+        {
+            if (tile == exit) continue;
+
+            float distance = Vector2Int.Distance(tile.gridPosition, exit.gridPosition);
+            if (distance >= minGenerDisFromExit && isTileEmpty(tile))
+            {
+                candidates.Add(tile);
+            }
+
+        }
+        if (candidates.Count == 0) return null;
+        
+
+        return candidates[Random.Range(0, candidates.Count)];
+
+    }
+
 
     private void ReplaceWithMatchingTile(TileInstance tileInstance, List<TileData> replaceList)
     {
@@ -585,9 +643,8 @@ public class DungeonGenerator : MonoBehaviour
         // Collect vaild tiles (only empty, has walls, no interactables nearby)
         List<TileInstance> usedTiles = new List<TileInstance>();
         int minPairs = 10; // Minimum number of pairs to place
-        int maxPairs = 20; // Limit the number of pairs to avoid overpopulation
+        int maxPairs = 15; // Limit the number of pairs to avoid overpopulation
         int pairCount = Random.Range(minPairs, maxPairs + 1);
-
         Debug.Log($" Pair count to place: {pairCount}");
 
         int placed = 0;
@@ -612,6 +669,10 @@ public class DungeonGenerator : MonoBehaviour
             // Replace tiles with matching activator and receiver tiles
             ReplaceTileWith(activatorTile, activatorTileData);
             ReplaceTileWith(receiverTile, receiverTileData);
+            if(receiverTileData.hasDoor)
+            {
+                SwapTileBehindDoor(receiverTile, tileOptions.ToList());
+            }
             placed++;
 
             LinkItems activatorLink = activatorTile.instance.GetComponentInChildren<LinkItems>();
@@ -758,43 +819,15 @@ public class DungeonGenerator : MonoBehaviour
             if (distance < minDistance)
                 minDistance = distance;
         }
-        float weight = Mathf.Max(0.3f, 1 - (minDistance / 10f)); // Weight decreases with distance, adjust divisor for range
+        float weight = Mathf.Max(0.2f, 1 - (minDistance / 10f)); // Weight decreases with distance, adjust divisor for range
         return weight;
     }
     #endregion
 
     #region Block of paths
 
-    private void PlaceBlockingWalls()
-    {
-        // Block some paths by replacing certain floor tiles with wall tiles
-        // Ensure Player cant walk around traps or other interactive elements
-        // Make sure Player cant be softlocked because activator or receiver is blocked
-        // block most of the open paths, but leave some open for navigation
-        // look over the whole map and replace some floor tiles with wall tiles
-        // dont replace randomly, but look for tiles that have multiple open sides
-        foreach (var tile in tileGrid)
-        {
-            if (tile == null || tile.tileData == null || !isTileEmpty(tile))
-                continue;
-            int openSides = 0;
-            if (tile.tileData.topOpen) openSides++;
-            if (tile.tileData.bottomOpen) openSides++;
-            if (tile.tileData.leftOpen) openSides++;
-            if (tile.tileData.rightOpen) openSides++;
-            // Only consider tiles with 3 or more open sides for wall placement
-            if (openSides >= 3 && Random.value < 0.3f) // 30% chance to replace
-            {
-                TileData wallTile = GetMatchingTile(tile.tileData, wallTiles);
-                if (wallTile != null)
-                {
-                    ReplaceTileWith(tile, wallTile);
-                }
-            }
-        }
-    }
-
     #endregion
+
 
     #region Spawn Player
 
@@ -805,6 +838,7 @@ public class DungeonGenerator : MonoBehaviour
             Vector3 spawnPosition = spawnTile.worldPosition + new Vector3(0, 1, 0); // Adjust Y position as needed
             Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
 
+            globalSpawnPosition = spawnPosition;
         }
         else
         {
@@ -849,5 +883,68 @@ public class DungeonGenerator : MonoBehaviour
 
     #endregion
 
+#region Fix Door Neighbor Tile
+
+    private Vector2Int GetDoorDirection(TileData tile)
+    {
+        if (tile.topOpen) return Vector2Int.down;   // Door is on the bottom side of the tile 
+        if (tile.bottomOpen) return Vector2Int.up;  // Door is on the top side of the tile
+        if (tile.leftOpen) return Vector2Int.right; // Door is on the left side of the tile 
+        if (tile.rightOpen) return Vector2Int.left;   // Door is on the right side of the tile
+        return Vector2Int.zero; // shouldn't happen
+    }
+
+    private void SwapTileBehindDoor(TileInstance door, List<TileData> tileList)
+    {
+        Vector2Int doorDirection = GetDoorDirection(door.tileData);
+            if (doorDirection == Vector2Int.zero) return;
+
+        Vector2Int neighborPosition = door.gridPosition + doorDirection;
+            if (!IsInBounds(neighborPosition.x, neighborPosition.y)) return;
+
+        TileInstance neighbor = tileGrid[neighborPosition.x, neighborPosition.y];
+            if (neighbor == null || neighbor.tileData == null) return;
+
+            if (IsEdgeTile(neighbor)) return;
+
+            if (HasOpening(neighbor.tileData, Negate(doorDirection))) return;
+
+        TileData changedTile = ModifyTile(neighbor.tileData, doorDirection, tileList);
+
+            if(changedTile != null)
+            {
+                neighbor.tileData = changedTile;
+                ReplaceWithMatchingTile(neighbor, tileList);
+            }
+    }
+
+    private TileData ModifyTile(TileData originalTile, Vector2Int neededOpening, List<TileData> tileList)
+    {
+        bool top = originalTile.topOpen;
+        bool bottom = originalTile.bottomOpen;
+        bool left = originalTile.leftOpen;
+        bool right = originalTile.rightOpen;
+
+        if (neededOpening == Vector2Int.up) bottom = true;
+        else if (neededOpening == Vector2Int.down) top = true;
+        else if (neededOpening == Vector2Int.left) right = true;
+        else if (neededOpening == Vector2Int.right) left = true;
+
+        foreach (var tile in tileList)
+        {
+            if(tile == null) continue;
+            if (tile.topOpen == top && 
+                tile.bottomOpen == bottom && 
+                tile.leftOpen == left &&
+                tile.rightOpen == right && 
+                isTileEmpty(new TileInstance { tileData = tile }))
+                {
+                    return tile;
+                }
+        }
+        return null;
+    }
+
+    #endregion 
 
 }
