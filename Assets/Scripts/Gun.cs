@@ -1,56 +1,132 @@
 using UnityEngine;
+using System.Collections;
 using static UnityEngine.InputSystem.InputAction;
+using UnityEngine.VFX;
 
 public class Gun : MonoBehaviour
 {
+    [Header("Gun Stats")]
     public float damage = 10f;
     public float range = 100f;
+    public float fireRate = 15f;
 
     public Camera fpsCam;
+    public Transform muzzlePoint;
+    public VisualEffect muzzleFlash;
+    public GameObject impactEffect;
 
-    LayerMask layerMask;
+    [Header("Tracer Settings")]
+    [SerializeField] private GameObject tracerPrefab;
+    [SerializeField] private float tracerDuration = 0.05f;
 
-    void Awake()
+    private bool isShooting = false;
+    private Coroutine fireCoroutine;
+
+    public void Attack(CallbackContext context)
     {
-        layerMask = LayerMask.GetMask("Default");
-    }
+        Debug.Log($"Attack called. Phase: {context.phase}");
 
-    void FixedUpdate()
-    {
-        void Attack(CallbackContext ctx)
+        if (context.started || context.performed)
         {
-            if (ctx.performed)
-                Debug.Log("M1 pressed");
+            Debug.Log("Start continuous shooting");
+            isShooting = true;
+
+            if (fireCoroutine != null)
             {
-                Shoot();
+                StopCoroutine(fireCoroutine);
+            }
+
+            fireCoroutine = StartCoroutine(ContinuousFire());
+        }
+        else if (context.canceled)
+        {
+            Debug.Log("Stop shooting");
+            isShooting = false;
+
+            if (fireCoroutine != null)
+            {
+                StopCoroutine(fireCoroutine);
+                fireCoroutine = null;
             }
         }
     }
-    
-    void Shoot() {
+
+    private IEnumerator ContinuousFire()
+    {
+        while (isShooting)
+        {
+            Shoot();
+
+            float waitTime = 1f / fireRate;
+            yield return new WaitForSeconds(waitTime);
+        }
+    }
+
+    public void Shoot()
+    {
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.Stop();
+            muzzleFlash.Reinit();
+            muzzleFlash.Play();
+        }
+        Debug.Log("Shoot called");
+
         RaycastHit hit;
+        Ray ray = fpsCam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        Vector3 targetPoint;
+        Vector3 tracerStartPoint = GetMuzzlePosition();
 
-        if (Physics.Raycast(transform.position, transform.forward , out hit, Mathf.Infinity, layerMask))
-
+        if (Physics.Raycast(ray, out hit, range))
         {
-            Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.forward * 1000, Color.white);
-            Debug.Log("Did not Hit");
-        }
-
-        /* if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
-        {
-            Debug.Log(hit.transform.name);
+            Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.yellow);
+            Debug.Log($"Hit: {hit.transform.name}");
 
             Target target = hit.transform.GetComponent<Target>();
             if (target != null)
             {
+                Debug.Log($"Target hit. Damage: {damage}");
                 target.TakeDamage(damage);
             }
-        } */
+
+            GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impactGO, 2f);
+
+            targetPoint = hit.point;
+        }
+        else
+        {
+            Debug.DrawRay(ray.origin, ray.direction * range, Color.red);
+            Debug.Log("No hit");
+            targetPoint = ray.origin + ray.direction * range;
+        }
+
+        SpawnTracer(tracerStartPoint, targetPoint);
+    }
+
+    private Vector3 GetMuzzlePosition()
+    {
+        if (muzzlePoint != null)
+        {
+            return muzzlePoint.position;
+        }
+        return fpsCam.transform.position + fpsCam.transform.forward * 0.5f;
+    }
+
+    private void SpawnTracer(Vector3 start, Vector3 end)
+    {
+        if (tracerPrefab != null)
+        {
+            GameObject tracer = Instantiate(tracerPrefab, start, Quaternion.identity);
+            LineRenderer lr = tracer.GetComponent<LineRenderer>();
+            if (lr != null)
+            {
+                lr.positionCount = 2;
+                lr.SetPosition(0, start);
+                lr.SetPosition(1, end);
+            }
+
+            Destroy(tracer, tracerDuration);
+        }
     }
 }
