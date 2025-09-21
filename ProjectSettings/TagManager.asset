@@ -12,10 +12,10 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - interactableLayer
   - Roof
-  - MinimapLight
   - Minimap
+  - MinimapLight
   - 
   - 
   - 

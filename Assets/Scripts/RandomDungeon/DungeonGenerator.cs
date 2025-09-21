@@ -360,8 +360,7 @@ public class DungeonGenerator : MonoBehaviour
         TileInstance generatorTile = FindGeneratorPlacement(emptyTile, exitTile);
         if (generatorTile != null)
         {
-            TileData generatorData = generatorTiles[Random.Range(0, generatorTiles.Count)];
-            ReplaceTileWith(generatorTile, generatorData);
+            ReplaceWithMatchingTile(generatorTile, generatorTiles);
 
             // Link generator to exit with uniqueID
             string uniqueID = System.Guid.NewGuid().ToString();
@@ -393,16 +392,21 @@ public class DungeonGenerator : MonoBehaviour
         SpawnPlayerAtStart();
     }
 
+    private bool IsOpenOnAllSides(TileData tile)
+    { 
+        return tile.topOpen && tile.bottomOpen && tile.leftOpen && tile.rightOpen;    
+    }
     private TileInstance FindGeneratorPlacement(List<TileInstance> emptyTiles, TileInstance exit)
     {
         List<TileInstance> candidates = new List<TileInstance>();
 
         foreach (var tile in emptyTiles)
         {
-            if (tile == exit) continue;
+            if (tile == exit || tile.tileData == null) continue;
 
             float distance = Vector2Int.Distance(tile.gridPosition, exit.gridPosition);
-            if (distance >= minGenerDisFromExit && isTileEmpty(tile))
+            if (distance >= minGenerDisFromExit && isTileEmpty(tile) && !IsOpenOnAllSides(tile.tileData))
+
             {
                 candidates.Add(tile);
             }

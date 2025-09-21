@@ -134,9 +134,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fd5c0c024d810e43a4701b031f9c53d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1810836019489412635}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fd5c0c024d810e43a4701b031f9c53d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7025323856457553025}
   m_SourcePrefab: {fileID: 100100000, guid: 8fd5c0c024d810e43a4701b031f9c53d, type: 3}
 --- !u!4 &538022812908524501 stripped
 Transform:
@@ -169,20 +166,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.004000015, y: 0.027999995, z: 0.025850143}
   m_Center: {x: 0.000714055, y: -0.0016111287, z: 0.0039704414}
---- !u!114 &7025323856457553025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 881755863772580207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb56c84c8ec1bf044baa96f0f0f5fce1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LinkItems
-  linkedItemID: 
-  linkedPartner: {fileID: 0}
 --- !u!1001 &2012885408322619592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -248,8 +231,16 @@ PrefabInstance:
       value: Modular_Dungeon_generator_w_power (1)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2196397739193980710, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -258,7 +249,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6828494009859713848}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2528023172301344763}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5022022560698609556}
   m_SourcePrefab: {fileID: 100100000, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
+--- !u!1 &401973232401637358 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2196397739193980710, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
+  m_PrefabInstance: {fileID: 2012885408322619592}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1670375096502334873 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
@@ -285,6 +287,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0033101426, y: 0.004595892, z: 0.0077777514}
   m_Center: {x: 0.00075572764, y: 0.000000002095476, z: -5.8207694e-10}
+--- !u!114 &2528023172301344763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670375096502334873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f30742d53e5f4499fd193b8a9ab18b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PowerGenerator
+  requiredItem: {fileID: 11400000, guid: 4e3b295f21a6e884ebbc817174e7d835, type: 2}
+  generatorObject: {fileID: 401973232401637358}
+--- !u!114 &5022022560698609556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670375096502334873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb56c84c8ec1bf044baa96f0f0f5fce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LinkItems
+  linkedItemID: 
+  linkedPartner: {fileID: 0}
 --- !u!4 &2046197600098348835 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
@@ -356,9 +386,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 30021f0d6d39fd54c9430fa5530c643b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3373473307319450819}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 30021f0d6d39fd54c9430fa5530c643b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6694663928585244499}
   m_SourcePrefab: {fileID: 100100000, guid: 30021f0d6d39fd54c9430fa5530c643b, type: 3}
 --- !u!4 &3919378967078107261 stripped
 Transform:
@@ -391,20 +418,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.004000015, y: 0.028000008, z: 0.025850153}
   m_Center: {x: 0.0008118039, y: -0.0006676737, z: 0.0036707674}
---- !u!114 &6694663928585244499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4408952340286251719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb56c84c8ec1bf044baa96f0f0f5fce1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LinkItems
-  linkedItemID: 
-  linkedPartner: {fileID: 0}
 --- !u!1001 &3832792574384765868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -668,8 +681,16 @@ PrefabInstance:
       value: Modular_Dungeon_generator_w_power
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2196397739193980710, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -678,6 +699,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6020999550750551975}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5685585404600313850}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5026068217799535849}
   m_SourcePrefab: {fileID: 100100000, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
 --- !u!4 &7287069698377774995 stripped
 Transform:
@@ -710,3 +737,36 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0033101426, y: 0.004595892, z: 0.0077777514}
   m_Center: {x: 0.00075572764, y: 0.000000002095476, z: -5.8207694e-10}
+--- !u!114 &5685585404600313850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956470641356549417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f30742d53e5f4499fd193b8a9ab18b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PowerGenerator
+  requiredItem: {fileID: 11400000, guid: 4e3b295f21a6e884ebbc817174e7d835, type: 2}
+  generatorObject: {fileID: 8994051492563142494}
+--- !u!114 &5026068217799535849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956470641356549417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb56c84c8ec1bf044baa96f0f0f5fce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LinkItems
+  linkedItemID: 
+  linkedPartner: {fileID: 0}
+--- !u!1 &8994051492563142494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2196397739193980710, guid: bdd0ad87af5d186498cc61ecab827006, type: 3}
+  m_PrefabInstance: {fileID: 7109607340783734904}
+  m_PrefabAsset: {fileID: 0}

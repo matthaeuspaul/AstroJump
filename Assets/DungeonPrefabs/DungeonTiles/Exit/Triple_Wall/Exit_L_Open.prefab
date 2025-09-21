@@ -102,6 +102,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb38c1e8c119a814781403b8b6d41a29, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2796780163040269197}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb38c1e8c119a814781403b8b6d41a29, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3004474876165728157}
   m_SourcePrefab: {fileID: 100100000, guid: bb38c1e8c119a814781403b8b6d41a29, type: 3}
 --- !u!4 &8504027260909665139 stripped
 Transform:
@@ -151,7 +154,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.008328944
   m_Center: {x: -0.0000055146215, y: -0.00000074744224, z: 0.003046397}
@@ -169,6 +172,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LinkItems
   linkedItemID: 
   linkedPartner: {fileID: 0}
+--- !u!114 &3004474876165728157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9029593078200164809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e774f84ba23e440b2ddc8c44029903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExitZone
+  nextScene: Planet2
 --- !u!1001 &9156137182606362421
 PrefabInstance:
   m_ObjectHideFlags: 0
