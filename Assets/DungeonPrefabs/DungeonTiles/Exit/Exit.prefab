@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2632016829218757781}
-  - component: {fileID: 3216730888450385041}
   m_Layer: 0
   m_Name: Exit
   m_TagString: Untagged
@@ -33,19 +32,6 @@ Transform:
   - {fileID: 4067482216720020907}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3216730888450385041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2799436661362096037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5e774f84ba23e440b2ddc8c44029903, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ExitZone
-  nextScene: Planet2
 --- !u!1001 &4609470485039534656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115,6 +101,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb38c1e8c119a814781403b8b6d41a29, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4688625703636842568}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb38c1e8c119a814781403b8b6d41a29, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3976168157418552233}
   m_SourcePrefab: {fileID: 100100000, guid: bb38c1e8c119a814781403b8b6d41a29, type: 3}
 --- !u!1 &3691061814535188241 stripped
 GameObject:
@@ -177,6 +166,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LinkItems
   linkedItemID: 
   linkedPartner: {fileID: 0}
+--- !u!114 &3976168157418552233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691061814535188241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e774f84ba23e440b2ddc8c44029903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExitZone
+  nextScene: LightTest
 --- !u!4 &4067482216720020907 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bb38c1e8c119a814781403b8b6d41a29, type: 3}

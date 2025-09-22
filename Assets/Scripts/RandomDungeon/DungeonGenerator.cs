@@ -58,11 +58,10 @@ public class DungeonGenerator : MonoBehaviour
         // Generate the level only on the server
         GenerateLevel();
         SelectSpawnAndExit();
-        VisualizePath();
         PlaceInteractableElements();
         //PlaceRoof();
+        VisualizePath();
         //FindMainPath(spawnTile, exitTile);
-
     }
 
     private void GenerateLevel()
@@ -389,7 +388,8 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         // Spawn the player at the spawn tile position
-        SpawnPlayerAtStart();
+        Invoke("SpawnPlayerAtStart",0.1f);
+        
     }
 
     private bool IsOpenOnAllSides(TileData tile)
@@ -827,11 +827,6 @@ public class DungeonGenerator : MonoBehaviour
         return weight;
     }
     #endregion
-
-    #region Block of paths
-
-    #endregion
-
 
     #region Spawn Player
 

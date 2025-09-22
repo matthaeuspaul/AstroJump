@@ -1,5 +1,7 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 
 public class Player : MonoBehaviour
@@ -161,5 +163,8 @@ public class Player : MonoBehaviour
         {
             TransitionToState(_previousGameplayState);
         }
-    } 
+    }
+
 }
+
+
