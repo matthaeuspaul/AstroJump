@@ -1186,6 +1186,7 @@ GameObject:
   - component: {fileID: 1683977820}
   - component: {fileID: 1683977819}
   - component: {fileID: 1683977821}
+  - component: {fileID: 1683977822}
   m_Layer: 0
   m_Name: PersistanceManager
   m_TagString: Untagged
@@ -1236,6 +1237,22 @@ MonoBehaviour:
   currentHealth: 50
   maxOxygen: 100
   currentOxygen: 50
+--- !u!114 &1683977822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683977818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5223812f4775d9a489bd0ed37ec777c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelTracker
+  levelNames:
+  - LightTest
+  - Planet1
+  - Dungeon generator
 --- !u!1 &1773959264
 GameObject:
   m_ObjectHideFlags: 0
