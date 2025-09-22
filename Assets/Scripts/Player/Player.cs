@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
         _movementInput = ctx.ReadValue<Vector2>();
     }
 
-    public void Attack(CallbackContext ctx)
+    /* public void Attack(CallbackContext ctx)
     {
         Debug.Log("Attack called");
         // Only allow attacking when grounded and idle or walking
@@ -151,16 +151,8 @@ public class Player : MonoBehaviour
         {
             // Trigger attack animation
             ChangeAnimation("Sword_Attack", 0.1f);
-
-            
-            // Length of the attack animation
-            float length = animator.runtimeAnimatorController.animationClips
-            .First(c => c.name == "Sword_Attack1").length;
-
-            StartCoroutine(ResetToIdle(length));
-           
         }
-    }
+    } */
 
     public void EnableWeaponCollider()
     {
@@ -172,12 +164,6 @@ public class Player : MonoBehaviour
     {
         // Disable the weapon collider after the attack animation
         weaponCollider.enabled = false;
-    }
-
-    private IEnumerator ResetToIdle(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        ChangeAnimation("Idle");
     }
     
     public void Jump(CallbackContext ctx)
@@ -244,11 +230,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    /* public void Attack(InputAction.CallbackContext ctx)
+    public void Attack(InputAction.CallbackContext ctx)
     {
         if (gun != null && isGrounded && !isRunning)
         {
             gun.Attack(ctx); // Call the Attack method of the Gun component when the attack input is performed
         }
-    } */
+    }
 }
