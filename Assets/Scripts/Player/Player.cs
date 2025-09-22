@@ -152,17 +152,17 @@ public class Player : MonoBehaviour
             // Trigger attack animation
             ChangeAnimation("Sword_Attack", 0.1f);
 
-            /*
+            
             // Length of the attack animation
             float length = animator.runtimeAnimatorController.animationClips
             .First(c => c.name == "Sword_Attack1").length;
 
             StartCoroutine(ResetToIdle(length));
-            */
+           
         }
     }
 
-    public void EnableWeaponCOllider()
+    public void EnableWeaponCollider()
     {
         // Enable the weapon collider during the attack animation
         weaponCollider.enabled = true;
@@ -174,23 +174,18 @@ public class Player : MonoBehaviour
         weaponCollider.enabled = false;
     }
 
-
-
-    /*
     private IEnumerator ResetToIdle(float delay)
     {
         yield return new WaitForSeconds(delay);
         ChangeAnimation("Idle");
     }
-    */
-
+    
     public void Jump(CallbackContext ctx)
     {
         if (ctx.performed && isGrounded)
         {
             _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
 
-            // Animation basierend auf aktuellem Zustand wählen
             if (isRunning)
             {
                 ChangeAnimation("Running_Jump", 0.1f);
@@ -249,11 +244,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Attack(InputAction.CallbackContext ctx)
+    /* public void Attack(InputAction.CallbackContext ctx)
     {
-        if (gun != null)
+        if (gun != null && isGrounded && !isRunning)
         {
             gun.Attack(ctx); // Call the Attack method of the Gun component when the attack input is performed
         }
-    }
+    } */
 }
