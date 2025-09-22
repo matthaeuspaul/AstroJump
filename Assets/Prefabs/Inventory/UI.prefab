@@ -74,8 +74,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 1203573650, guid: ae1bde27b2d646c46990fb5b9b708f92, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
   m_Padding:
-    m_Left: 0
-    m_Right: 0
+    m_Left: 70
+    m_Right: 70
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
@@ -470,14 +470,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1719487936401220391}
     m_Modifications:
-    - target: {fileID: 3743255638782730153, guid: 08a813563e09ce34fb82936a85d947e5, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3743255638782730153, guid: 08a813563e09ce34fb82936a85d947e5, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4831118665389446625, guid: 08a813563e09ce34fb82936a85d947e5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
