@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
@@ -10,6 +12,9 @@ public class Player : MonoBehaviour
     private PlayerInput _playerinput; // Reference to the PlayerInput component for handling input actions
     private Vector2 _movementInput; // Input for player movement, using Vector2 for 2D input (x, y)
     private Transform _camTransform; // Reference to the camera transform for movement direction
+    private Animator animator; // Reference to the Animator component for handling animations
+    private string currentAnimation = ""; // Current animation state
+    [SerializeField] private Collider weaponCollider; // Reference to the weapon collider
     [SerializeField] GameObject _pauseMenu; // Reference to the pause menu GameObject
     [HideInInspector] public float _speed; // Default walking speed
     public Gun gun; // Reference to the Gun component for shooting mechanics
@@ -29,7 +34,8 @@ public class Player : MonoBehaviour
     [SerializeField] public float _airMultiplier; // Multiplier for air control, affects movement speed while in the air
 
     [Header("Ground Detection")]
-    [SerializeField] private float height; // Height of the player for ground detection, used to determine how far down to check for ground
+    [SerializeField] private Transform groundCheck; // Position from where to check for ground
+    [SerializeField] private float groundCheckRadius = 0.3f; // Radius for ground detection sphere
     [SerializeField] private LayerMask Ground; // LayerMask for ground detection
 
 
@@ -66,19 +72,48 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen and hide it
     }
+
     private void Update()
     {
-        // Check if the player is grounded
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, height / 2 + 0.1f, Ground);
-        _currentState?.Update(); // Call the Update method of the current state
+        HandlePlayerRotation();
+        
+        // Ground dectection with SphereCheck
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, Ground);
+        // Debug visualization
+        Debug.DrawRay(groundCheck.position, Vector3.down * groundCheckRadius, isGrounded ? Color.green : Color.red);
+
+        _currentState?.Update();
     }
+
     private void FixedUpdate()
     {
         SpeedControl(); // Control the player's speed to not exceed the maximum speed
         _currentState?.FixedUpdate(); // Call the FixedUpdate method of the current state
     }
+
+    public void ChangeAnimation(string animation, float crossfade = 0.2f)
+    {
+        if (currentAnimation != animation)
+        {
+            currentAnimation = animation;
+            animator.CrossFade(animation, crossfade);
+        }
+    }
+
+    private void HandlePlayerRotation()
+    {
+
+        if (_camTransform != null)
+        {
+            // Rotate the player to face the same direction as the camera on the Y axis
+            float cameraYRotation = _camTransform.eulerAngles.y;
+            transform.rotation = Quaternion.Euler(0f, cameraYRotation, 0f);
+        }
+    }
+
     public void TransitionToState(IPlayerState newState)
     {
         if (_currentState != pausedState)
@@ -108,14 +143,65 @@ public class Player : MonoBehaviour
         _movementInput = ctx.ReadValue<Vector2>();
     }
 
-    public void Jump(CallbackContext ctx)
+    public void Attack(CallbackContext ctx)
     {
-        // Jump only if the player is grounded
-        if (ctx.performed && isGrounded)
+        Debug.Log("Attack called");
+        // Only allow attacking when grounded and idle or walking
+        if (ctx.performed && isGrounded && !isRunning)
         {
-            _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse); // Apply an upward force to the Rigidbody for jumping
+            // Trigger attack animation
+            ChangeAnimation("Sword_Attack", 0.1f);
+
+            /*
+            // Length of the attack animation
+            float length = animator.runtimeAnimatorController.animationClips
+            .First(c => c.name == "Sword_Attack1").length;
+
+            StartCoroutine(ResetToIdle(length));
+            */
         }
     }
+
+    public void EnableWeaponCOllider()
+    {
+        // Enable the weapon collider during the attack animation
+        weaponCollider.enabled = true;
+    }
+
+    public void DisableWeaponCollider()
+    {
+        // Disable the weapon collider after the attack animation
+        weaponCollider.enabled = false;
+    }
+
+
+
+    /*
+    private IEnumerator ResetToIdle(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ChangeAnimation("Idle");
+    }
+    */
+
+    public void Jump(CallbackContext ctx)
+    {
+        if (ctx.performed && isGrounded)
+        {
+            _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+
+            // Animation basierend auf aktuellem Zustand wählen
+            if (isRunning)
+            {
+                ChangeAnimation("Running_Jump", 0.1f);
+            }
+            else
+            {
+                ChangeAnimation("Jumping", 0.1f);
+            }
+        }
+    }
+
     public void Run(CallbackContext ctx)
     {
         // prevent switching states when in air

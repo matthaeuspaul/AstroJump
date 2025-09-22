@@ -12,6 +12,12 @@ public class WalkingState : IPlayerState
     {
         // Set the player's speed to the walking speed when entering the walking state
         _player._speed = _player._walkSpeed;
+        /*
+        if (_player.rb.linearVelocity.y < -5f) // Schwellenwert nach Bedarf anpassen
+        {
+            _player.ChangeAnimation("Falling_Land", 0.1f);
+        }
+        */
         Debug.Log("Entered Walking State"); // Log message for debugging purposes
     }
 
@@ -33,7 +39,34 @@ public class WalkingState : IPlayerState
         {
             _player.TransitionToState(_player.airborneState);
         }
+        HandleAnimation(); // Call the method to handle animations while walking
     }
+    public void HandleAnimation()
+    {
+        Vector2 input = _player.movementInput;
+
+        if (input.magnitude < 0.1f)
+        {
+            _player.ChangeAnimation("Idle");
+        }
+        else if (input.y > 0.5f)
+        {
+            _player.ChangeAnimation("Walking");
+        }
+        else if (input.y < -0.5f)
+        {
+            _player.ChangeAnimation("Walking_Backwards");
+        }
+        else if (input.x > 0.5f)
+        {
+            _player.ChangeAnimation("Walking_Right");
+        }
+        else if (input.x < -0.5f)
+        {
+            _player.ChangeAnimation("Walking_Left");
+        }
+    }
+
     private void Movement()
     {
         // Calculate the movement direction based on player input and camera orientation
