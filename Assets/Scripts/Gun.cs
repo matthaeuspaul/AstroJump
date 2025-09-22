@@ -6,7 +6,7 @@ using UnityEngine.VFX;
 public class Gun : MonoBehaviour
 {
     [Header("Gun Stats")]
-    public float damage = 10f;
+    public int damage = 10;
     public float range = 100f;
     public float fireRate = 15f;
 
@@ -82,11 +82,11 @@ public class Gun : MonoBehaviour
             Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.yellow);
             Debug.Log($"Hit: {hit.transform.name}");
 
-            Target target = hit.transform.GetComponent<Target>();
-            if (target != null)
+            Enemy enemy = hit.transform.GetComponent<Enemy>();
+            if (enemy != null)
             {
                 Debug.Log($"Target hit. Damage: {damage}");
-                target.TakeDamage(damage);
+                enemy.TakeDamage(damage);
             }
 
             VisualEffect impactVFX = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
