@@ -3,7 +3,32 @@ guid: 782e1a7cd84c6954fab2b151a7c8a96f
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cable
+    second: {fileID: 2100000, guid: 712cd8cd9656f354f8d96ddbe8710113, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Energy
+    second: {fileID: 2100000, guid: a2a1a3ba06c19674e94114d8a605a0ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Generator_Basis
+    second: {fileID: 2100000, guid: 3dcd6e2c1a992734b87f7941e5607f50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Generator_Metall
+    second: {fileID: 2100000, guid: 49ccd79d13717294cb9b64325971e24c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Relais
+    second: {fileID: 2100000, guid: 226ed5879b1b3344b904df68f227e8ff, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

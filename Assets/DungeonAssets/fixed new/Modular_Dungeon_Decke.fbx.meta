@@ -3,7 +3,17 @@ guid: c437316431148934790de475a7ab47e0
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Decke
+    second: {fileID: 2100000, guid: 71483875e24934445988d214a1de1bf9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "Leuchtr\xF6hre"
+    second: {fileID: 2100000, guid: 3136acc7e8dcb0d419f84f6e41ef405e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

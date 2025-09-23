@@ -3,7 +3,17 @@ guid: 7191c1ffedaddb54b955a3880a491548
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base_Material_pressurplate
+    second: {fileID: 2100000, guid: 2d1ea3f1d88cd0948b504af77e2c489a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base_Material_schalter
+    second: {fileID: 2100000, guid: 847e30e422e94f340bc3239390c84e1f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

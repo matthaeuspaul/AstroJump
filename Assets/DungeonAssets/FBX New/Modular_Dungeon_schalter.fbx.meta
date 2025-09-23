@@ -3,7 +3,17 @@ guid: a7c3936df223ef84e95ac2c6668acdcf
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "Schalter_geh\xE4use"
+    second: {fileID: 2100000, guid: 4928a27c044df9a4d953fbe7d1a0d5cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: schalter_schalter
+    second: {fileID: 2100000, guid: 7b5a1206e83645f478a95af409f60317, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
