@@ -75,7 +75,7 @@ public class PowerGenerator : MonoBehaviour, IInteractable
     {
         // If generator is already activated
         if (isActivated)
-            return "Generator activated.";
+            return "Generator activated";
 
         // If showing required message temporarily (after failed interaction)
         if (showRequiredMessage && requiredItem != null)
