@@ -8,6 +8,7 @@ public class InventorySlot : MonoBehaviour
     public ItemData currentItem; // Current item in the slot
 
     [SerializeField] Image itemImage; // UI Image to display the item
+    [SerializeField] Sprite defaultSprite;
 
     // <summary>
     // Spawn item in the inventory slot
@@ -26,7 +27,7 @@ public class InventorySlot : MonoBehaviour
     {
         slotIsOccupied = false;
         currentItem = null;
-        itemImage.sprite = null;
+        itemImage.sprite = defaultSprite;
     }
 
     // <summary>

@@ -92,3 +92,4 @@ MonoBehaviour:
   slotIndex: 0
   currentItem: {fileID: 0}
   itemImage: {fileID: 3743255638782730153}
+  defaultSprite: {fileID: -1411146664, guid: 12690b844b609c24eab15ff5c21e7a5d, type: 3}
