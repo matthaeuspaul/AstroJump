@@ -1,9 +1,12 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
+    [SerializeField] private float knockbackForce = 10f; // Force to push the player back
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player hit the trap!");
@@ -13,11 +16,11 @@ public class Trap : MonoBehaviour
 
             if (rb != null)
             {
-                Vector3 currentVelocity = rb.linearVelocity;
-                Vector3 pushDirection = -currentVelocity.normalized; // Push in the opposite direction of current movement
+                Vector3 pushDirection = (other.transform.position - transform.position).normalized;
                 pushDirection.y = 0; // Keep the push direction horizontal
                 rb.linearVelocity = Vector3.zero; // Reset current velocity
-                rb.AddForce(pushDirection * 10f, ForceMode.VelocityChange); 
+                rb.AddForce(pushDirection * knockbackForce, ForceMode.Impulse);
+
             }
 
         }
