@@ -1118,6 +1118,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8de707dffe8c7b4ea5acecd9b2ac3bb, type: 3}
+--- !u!1 &1752450647 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4659028018152407413, guid: a8de707dffe8c7b4ea5acecd9b2ac3bb, type: 3}
+  m_PrefabInstance: {fileID: 1752450646}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1832103115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,6 +1472,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4042650223064160670, guid: 110a51ca5e528274198f057538444a4b, type: 3}
+      propertyPath: interactionPromptObject
+      value: 
+      objectReference: {fileID: 1752450647}
     - target: {fileID: 3260464452728001978, guid: 110a51ca5e528274198f057538444a4b, type: 3}
       propertyPath: m_Name
       value: Player
