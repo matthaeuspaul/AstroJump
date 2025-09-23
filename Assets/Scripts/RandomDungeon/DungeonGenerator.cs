@@ -52,6 +52,11 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private CinemachineCamera cinemachineCamera; // Reference to the Cinemachine camera for player follow
     [SerializeField] private CinemachineCamera cinemachineMinimap; // Reference to the Cinemachine camera for minimap follow
 
+    [Header("Item Settings")]
+    [SerializeField] private GameObject energyOrbPrefab; // Energy orb prefab to spawn in the level
+    [SerializeField] private int energyOrbCount = 1; // Number of energy orbs to spawn
+    [SerializeField] private List<GameObject> itemPrefabs; // List of item prefabs to spawn in the level
+    [SerializeField] private int itemCount; // Number of items to spawn
 
     public void Start()
     {
@@ -61,6 +66,7 @@ public class DungeonGenerator : MonoBehaviour
         PlaceInteractableElements();
         //PlaceRoof();
         VisualizePath();
+        SpawnItems();
         //FindMainPath(spawnTile, exitTile);
     }
 
@@ -388,13 +394,13 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         // Spawn the player at the spawn tile position
-        Invoke("SpawnPlayerAtStart",0.1f);
-        
+        Invoke("SpawnPlayerAtStart", 0.1f);
+
     }
 
     private bool IsOpenOnAllSides(TileData tile)
-    { 
-        return tile.topOpen && tile.bottomOpen && tile.leftOpen && tile.rightOpen;    
+    {
+        return tile.topOpen && tile.bottomOpen && tile.leftOpen && tile.rightOpen;
     }
     private TileInstance FindGeneratorPlacement(List<TileInstance> emptyTiles, TileInstance exit)
     {
@@ -413,7 +419,7 @@ public class DungeonGenerator : MonoBehaviour
 
         }
         if (candidates.Count == 0) return null;
-        
+
 
         return candidates[Random.Range(0, candidates.Count)];
 
@@ -673,7 +679,7 @@ public class DungeonGenerator : MonoBehaviour
             // Replace tiles with matching activator and receiver tiles
             ReplaceTileWith(activatorTile, activatorTileData);
             ReplaceTileWith(receiverTile, receiverTileData);
-            if(receiverTileData.hasDoor)
+            if (receiverTileData.hasDoor)
             {
                 SwapTileBehindDoor(receiverTile, tileOptions.ToList());
             }
@@ -864,25 +870,25 @@ public class DungeonGenerator : MonoBehaviour
 
     private void PlaceRoof()
     {
-          if (roofTiles == null)
-          {
-              Debug.LogWarning("No roof tiles available to place.");
-              return;
-          }
-          for (int x = 0; x < width; x++)
-          {
-              for (int y = 0; y < height; y++)
-              {
-                  Vector3 position = new Vector3(x * tileSize, wallHeight, y * tileSize); // Adjust Y position for roof height
-                  Instantiate(roofTiles, position, Quaternion.identity, transform);
-              }
-          }
+        if (roofTiles == null)
+        {
+            Debug.LogWarning("No roof tiles available to place.");
+            return;
+        }
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Vector3 position = new Vector3(x * tileSize, wallHeight, y * tileSize); // Adjust Y position for roof height
+                Instantiate(roofTiles, position, Quaternion.identity, transform);
+            }
+        }
     }
 
 
     #endregion
 
-#region Fix Door Neighbor Tile
+    #region Fix Door Neighbor Tile
 
     private Vector2Int GetDoorDirection(TileData tile)
     {
@@ -896,25 +902,25 @@ public class DungeonGenerator : MonoBehaviour
     private void SwapTileBehindDoor(TileInstance door, List<TileData> tileList)
     {
         Vector2Int doorDirection = GetDoorDirection(door.tileData);
-            if (doorDirection == Vector2Int.zero) return;
+        if (doorDirection == Vector2Int.zero) return;
 
         Vector2Int neighborPosition = door.gridPosition + doorDirection;
-            if (!IsInBounds(neighborPosition.x, neighborPosition.y)) return;
+        if (!IsInBounds(neighborPosition.x, neighborPosition.y)) return;
 
         TileInstance neighbor = tileGrid[neighborPosition.x, neighborPosition.y];
-            if (neighbor == null || neighbor.tileData == null) return;
+        if (neighbor == null || neighbor.tileData == null) return;
 
-            if (IsEdgeTile(neighbor)) return;
+        if (IsEdgeTile(neighbor)) return;
 
-            if (HasOpening(neighbor.tileData, Negate(doorDirection))) return;
+        if (HasOpening(neighbor.tileData, Negate(doorDirection))) return;
 
         TileData changedTile = ModifyTile(neighbor.tileData, doorDirection, tileList);
 
-            if(changedTile != null)
-            {
-                neighbor.tileData = changedTile;
-                ReplaceWithMatchingTile(neighbor, tileList);
-            }
+        if (changedTile != null)
+        {
+            neighbor.tileData = changedTile;
+            ReplaceWithMatchingTile(neighbor, tileList);
+        }
     }
 
     private TileData ModifyTile(TileData originalTile, Vector2Int neededOpening, List<TileData> tileList)
@@ -931,19 +937,77 @@ public class DungeonGenerator : MonoBehaviour
 
         foreach (var tile in tileList)
         {
-            if(tile == null) continue;
-            if (tile.topOpen == top && 
-                tile.bottomOpen == bottom && 
+            if (tile == null) continue;
+            if (tile.topOpen == top &&
+                tile.bottomOpen == bottom &&
                 tile.leftOpen == left &&
-                tile.rightOpen == right && 
+                tile.rightOpen == right &&
                 isTileEmpty(new TileInstance { tileData = tile }))
-                {
-                    return tile;
-                }
+            {
+                return tile;
+            }
         }
         return null;
     }
 
-    #endregion 
+    #endregion
+
+    #region Spawn Items
+
+    // spawn energy orb based on energyOrbCount
+    // only spawn the energy orb the amount of energyOrbCount but must spawn at least one
+    // spawn orb on empty floor tiles only
+    // spawn other items based on itemPrefabs and itemCount
+    // itemPrefabs is a list of prefabs to choose from
+    // itemCount is the total number of items to spawn
+    // items can be spawned on empty floor tiles only
+    // items should not be spawned too close to each other
+    
+
+    private void SpawnItems()
+    {
+        List<TileInstance> emptyTiles = new List<TileInstance>();
+        // Collect all empty tiles
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                var tile = tileGrid[x, y];
+                if (tile != null && isTileEmpty(tile))
+                {
+                    emptyTiles.Add(tile);
+                }
+            }
+        }
+        if (emptyTiles.Count == 0)
+        {
+            Debug.LogWarning("No empty tiles available for item spawning.");
+            return;
+        }
+        // Spawn energy orbs
+        int orbsToSpawn = Mathf.Max(1, energyOrbCount); // Ensure at least one orb is spawned
+        for (int i = 0; i < orbsToSpawn; i++)
+        {
+            if (emptyTiles.Count == 0) break;
+            int index = Random.Range(0, emptyTiles.Count);
+            var tile = emptyTiles[index];
+            Vector3 spawnPosition = tile.worldPosition + new Vector3(0, 1, 0); // Adjust Y position as needed
+            Instantiate(energyOrbPrefab, spawnPosition, Quaternion.identity);
+            emptyTiles.RemoveAt(index); // Remove tile to prevent multiple spawns on the same tile
+        }
+        // Spawn other items
+        for (int i = 0; i < itemCount; i++)
+        {
+            if (emptyTiles.Count == 0 || itemPrefabs.Count == 0) break;
+            int index = Random.Range(0, emptyTiles.Count);
+            var tile = emptyTiles[index];
+            Vector3 spawnPosition = tile.worldPosition + new Vector3(0, 1, 0); // Adjust Y position as needed
+            var itemPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Count)];
+            Instantiate(itemPrefab, spawnPosition, Quaternion.identity);
+            emptyTiles.RemoveAt(index); // Remove tile to prevent multiple spawns on the same tile
+        }
+        Debug.Log($"Spawned {orbsToSpawn} energy orbs and {itemCount} items.");
+    }
+    #endregion
 
 }
