@@ -594,6 +594,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &971374256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4659028018152407413, guid: a8de707dffe8c7b4ea5acecd9b2ac3bb, type: 3}
+  m_PrefabInstance: {fileID: 1752450646}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1126628028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,6 +1736,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4042650223064160670, guid: 110a51ca5e528274198f057538444a4b, type: 3}
+      propertyPath: interactionPromptObject
+      value: 
+      objectReference: {fileID: 971374256}
     - target: {fileID: 1263093603863243524, guid: 110a51ca5e528274198f057538444a4b, type: 3}
       propertyPath: m_ActionEvents.Array.data[21].m_PersistentCalls.m_Calls.Array.size
       value: 0
