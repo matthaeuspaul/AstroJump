@@ -26,4 +26,23 @@ public class MainMenu : MonoBehaviour
     {
         _characterSelection.SetActive(true);
     }
+
+    public void SelectMalePalayer()
+    {
+        PlayerPrefs.SetInt("SelectedPlayerGender", 1);
+        PlayerPrefs.Save();
+        Debug.Log("Männlicher Spieler ausgewählt");
+
+        StartGame();
+
+    }
+
+    public void SelectFemalePlayer()
+    {
+        PlayerPrefs.SetInt("SelectedPlayerGender", 0);
+        PlayerPrefs.Save();
+        Debug.Log("Weiblicher Spieler ausgewählt");
+
+        StartGame();
+    }
 }
