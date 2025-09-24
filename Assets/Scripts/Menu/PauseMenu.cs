@@ -2,7 +2,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private Player _player; // Reference to the Player script for accessing player state
+    public Player _player; // Reference to the Player script for accessing player state
+
+    private void Awake()
+    {
+        _player = GetComponent<Player>(); // Find the Player object and get the Player script component
+        if (_player == null)
+        {
+            Debug.LogError("Player script not found on the Player object. Please ensure the Player object has the Player script attached.");
+        }
+    }
 
     public void ResumeGame()
     {

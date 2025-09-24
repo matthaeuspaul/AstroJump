@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
     public Transform target;
     private NavMeshAgent agent;
     private float maxHealth = 100;
-    private float damage = 20;
+    [SerializeField] private float damage = 1;
     private float currentHealth;
     private Vector3 startPosition;
     private Quaternion startRotation;

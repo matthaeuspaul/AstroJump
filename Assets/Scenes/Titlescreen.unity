@@ -1888,7 +1888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc19b6b2dfbd2d743b7378912bce9176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
-  _sceneName: Planet1
+  _sceneName: EnemyAI
   _characterSelection: {fileID: 891203835}
 --- !u!1 &2084545697
 GameObject:

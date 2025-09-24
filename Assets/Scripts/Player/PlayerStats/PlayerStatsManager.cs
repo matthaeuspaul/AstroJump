@@ -1,15 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStatsManager : MonoBehaviour
 {
     public static PlayerStatsManager instance;
-    [SerializeField] private GameObject GOS;
 
     [Header("Player Stats")]
     public float maxHealth = 100;
     public float currentHealth;
     public float maxOxygen = 100;
     public float currentOxygen;
+
+    [Header("UI References")]
+    [SerializeField] private GameObject GOS; // Reference to the Game Over Screen
+    [SerializeField] private Image lifeBarFilled; // Reference to the health bar UI element
+    [SerializeField] private Image oxygenBarFilled; // Reference to the oxygen bar UI element
 
     private void Awake()
     {
@@ -28,6 +33,16 @@ public class PlayerStatsManager : MonoBehaviour
     {
         currentHealth = maxHealth;
         currentOxygen = maxOxygen;
+
+         Invoke("UpdateHealthUI", 1f);
+         Invoke("UpdateOxygenUI", 1f);
+
+    }
+
+    private void Update()
+    {
+        UpdateOxygenUI();
+        UpdateHealthUI();
     }
 
     public bool Use(ItemData itemData)
@@ -36,16 +51,16 @@ public class PlayerStatsManager : MonoBehaviour
         {
             switch (itemData.actionType)
             {
-                case ItemData.ActionType.Heal: 
-                    Health(20); // Heal 20 health points
+                case ItemData.ActionType.Heal:
+                    Health(20);
                     Debug.Log($"Used {itemData.itemName}, healed 20 health points.");
                     return true;
                 case ItemData.ActionType.Damage:
-                    Health(-20); // Damage 20 health points
+                    Health(-20);
                     Debug.Log($"Used {itemData.itemName}, took 20 damage.");
                     return true;
                 case ItemData.ActionType.FillOxygen:
-                    FillOxygen(20); // Fill 20 oxygen points
+                    FillOxygen(20);
                     Debug.Log($"Used {itemData.itemName}, filled 20 oxygen points.");
                     return true;
                 default:
@@ -62,32 +77,44 @@ public class PlayerStatsManager : MonoBehaviour
 
     private void Health(float amount)
     {
-        // if player consumes a healing item, health is increased by the specified amount
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         Debug.Log($"Player health changed by {amount} points.");
-
+        UpdateHealthUI();
     }
 
     private void FillOxygen(float amount)
     {
-        // if player collects an oxygen item, oxygen is increased by the specified amount
         currentOxygen += amount;
         currentOxygen = Mathf.Clamp(currentOxygen, 0, maxOxygen);
         Debug.Log($"Player oxygen changed by {amount} points.");
-
+        UpdateOxygenUI();
     }
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        Debug.Log($"Player took {damage} damage.Health: {currentHealth/maxHealth}");
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        Debug.Log($"Player took {damage} damage. Health: {currentHealth / maxHealth}");
+        UpdateHealthUI();
         CheckForDeath();
+    }
+
+    private void UpdateHealthUI()
+    {
+        if (lifeBarFilled != null)
+            lifeBarFilled.fillAmount = currentHealth / maxHealth;
+    }
+
+    private void UpdateOxygenUI()
+    {
+        if (oxygenBarFilled != null)
+            oxygenBarFilled.fillAmount = currentOxygen / maxOxygen;
     }
 
     public void CheckForDeath()
     {
-        if (currentHealth <= 0 || currentOxygen <= 0 )
+        if (currentHealth <= 0 || currentOxygen <= 0)
         {
             Debug.Log("Player has died.");
             Player.Destroy(gameObject);
@@ -95,8 +122,7 @@ public class PlayerStatsManager : MonoBehaviour
 
             if (UI != null) UI.SetActive(false); else Debug.Log("UI not found.");
             if (GOS != null) GOS.SetActive(true); else Debug.Log("GameOverScreen not found.");
-            Time.timeScale = 0f; // Pause the game
-            // Implement death logic here (e.g., respawn, game over screen)
+            Time.timeScale = 0f;
         }
     }
 }
