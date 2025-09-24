@@ -518,6 +518,10 @@ MonoBehaviour:
   playerPrefab: {fileID: 2828686593904051156, guid: 940fdbaf680fd7a4abec431b3a588489, type: 3}
   cinemachineCamera: {fileID: 1402937283}
   cinemachineMinimap: {fileID: 1344777731}
+  energyOrbPrefab: {fileID: 0}
+  energyOrbCount: 1
+  itemPrefabs: []
+  itemCount: 0
 --- !u!4 &782314968
 Transform:
   m_ObjectHideFlags: 0

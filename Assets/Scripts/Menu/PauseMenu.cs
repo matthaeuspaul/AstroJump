@@ -6,7 +6,8 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        _player = GameObject.FindWithTag("Player").GetComponent<Player>(); // Find the Player object and get its Player script component
+        _player = GetComponent<Player>();
+        //_player = GameObject.FindWithTag("Player").GetComponent<Player>(); // Find the Player object and get its Player script component
     }
 
     public void ResumeGame()

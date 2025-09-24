@@ -64,7 +64,7 @@ public class DungeonGenerator : MonoBehaviour
         GenerateLevel();
         SelectSpawnAndExit();
         PlaceInteractableElements();
-        //PlaceRoof();
+        PlaceRoof();
         VisualizePath();
         SpawnItems();
         //FindMainPath(spawnTile, exitTile);

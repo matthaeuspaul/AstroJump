@@ -130,6 +130,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Modular_Dungeon_wall_window (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fd28a1b7ca7602b498b8476f37ea242f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -294,6 +298,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6028fd4c1fe05304aafb590f9e065de7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6028fd4c1fe05304aafb590f9e065de7, type: 3}
       propertyPath: m_Name
       value: Modular_Dungeon_wall_simple
@@ -392,6 +400,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fd28a1b7ca7602b498b8476f37ea242f, type: 3}
       propertyPath: m_Name
       value: Modular_Dungeon_wall_window
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fd28a1b7ca7602b498b8476f37ea242f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -570,6 +582,10 @@ PrefabInstance:
       value: Modular_Dungeon_Floor_basic_B
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 93a7a775abadd2d4b9720fe41b04bf4f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 93a7a775abadd2d4b9720fe41b04bf4f, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -659,6 +675,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 6028fd4c1fe05304aafb590f9e065de7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6028fd4c1fe05304aafb590f9e065de7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6028fd4c1fe05304aafb590f9e065de7, type: 3}
       propertyPath: m_Name
@@ -755,6 +775,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4a8c69bf33e29fd4b82ac52c44e7b899, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4a8c69bf33e29fd4b82ac52c44e7b899, type: 3}
       propertyPath: m_Name
       value: Modular_Dungeon_wall_simple_B
@@ -849,6 +873,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4a8c69bf33e29fd4b82ac52c44e7b899, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4a8c69bf33e29fd4b82ac52c44e7b899, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4a8c69bf33e29fd4b82ac52c44e7b899, type: 3}
       propertyPath: m_Name
@@ -956,6 +984,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 11f4e735cbf38ba4389108acaaeacbd7, type: 3}
       propertyPath: m_Name
       value: Modular_Dungeon_Floor_basic
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 11f4e735cbf38ba4389108acaaeacbd7, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 11f4e735cbf38ba4389108acaaeacbd7, type: 3}
       propertyPath: m_IsActive

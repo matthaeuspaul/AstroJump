@@ -498,6 +498,10 @@ PrefabInstance:
       value: Modular_Dungeon_Floor_basic_B
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 93a7a775abadd2d4b9720fe41b04bf4f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 93a7a775abadd2d4b9720fe41b04bf4f, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -768,6 +772,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 11f4e735cbf38ba4389108acaaeacbd7, type: 3}
       propertyPath: m_Name
       value: Modular_Dungeon_Floor_basic
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 11f4e735cbf38ba4389108acaaeacbd7, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 11f4e735cbf38ba4389108acaaeacbd7, type: 3}
       propertyPath: m_IsActive
