@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerStatsManager : MonoBehaviour
 {
     public static PlayerStatsManager instance;
+    [SerializeField] private GameObject GOS;
 
     [Header("Player Stats")]
     public float maxHealth = 100;
@@ -77,11 +78,24 @@ public class PlayerStatsManager : MonoBehaviour
 
     }
 
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        Debug.Log($"Player took {damage} damage.Health: {currentHealth/maxHealth}");
+        CheckForDeath();
+    }
+
     public void CheckForDeath()
     {
-        if (currentHealth <= 0 && currentOxygen <= 0 )
+        if (currentHealth <= 0 || currentOxygen <= 0 )
         {
             Debug.Log("Player has died.");
+            Player.Destroy(gameObject);
+            GameObject UI = GameObject.Find("UI");
+
+            if (UI != null) UI.SetActive(false); else Debug.Log("UI not found.");
+            if (GOS != null) GOS.SetActive(true); else Debug.Log("GameOverScreen not found.");
+            Time.timeScale = 0f; // Pause the game
             // Implement death logic here (e.g., respawn, game over screen)
         }
     }

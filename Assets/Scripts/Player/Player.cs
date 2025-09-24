@@ -237,4 +237,16 @@ public class Player : MonoBehaviour
             gun.Attack(ctx); // Call the Attack method of the Gun component when the attack input is performed
         }
     }
+
+    public void TakeDamage(float damage)
+    {
+        if (PlayerStatsManager.instance != null)
+        {
+            PlayerStatsManager.instance.TakeDamage(damage);
+        }
+        else 
+        {
+            Debug.LogWarning("PlayerStatsManager instance is null");
+        }
+    }
 }
