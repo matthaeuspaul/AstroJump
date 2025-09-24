@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
+using UnityEditor.Experimental.GraphView;
 
 public class Player : MonoBehaviour
 {
@@ -116,6 +117,8 @@ public class Player : MonoBehaviour
 
     public void TransitionToState(IPlayerState newState)
     {
+        Debug.Log($"Transitioning from {_currentState?.GetType().Name} to {newState.GetType().Name}");
+
         if (_currentState != pausedState)
         {
             // Store the current state as the previous gameplay state before pausing
@@ -203,25 +206,60 @@ public class Player : MonoBehaviour
             TransitionToState(walkingState);
         }
     }
+
     public void Pause(CallbackContext ctx)
     {
+        Debug.Log("Pause() entered");
         if (ctx.performed)
         {
-            // Prevent rapid toggling of pause state caused by the action Map switch and holding the escape Button
-            if (Time.unscaledTime - _lastPause < pauseCooldown)
+            float diff = Time.unscaledTime - _lastPause;
+            Debug.Log($"Pause ctx.performed, time diff = {diff}");
+
+            if (diff < pauseCooldown)
+            {
+                Debug.Log("Pause ignored due to cooldown");
                 return;
+            }
+
             _lastPause = Time.unscaledTime;
-            // Toggle between paused and previous gameplay state
+            Debug.Log("Cooldown passed, processing pause toggle...");
+
             if (_currentState == pausedState)
             {
+                Debug.Log("Switching back to gameplay state");
                 TransitionToState(_previousGameplayState);
             }
             else
             {
+                Debug.Log("Switching into paused state");
                 TransitionToState(pausedState);
             }
         }
     }
+
+    /*public void Pause(CallbackContext ctx)
+    {
+        Debug.Log($"Pause() called, ctx.phase={ctx.phase}, performed={ctx.performed}");
+        if (ctx.performed)
+        {
+            // Prevent rapid toggling of pause state caused by the action Map switch and holding the escape Button
+            if (Time.unscaledTime - _lastPause < pauseCooldown)
+                Debug.Log("Pause ignored due to cooldown");
+            return;
+                _lastPause = Time.unscaledTime;
+            // Toggle between paused and previous gameplay state
+            if (_currentState == pausedState)
+            {
+                Debug.Log("Resuming from paused state");
+                TransitionToState(_previousGameplayState);
+            }
+            else
+            {
+                Debug.Log("Switching to paused state");
+                TransitionToState(pausedState);
+            }
+        }
+    } */
     public void Resume()
     {
         if (_currentState == pausedState)
