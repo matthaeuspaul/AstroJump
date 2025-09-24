@@ -46,7 +46,7 @@ public class PlayerStatsManager : MonoBehaviour
                     return true;
                 case ItemData.ActionType.FillOxygen:
                     FillOxygen(20); // Fill 20 oxygen points
-                    Debug.Log($"Used {itemData.itemName}, filled 30 oxygen points.");
+                    Debug.Log($"Used {itemData.itemName}, filled 20 oxygen points.");
                     return true;
                 default:
                     Debug.LogWarning($"Action type {itemData.actionType} not implemented.");

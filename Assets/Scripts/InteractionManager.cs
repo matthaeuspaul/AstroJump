@@ -1,5 +1,7 @@
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
+using UnityEngine.UI;
+using TMPro;
 
 public class InteractionManager : MonoBehaviour
 {
@@ -8,6 +10,15 @@ public class InteractionManager : MonoBehaviour
     public LayerMask interactableLayer; // Layer mask for interactable objects
     private IInteractable interactable; // Currently focused interactable object
     private Camera mainCamera; // Reference to the main camera
+
+    [SerializeField] private GameObject interactionPromptObject; // UI element to show interaction prompts
+    private TMP_Text interactionText; // Text component for displaying prompts
+
+
+    private void Start()
+    {
+        interactionText = interactionPromptObject.GetComponentInChildren<TMP_Text>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -24,7 +35,7 @@ public class InteractionManager : MonoBehaviour
 
         // Cast a ray from the center of the screen
         Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-        RaycastHit hit;
+        RaycastHit hit;       
         Debug.DrawRay(ray.origin, ray.direction * interactionRange, Color.red); // Visualize the ray in the editor
         // Perform the raycast
         if (Physics.Raycast(ray, out hit, interactionRange, interactableLayer))
@@ -33,12 +44,15 @@ public class InteractionManager : MonoBehaviour
             interactable = hit.collider.GetComponent<IInteractable>();
             if (interactable != null)
             {
+                interactionText.text = interactable.GetInteractionPrompt();
+                interactionPromptObject.SetActive(true);
                 Debug.Log("Interactable object detected: " + hit.collider.name);
             }
         }
         else
         {
             interactable = null;
+            interactionPromptObject.SetActive(false);
         }
     }
 
