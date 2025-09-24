@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28a5c5b71b59e9b4bb28cd8b93473d9b, type: 3}
-  m_Name: EnergyOrb
+  m_Name: Pistol
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: ' Energy Orb'
+  itemName: Metal Box
   itemType: 1
   actionType: 3
-  image: {fileID: -1969888846, guid: 8185295165fe0604ca9fc9c1c2a7a81c, type: 3}
-  isStackable: 0
-  maxStackSize: 0
-  itemPrefab: {fileID: 3211850588248303736, guid: a1ba7f1d48bb0ea448913d56d276d75e, type: 3}
+  image: {fileID: 1816301387, guid: 976f738142ce2a94bacf40eaf219bb5d, type: 3}
+  isStackable: 1
+  maxStackSize: 5
+  itemPrefab: {fileID: 6052665596443679477, guid: 5f0ba82b03ab7364daa4653dd01121aa, type: 3}
