@@ -15,7 +15,7 @@ public class InventoryManager : MonoBehaviour
     {
         SelectSlot(0); // Select the first slot by default
         cameraTransform = Camera.main.transform; // Cache the main camera's transform
-        Subscribe();
+        Invoke("Subscribe", 1f);
     }
 
     // <summary>

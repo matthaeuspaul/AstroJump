@@ -14,12 +14,9 @@ public class PausedState : IPlayerState
     }
     public void Enter()
     {
-        Debug.Log("PausedState.Enter() reached");
-
         Time.timeScale = 0f; // Pause the game by setting time scale to 0
         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         _pauseMenu.SetActive(true); // Show the pause menu
-        Debug.Log("Pause Menu Activated");
         _playerInput.SwitchCurrentActionMap("UI"); // Switch to UI action map
         Debug.Log("Game Paused");
     }
@@ -41,6 +38,7 @@ public class PausedState : IPlayerState
     {
     }
 
-    public void HandleAnimation() { /* No animations to handle in paused state */ }
-
+    /* public void HandleAnimation()
+    {
+    } */
 }

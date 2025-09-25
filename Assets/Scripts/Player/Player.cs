@@ -18,7 +18,10 @@ public class Player : MonoBehaviour
     [SerializeField] private Collider weaponCollider; // Reference to the weapon collider
     [SerializeField] GameObject _pauseMenu; // Reference to the pause menu GameObject
     [HideInInspector] public float _speed; // Default walking speed
-    public Gun gun; // Reference to the Gun component for shooting mechanics
+    public Gun gun; // Reference to the Gun component for shooting mechanic
+    private bool _isGun = false;
+    private bool _isSword = false;
+    private bool _attacking = false;
     public bool isGrounded { get; private set; } // Flag to check if the player is on the ground
     public bool isAirborne { get; private set; } // Flag to check if the player is in the air (not grounded)
     public bool isRunning { get; private set; } // Flag to check if the player is running
@@ -146,17 +149,6 @@ public class Player : MonoBehaviour
         _movementInput = ctx.ReadValue<Vector2>();
     }
 
-    /* public void Attack(CallbackContext ctx)
-    {
-        Debug.Log("Attack called");
-        // Only allow attacking when grounded and idle or walking
-        if (ctx.performed && isGrounded && !isRunning)
-        {
-            // Trigger attack animation
-            ChangeAnimation("Sword_Attack", 0.1f);
-        }
-    } */
-
     public void EnableWeaponCollider()
     {
         // Enable the weapon collider during the attack animation
@@ -171,7 +163,7 @@ public class Player : MonoBehaviour
     
     public void Jump(CallbackContext ctx)
     {
-        if (ctx.performed && isGrounded)
+        if (ctx.performed && isGrounded && !_attacking )
         {
             _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
 
@@ -209,43 +201,13 @@ public class Player : MonoBehaviour
 
     public void Pause(CallbackContext ctx)
     {
-        Debug.Log("Pause() entered");
-        if (ctx.performed)
-        {
-            float diff = Time.unscaledTime - _lastPause;
-            Debug.Log($"Pause ctx.performed, time diff = {diff}");
-
-            if (diff < pauseCooldown)
-            {
-                Debug.Log("Pause ignored due to cooldown");
-                return;
-            }
-
-            _lastPause = Time.unscaledTime;
-            Debug.Log("Cooldown passed, processing pause toggle...");
-
-            if (_currentState == pausedState)
-            {
-                Debug.Log("Switching back to gameplay state");
-                TransitionToState(_previousGameplayState);
-            }
-            else
-            {
-                Debug.Log("Switching into paused state");
-                TransitionToState(pausedState);
-            }
-        }
-    }
-
-    /*public void Pause(CallbackContext ctx)
-    {
         Debug.Log($"Pause() called, ctx.phase={ctx.phase}, performed={ctx.performed}");
         if (ctx.performed)
         {
             // Prevent rapid toggling of pause state caused by the action Map switch and holding the escape Button
             if (Time.unscaledTime - _lastPause < pauseCooldown)
-                Debug.Log("Pause ignored due to cooldown");
-            return;
+                // Debug.Log("Pause ignored due to cooldown");
+                return;
                 _lastPause = Time.unscaledTime;
             // Toggle between paused and previous gameplay state
             if (_currentState == pausedState)
@@ -259,7 +221,7 @@ public class Player : MonoBehaviour
                 TransitionToState(pausedState);
             }
         }
-    } */
+    }
     public void Resume()
     {
         if (_currentState == pausedState)
@@ -268,11 +230,43 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Attack(InputAction.CallbackContext ctx)
+    public void Attack(CallbackContext ctx)
     {
-        if (gun != null && isGrounded && !isRunning)
+        if (ctx.performed)
         {
-            gun.Attack(ctx); // Call the Attack method of the Gun component when the attack input is performed
+            WeaponType weaponType = FindFirstObjectByType<WeaponType>();
+            weaponType.IsWeaponActive();
+            if (weaponType == null)  return;
+            if(!weaponType.isPistolActive && !weaponType.isSwordActive) return;
+            if (weaponType.IsWeaponActive() == weaponType.isPistolActive)
+            {
+                _isGun = true;
+                _isSword = false;
+            }
+            else if (weaponType.IsWeaponActive() == weaponType.isSwordActive)
+            {
+                _isGun = false;
+                _isSword = true;
+            }
+            if (_isGun && isGrounded && !isRunning)
+            {
+                _attacking = true;
+                gun.Attack(ctx); // Call the Attack method of the Gun component when the attack input is performed
+            }
+            else if (_isSword && isGrounded && !isRunning)
+            {
+                _attacking = true;
+                // Trigger attack animation
+                ChangeAnimation("Sword_Attack", 0.1f);
+            }
+        }
+        else if (ctx.canceled)
+        {
+            if (_isGun && isGrounded && !isRunning)
+            {
+                gun.Attack(ctx); // Stop the Attack method of the Gun component when the attack input is canceled
+            }
+            _attacking = false;
         }
     }
 
