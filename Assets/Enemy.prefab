@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6445824760057473093}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,7 +124,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7607087298456043660}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1.5
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -150,6 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   target: {fileID: 0}
-  damage: 1
+  damage: 5
   attackRange: 3.5
   attackCooldown: 1

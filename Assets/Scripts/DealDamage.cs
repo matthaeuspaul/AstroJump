@@ -6,7 +6,7 @@ public class DealDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Target")) 
+        if (other.CompareTag("Enemy")) 
         {
             Target target = other.GetComponent<Target>();
             if (target != null)

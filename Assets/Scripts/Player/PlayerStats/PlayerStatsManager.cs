@@ -13,9 +13,11 @@ public class PlayerStatsManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private GameObject GOS; // Reference to the Game Over Screen
+    [SerializeField] private GameObject UI;  // Reference to the main UI
     [SerializeField] private Image lifeBarFilled; // Reference to the health bar UI element
     [SerializeField] private Image oxygenBarFilled; // Reference to the oxygen bar UI element
 
+    public bool isDead { get; private set; }
     private void Awake()
     {
         if (instance == null)
@@ -31,11 +33,13 @@ public class PlayerStatsManager : MonoBehaviour
 
     private void Start()
     {
+        if (GOS == null) Debug.LogWarning("GameOverScreen reference not set in PlayerStatsManager.");
+        else Debug.Log("GameOverScreen reference found.");
         currentHealth = maxHealth;
         currentOxygen = maxOxygen;
 
-         Invoke("UpdateHealthUI", 1f);
-         Invoke("UpdateOxygenUI", 1f);
+        Invoke("UpdateHealthUI", 1f);
+        Invoke("UpdateOxygenUI", 1f);
 
     }
 
@@ -116,13 +120,19 @@ public class PlayerStatsManager : MonoBehaviour
     {
         if (currentHealth <= 0 || currentOxygen <= 0)
         {
+            // GameObject UI = GameObject.Find("UI");
+            if (GOS != null) GOS.SetActive(true); else Debug.Log("GameOverScreen not found.");
+            if (UI != null) UI.SetActive(false); else Debug.Log("UI not found.");
+
             Debug.Log("Player has died.");
             Player.Destroy(gameObject);
-            GameObject UI = GameObject.Find("UI");
-
-            if (UI != null) UI.SetActive(false); else Debug.Log("UI not found.");
-            if (GOS != null) GOS.SetActive(true); else Debug.Log("GameOverScreen not found.");
+            Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0f;
         }
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
     }
 }

@@ -31,6 +31,7 @@ public class InteractionManager : MonoBehaviour
     // </summary>
     public void CheckForInteraction()
         {
+        if (interactionPromptObject == null) return; // Ensure the prompt object is assigned
         if (mainCamera == null) mainCamera = Camera.main; // Cache the main camera reference
 
         // Cast a ray from the center of the screen

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 using UnityEditor.Experimental.GraphView;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class Player : MonoBehaviour
 {
@@ -202,8 +203,11 @@ public class Player : MonoBehaviour
     public void Pause(CallbackContext ctx)
     {
         Debug.Log($"Pause() called, ctx.phase={ctx.phase}, performed={ctx.performed}");
+        PlayerStatsManager playerStats = FindFirstObjectByType<PlayerStatsManager>();
+        playerStats.IsDead(); // Update the _isDead flag based on player's health
         if (ctx.performed)
         {
+            if(playerStats.isDead) return; // Do not allow pausing if the player is dead
             // Prevent rapid toggling of pause state caused by the action Map switch and holding the escape Button
             if (Time.unscaledTime - _lastPause < pauseCooldown)
                 // Debug.Log("Pause ignored due to cooldown");

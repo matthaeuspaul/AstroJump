@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
@@ -7,6 +8,8 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] private int[] enemiesPerWave; // e.g., [5, 10, 15]
     [SerializeField] private float timeBetweenWaves = 5f;
     [SerializeField] private Transform playerTransform;
+
+    [SerializeField] private GameObject waveInfoUI; // UI-Element zur Anzeige der Welleninformationen
 
     private int currentWave = 0;
     private int enemiesSpawned = 0;
@@ -29,10 +32,13 @@ public class EnemySpawn : MonoBehaviour
                 StartNextWave();
             }
         }
+        ShowWaveInfo();
     }
-
+    
     void StartNextWave()
     {
+        StartCoroutine("ShowWaveInfo");
+        waveInfoUI.SetActive(true);
         enemiesSpawned = 0;
         enemiesAlive = enemiesPerWave[currentWave];
         for (int i = 0; i < enemiesPerWave[currentWave]; i++)
@@ -40,6 +46,15 @@ public class EnemySpawn : MonoBehaviour
             SpawnEnemy();
         }
         currentWave++;
+    }
+
+    public IEnumerator ShowWaveInfo()
+    {
+        waveInfoUI.SetActive(true);
+        // Hier können Sie den Text des UI-Elements aktualisieren, z.B. "Wave X"
+        waveInfoUI.GetComponentInChildren<TMPro.TMP_Text>().text = $"Wave {currentWave + 1} incoming. Enemies left: {enemiesAlive}";
+        yield return new WaitForSeconds(10f); // Anzeigezeit
+        waveInfoUI.SetActive(false);
     }
 
     void SpawnEnemy()
