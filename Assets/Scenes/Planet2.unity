@@ -815,7 +815,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e774f84ba23e440b2ddc8c44029903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExitZone
-  nextScene: Planet1
 --- !u!65 &1492996823
 BoxCollider:
   m_ObjectHideFlags: 0

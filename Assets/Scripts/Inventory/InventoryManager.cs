@@ -8,13 +8,13 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private List<InventorySlot> inventorySlots = new List<InventorySlot>(); // List of inventory slots
     public InventorySlot selectedSlot { get; private set; } // Currently selected slot
-    private Transform cameraTransform; // Reference to the main camera's transform
+    private Transform cameraTransform => Camera.main.transform; // Reference to the main camera's transform
     private PlayerInput playerInput; // Reference to PlayerInput component
 
     private void Start()
     {
         SelectSlot(0); // Select the first slot by default
-        cameraTransform = Camera.main.transform; // Cache the main camera's transform
+        //cameraTransform = Camera.main.transform; // Cache the main camera's transform
         Invoke("Subscribe", 0.2f);
     }
 
