@@ -37,4 +37,8 @@ public class PausedState : IPlayerState
     public void Update()
     {
     }
+
+    /* public void HandleAnimation()
+    {
+    } */
 }

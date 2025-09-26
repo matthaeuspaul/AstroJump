@@ -2,7 +2,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private Player _player; // Reference to the Player script for accessing player state
+    private Player _player; // Reference to the Player script for accessing player state
+
+    private void Awake()
+    {
+        _player = FindFirstObjectByType<Player>();
+        //_player = GameObject.FindWithTag("Player").GetComponent<Player>(); // Find the Player object and get its Player script component
+    }
 
     public void ResumeGame()
     {
@@ -19,6 +25,6 @@ public class PauseMenu : MonoBehaviour
         Destroy(GameObject.Find("PersistanceManager")); // Destroy the PersistanceManager to reset game state
         SceneManager.LoadScene("Titlescreen"); // Load the Title Screen scene
         Time.timeScale = 1f; // Ensure the game is unpaused
-        
+
     }
 }

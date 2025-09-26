@@ -7,5 +7,6 @@ public interface IPlayerState
     void Exit();
     void Update();
     void FixedUpdate();
+    // void HandleAnimation();
 
 }

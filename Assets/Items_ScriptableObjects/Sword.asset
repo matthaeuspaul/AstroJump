@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Metal Box
-  itemType: 1
-  actionType: 3
-  image: {fileID: 1816301387, guid: 976f738142ce2a94bacf40eaf219bb5d, type: 3}
+  itemType: 2
+  actionType: 1
+  image: {fileID: -645489658, guid: 04d5f7eda0c33154cb8b9a8dfd08695a, type: 3}
   isStackable: 1
   maxStackSize: 5
-  itemPrefab: {fileID: 6052665596443679477, guid: 5f0ba82b03ab7364daa4653dd01121aa, type: 3}
+  itemPrefab: {fileID: 6937603688500329264, guid: 7ec36876f87a6d849b3cc60a7e3e5f2b, type: 3}

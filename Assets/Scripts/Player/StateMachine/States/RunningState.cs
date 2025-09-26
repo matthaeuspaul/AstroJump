@@ -10,9 +10,15 @@ public class RunningState : IPlayerState
     }
 
     public void Enter()
-    {
+    { 
         // Set the player's speed to the running speed when entering the running state
         _player._speed = _player._runSpeed;
+        /*
+        if (_player.rb.linearVelocity.y < -5f) // Schwellenwert nach Bedarf anpassen
+        {
+            _player.ChangeAnimation("Falling_Land", 0.1f);
+        }
+        */
         Debug.Log("Entered Running State"); // Log message for debugging purposes
     }
 
@@ -34,7 +40,23 @@ public class RunningState : IPlayerState
         {
             _player.TransitionToState(_player.airborneState);
         }
+        HandleAnimation(); // Call the method to handle animations while running
     }
+
+    public void HandleAnimation()
+    {
+        Vector2 input = _player.movementInput;
+
+        if (input.magnitude < 0.1f)
+        {
+            _player.ChangeAnimation("Idle");
+        }
+        else
+        {
+            _player.ChangeAnimation("Running");
+        }
+    }
+
     private void RunningMovement()
     {
         // Calculate the movement direction based on player input and camera orientation

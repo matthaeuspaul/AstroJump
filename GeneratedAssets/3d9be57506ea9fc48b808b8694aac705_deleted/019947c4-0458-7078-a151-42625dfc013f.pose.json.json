@@ -1,0 +1,11 @@
+{
+    "asset": "3d9be57506ea9fc48b808b8694aac705",
+    "fileName": "019947c4-0458-7078-a151-42625dfc013f.pose.json",
+    "prompt": "Sword Slash Attack animation. Only one Swing, no combo. Character doesnt walk in the animation, his head doesnt twist/turn.\n",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 516719297,
+    "w3CTraceId": "5809497f04716bdc21cfc4b883787295",
+    "isTrimmed": false
+}

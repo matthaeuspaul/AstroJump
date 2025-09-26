@@ -1,0 +1,11 @@
+{
+    "asset": "3d9be57506ea9fc48b808b8694aac705",
+    "fileName": "019947c5-0f73-71b1-b69d-9a8e053b87d8.pose.json",
+    "prompt": "Sword attack animation. Only one attack, no combo. Character doesnt walk forwards/stays in one spot. His head doesnt move at all\n",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 437072923,
+    "w3CTraceId": "c9d52494aed47e440025858efca67f7d",
+    "isTrimmed": false
+}
