@@ -20,54 +20,85 @@ public class EnemySpawn : MonoBehaviour
     private int enemiesSpawned = 0;
     private int enemiesAlive = 0;
     private float waveTimer = 0f;
-    private bool waveActive = false;
+    private float nextSceneTimer = 0f;
+
+    private enum WaveState
+    {
+        WaitingForNextWave,
+        ShowingWaveInfo,
+        WaveActive,
+        AllWavesCompleted,
+        TransitioningToNextScene
+    }
+
+    private WaveState currentState = WaveState.WaitingForNextWave;
+    private bool allWavesCompleted = false; // Flag to track if all waves are defeated
+
+    [SerializeField] private string nextScene; // Name of the next scene to load after all waves are defeated
+    [SerializeField] private float countdownToNextScene = 5f; // Countdown time before loading next scene
 
     void Start()
     {
         UpdateWaveInfoUI();
-        StartNextWave();
+        // Instantly start the first wave
+        StartCoroutine(StartNextWaveCoroutine());
     }
 
     void Update()
     {
-        // If no enemies are alive and there are more waves to spawn
-        if (enemiesAlive == 0 && currentWave < enemiesPerWave.Length)
+        // Check if all waves are completed first
+        if (currentWave >= enemiesPerWave.Length && enemiesAlive == 0 && !allWavesCompleted)
         {
-            if (!waveActive) // Only count down if no wave is active
-            {
-                waveTimer += Time.deltaTime;
-                UpdateCountdownUI();
+            allWavesCompleted = true;
+            currentState = WaveState.AllWavesCompleted;
+            ShowAllWavesCompleted();
+        }
 
-                if (waveTimer >= timeBetweenWaves)
-                {
-                    waveTimer = 0f;
-                    StartNextWave();
-                }
+        // Handle countdown to next scene
+        if (allWavesCompleted && currentState == WaveState.TransitioningToNextScene)
+        {
+            nextSceneTimer += Time.deltaTime;
+            UpdateNextSceneCountdown();
+
+            if (nextSceneTimer >= countdownToNextScene)
+            {
+                LevelLoadingManagerer.instance.StartLevelTransition(nextScene);
+            }
+            return; // Don't process other logic when transitioning
+        }
+
+        // If waiting for next wave, update timer and check if it's time to start the next wave
+        if (currentState == WaveState.WaitingForNextWave)
+        {
+            waveTimer += Time.deltaTime;
+            UpdateCountdownUI();
+
+            if (waveTimer >= timeBetweenWaves)
+            {
+                waveTimer = 0f;
+                StartCoroutine(StartNextWaveCoroutine());
             }
         }
         // Update UI during active wave
-        else if (waveActive)
+        else if (currentState == WaveState.WaveActive)
         {
             UpdateWaveInfoUI();
         }
-
-        // Check if all waves are completed
-        if (currentWave >= enemiesPerWave.Length && enemiesAlive == 0)
-        {
-            ShowAllWavesCompleted();
-        }
     }
 
-    void StartNextWave()
+    private IEnumerator StartNextWaveCoroutine()
     {
-        waveActive = true;
+        if (currentWave >= enemiesPerWave.Length) yield break;
+
+        currentState = WaveState.ShowingWaveInfo;
         enemiesSpawned = 0;
         enemiesAlive = enemiesPerWave[currentWave];
 
         // Display wave start information
-        StartCoroutine(ShowWaveStartInfo());
+        yield return StartCoroutine(ShowWaveStartInfo());
 
         // Spawn enemies for the current wave
+        currentState = WaveState.WaveActive;
         for (int i = 0; i < enemiesPerWave[currentWave]; i++)
         {
             SpawnEnemy();
@@ -89,11 +120,7 @@ public class EnemySpawn : MonoBehaviour
         if (nextWaveCountdownText != null)
             nextWaveCountdownText.text = "";
 
-        yield return new WaitForSeconds(5f);
-
-        // Activate wave info UI for the ongoing wave
-        waveActive = true;
-        UpdateWaveInfoUI();
+        yield return new WaitForSeconds(3f); 
     }
 
     void UpdateWaveInfoUI()
@@ -107,7 +134,7 @@ public class EnemySpawn : MonoBehaviour
             if (currentWave < enemiesPerWave.Length || enemiesAlive > 0)
                 waveNumberText.text = $"Wave: {currentWave}/{enemiesPerWave.Length}";
             else
-                waveNumberText.text = "All Waves Complete!";
+                waveNumberText.text = "All WAVES COMPLETED";
         }
 
         // Number of alive enemies
@@ -123,19 +150,27 @@ public class EnemySpawn : MonoBehaviour
             nextWaveCountdownText.text = $"Next Wave in: {timeRemaining:F1}s";
     }
 
+    void UpdateNextSceneCountdown()
+    {
+        float timeRemaining = countdownToNextScene - nextSceneTimer;
+
+        if (nextWaveCountdownText != null)
+            nextWaveCountdownText.text = $"Loading next level in: {timeRemaining:F1}s";
+    }
+
     void ShowAllWavesCompleted()
     {
-        waveActive = false;
+        currentState = WaveState.TransitioningToNextScene;
 
         if (waveInfoUI != null)
             waveInfoUI.SetActive(true);
 
         if (waveNumberText != null)
-            waveNumberText.text = "ALL WAVES COMPLETED!";
+            waveNumberText.text = "";
         if (enemiesAliveText != null)
-            enemiesAliveText.text = "";
+            enemiesAliveText.text = "ALL WAVES COMPLETED";
         if (nextWaveCountdownText != null)
-            nextWaveCountdownText.text = "";
+            nextWaveCountdownText.text = $"Loading next level in: {countdownToNextScene:F1}s";
     }
 
     void SpawnEnemy()
@@ -155,10 +190,14 @@ public class EnemySpawn : MonoBehaviour
         enemiesAlive--;
 
         // Check if wave is completed
-        if (enemiesAlive <= 0)
+        if (enemiesAlive <= 0 && currentState == WaveState.WaveActive)
         {
-            waveActive = false;
-            waveTimer = 0f; // Reset timer for next wave
+            // Wave completed, wait for next wave if any left
+            if (currentWave < enemiesPerWave.Length)
+            {
+                currentState = WaveState.WaitingForNextWave;
+                waveTimer = 0f; // Reset timer for next wave
+            }
         }
 
         // Update UI after enemy death

@@ -11,7 +11,7 @@ public class InteractionManager : MonoBehaviour
     private IInteractable interactable; // Currently focused interactable object
     private Camera mainCamera; // Reference to the main camera
 
-    [SerializeField] private GameObject interactionPromptObject; // UI element to show interaction prompts
+    public GameObject interactionPromptObject; // UI element to show interaction prompts
     private TMP_Text interactionText; // Text component for displaying prompts
 
 
@@ -36,6 +36,7 @@ public class InteractionManager : MonoBehaviour
 
         // Cast a ray from the center of the screen
         Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        Debug.DrawRay(ray.origin, ray.direction * interactionRange);
         RaycastHit hit;       
         Debug.DrawRay(ray.origin, ray.direction * interactionRange, Color.red); // Visualize the ray in the editor
         // Perform the raycast

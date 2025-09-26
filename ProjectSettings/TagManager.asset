@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - XYZ
   - Item
+  - InteractionPrompt
   layers:
   - Default
   - TransparentFX
