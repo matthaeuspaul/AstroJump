@@ -45,6 +45,8 @@ Material:
     - _Blend: 2
     - _DotsNoiseScale: 10
     - _DstBlend: 1
+    - _QueueControl: 0
+    - _SrcBlend: 5
     m_Colors:
     - _DotTiling: {r: 0, g: 15, b: 0, a: 0}
     - _DotsColor: {r: 0, g: 0.54380876, b: 7.939611, a: 1}
