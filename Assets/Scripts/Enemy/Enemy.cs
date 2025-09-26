@@ -56,9 +56,10 @@ public class Enemy : MonoBehaviour
         lastAttackTime = 0f;
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         currentHealth -= amount;
+        Debug.Log($"{name} takes {amount} damage. Health: {currentHealth}/{maxHealth}");
         if (currentHealth <= 0)
         {
             Die();
@@ -77,6 +78,7 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
+        Debug.Log($"{name} died!");
         OnDeath?.Invoke();
         gameObject.SetActive(false);
     }

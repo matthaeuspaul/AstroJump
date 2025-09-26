@@ -154,12 +154,14 @@ public class Player : MonoBehaviour
     {
         // Enable the weapon collider during the attack animation
         weaponCollider.enabled = true;
+        Debug.Log("Weapon collider enabled");
     }
 
     public void DisableWeaponCollider()
     {
         // Disable the weapon collider after the attack animation
         weaponCollider.enabled = false;
+        Debug.Log("Weapon collider disabled");
     }
     
     public void Jump(CallbackContext ctx)

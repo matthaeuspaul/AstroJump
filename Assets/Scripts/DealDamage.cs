@@ -8,10 +8,10 @@ public class DealDamage : MonoBehaviour
     {
         if (other.CompareTag("Enemy")) 
         {
-            Target target = other.GetComponent<Target>();
-            if (target != null)
+            Enemy enemy = other.GetComponent<Enemy>();
+            if (enemy != null)
             {
-                target.TakeDamage(damage);
+                enemy.TakeDamage(damage);
             }
         }
     }
