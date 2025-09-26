@@ -11,6 +11,7 @@ public class DealDamage : MonoBehaviour
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null)
             {
+                enemy = other.GetComponent<Enemy>();
                 enemy.TakeDamage(damage);
             }
         }
