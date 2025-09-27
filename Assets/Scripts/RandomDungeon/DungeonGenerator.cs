@@ -35,6 +35,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private int minDistanceBetweenSpawnAndExit = 15; // Minimum distance between spawn and exit points
     [SerializeField] private List<TileData> spawnTiles; // List of tiles suitable for spawn point
     [SerializeField] private List<TileData> exitTiles;  // List of tiles suitable for exit point
+    [SerializeField] private Material pathMaterial; // Material to visualize the main path
     private TileInstance spawnTile;    // TileInstance for the spawn point
     private TileInstance exitTile;     // TileInstance for the exit point
 
@@ -64,10 +65,9 @@ public class DungeonGenerator : MonoBehaviour
         GenerateLevel();
         SelectSpawnAndExit();
         PlaceInteractableElements();
-        //PlaceRoof();
+        PlaceRoof();
         VisualizePath();
         SpawnItems();
-        //FindMainPath(spawnTile, exitTile);
     }
 
     private void GenerateLevel()
@@ -532,7 +532,7 @@ public class DungeonGenerator : MonoBehaviour
                         {
                             if (rend != null)
                             {
-                                rend.material.color = Color.blue; // Mark path tiles in blue
+                                rend.material = pathMaterial; // Mark path tiles in blue
                             }
                         }
                     }
