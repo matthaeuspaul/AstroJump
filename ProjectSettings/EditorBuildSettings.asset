@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Planet2.unity
     guid: 9f6cb79c74344214e82364a428e46787
   - enabled: 1
-    path: Assets/Scenes/LightTest.unity
+    path: Assets/Scenes/Dungeon1.unity
     guid: 8f9303735b28ecc4885dcd1e8da1848b
   - enabled: 1
     path: Assets/Scenes/Dungeon generator.unity

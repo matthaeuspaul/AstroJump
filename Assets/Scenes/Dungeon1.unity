@@ -648,7 +648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelTracker
   levelNames:
-  - LightTest
+  - Dungeon2
   - Planet2
   - Dungeon generator
 --- !u!114 &338705070
