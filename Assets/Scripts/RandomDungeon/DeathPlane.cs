@@ -12,13 +12,15 @@ public class DeathPlane : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-        { 
+        {
             // Move Player back to spawn point
-            other.transform.position = DungeonGenerator.globalSpawnPosition;
+            Transform playerRoot = other.transform.root;
+            playerRoot.position = DungeonGenerator.globalSpawnPosition;
+            // other.transform.position = DungeonGenerator.globalSpawnPosition;
 
             // reset velocity of rigidbody
 
-            Rigidbody rb = other.GetComponent<Rigidbody>();
+            Rigidbody rb = playerRoot.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.angularVelocity = Vector3.zero;

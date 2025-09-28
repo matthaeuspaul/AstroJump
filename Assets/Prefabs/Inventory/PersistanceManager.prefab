@@ -81,8 +81,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelTracker
   levelNames:
-  - Dungeon1
-  - Dungeon2
+  - Planet1
+  - ReferenceScene
   - Planet1
 --- !u!1001 &838905618627871623
 PrefabInstance:

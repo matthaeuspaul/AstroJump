@@ -12,7 +12,7 @@ public class PlayerStatsManager : MonoBehaviour
     public float currentOxygen;
 
     [Header("UI References")]
-    [SerializeField] private GameObject GOS; // Reference to the Game Over Screen
+    private GameObject GOS; // Reference to the Game Over Screen
     [SerializeField] private GameObject UI;  // Reference to the main UI
     [SerializeField] private Image lifeBarFilled; // Reference to the health bar UI element
     [SerializeField] private Image oxygenBarFilled; // Reference to the oxygen bar UI element
@@ -33,6 +33,7 @@ public class PlayerStatsManager : MonoBehaviour
 
     private void Start()
     {
+        GOS = FindObjectsInactiveByName("GameOverScreen");
         if (GOS == null) Debug.LogWarning("GameOverScreen reference not set in PlayerStatsManager.");
         else Debug.Log("GameOverScreen reference found.");
         currentHealth = maxHealth;
@@ -41,6 +42,19 @@ public class PlayerStatsManager : MonoBehaviour
         Invoke("UpdateHealthUI", 1f);
         Invoke("UpdateOxygenUI", 1f);
 
+    }
+
+    private GameObject FindObjectsInactiveByName(string name)
+    {
+        var allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (var obj in allObjects)
+        {
+            if (obj.name == name && !obj.hideFlags.HasFlag(HideFlags.NotEditable) && !obj.hideFlags.HasFlag(HideFlags.HideAndDontSave))
+            {
+                return obj;
+            }
+        }
+        return null;
     }
 
     private void Update()

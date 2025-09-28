@@ -79,6 +79,29 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen and hide it
+
+        AssignGUnReference();
+    }
+
+    private void AssignGUnReference()
+    {
+        // Find all Gun components in the scene even if they are inactive
+        Gun[] allGuns = Resources.FindObjectsOfTypeAll<Gun>();
+
+        foreach (Gun g in allGuns)
+        {
+            // only assign the gun if parent is a CinemachineCamera
+
+            if(g.transform.name == "Pistol" && g.transform.parent != null && g.transform.parent.GetComponent<Unity.Cinemachine.CinemachineCamera>() != null)
+            {
+                gun = g;
+                break;
+            }
+        }
+        if (gun == null)
+        {
+            Debug.LogWarning("Gun component not found in the scene. Please ensure there is a GameObject named 'Pistol' with a Gun component under a CinemachineCamera.");
+        }
     }
 
     private void Update()
@@ -190,7 +213,7 @@ public class Player : MonoBehaviour
             return;
         }
         // switch between walking and running states
-        if (ctx.performed)
+        if (ctx.performed && !_attacking)
         {
             isRunning = true;
             TransitionToState(runningState);
@@ -238,7 +261,7 @@ public class Player : MonoBehaviour
 
     public void Attack(CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.performed && !isRunning)
         {
             WeaponType weaponType = FindFirstObjectByType<WeaponType>();
             weaponType.IsWeaponActive();

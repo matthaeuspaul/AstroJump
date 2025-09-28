@@ -6,6 +6,7 @@ public class PowerGenerator : MonoBehaviour, IInteractable
 {
     [SerializeField] private ItemData requiredItem; // Item required to activate the generator
     [SerializeField] private GameObject generatorObject; // The generator object to activate
+    [SerializeField] private Material exitHologramMaterial; // Material to apply to the exit when activated
 
     private bool isActivated = false;
     private bool showRequiredMessage = false;
@@ -36,9 +37,68 @@ public class PowerGenerator : MonoBehaviour, IInteractable
         {   
             isActivated = true; // activate only once
             generatorObject.SetActive(true); // Activate the generator object
-///TODO: set exit zone active
+            Debug.Log("Power Generator activated with " + requiredItem.itemName + " at " + DateTime.Now);
+
             var InvMan = FindFirstObjectByType<InventoryManager>(); // Find the InventoryManager in the scene
             InvMan.ClearItem(); // Remove the used item from inventory
+            // Activate the linked exit's trigger collider
+            LinkItems link = GetComponent<LinkItems>();
+            if (link != null && link.linkedPartner != null)
+            {
+                // get all colliders from linked partner
+                Collider[] colliders = link.linkedPartner.GetComponents<Collider>();
+                bool triggerFound = false;
+
+                foreach (var col in colliders)
+                {
+                    // Enable the trigger collider to allow player to exit
+                    if (col.isTrigger)
+                    {
+                        col.enabled = true;
+                        Debug.Log("Exit active");
+                        triggerFound = true;
+                        break;
+                    }
+                }
+                if (!triggerFound)
+                {
+                    Debug.LogWarning("Linked exit has no trigger Collider to activate");
+                }
+                var meshRenderer = link.linkedPartner.GetComponent<MeshRenderer>();
+                if (meshRenderer != null)
+                {
+                    Material[] materials = meshRenderer.materials;
+                    bool materialChanged = false;  
+                    // swap the second Material "Barrier_Hologramm" based on name with "Exit_Hologramm"
+                    // using exitHologramMaterial assigned in inspector for "Exit_Hologramm"
+                    for (int i = 0; i < materials.Length; i++)
+                    {
+                        if (materials[i].name.Contains("Barrier_Hologramm"))
+                        {
+                            materials[i] = exitHologramMaterial;
+                            materialChanged = true;
+                            Debug.Log("Exit hologram material applied");
+                        }
+                    }
+                    if (materialChanged)
+                    {
+                        meshRenderer.materials = materials; // Apply the modified materials array back to the MeshRenderer
+                    }
+                    else
+                    {
+                        Debug.LogWarning("No 'Barrier_Hologramm' material found to replace on linked exit");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("Linked exit has no MeshRenderer to make visible");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("No linked partner found for generator");
+            }
+
         }
         else
         {

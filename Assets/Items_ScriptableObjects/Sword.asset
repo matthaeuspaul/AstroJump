@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a5c5b71b59e9b4bb28cd8b93473d9b, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Metal Box
+  itemName: Sword
   itemType: 2
   actionType: 1
   image: {fileID: -645489658, guid: 04d5f7eda0c33154cb8b9a8dfd08695a, type: 3}

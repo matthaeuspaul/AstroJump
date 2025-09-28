@@ -1,10 +1,11 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class WeaponType : MonoBehaviour
 {
     [SerializeField] private ItemData pistol;
     [SerializeField] private ItemData sword;
-    [SerializeField] private GameObject pistolPrefab;
+    public GameObject pistolPrefab;
     [SerializeField] private GameObject swordPrefab;
 
     public bool isPistolActive { get; private set; }
@@ -15,6 +16,27 @@ public class WeaponType : MonoBehaviour
     void Start()
     {
         inventoryManager = FindFirstObjectByType<InventoryManager>();
+
+        // Find the pistolPrefab in the scene even if its inactive
+        Transform[] allTransforms = Resources.FindObjectsOfTypeAll<Transform>();
+
+        foreach (Transform t in allTransforms)
+            {
+            if (t.name == "Pistol")
+            {
+                // Make sure it's a child of the CinemachineCamera
+                if(t.parent != null && t.parent.GetComponent<Unity.Cinemachine.CinemachineCamera>() != null)
+                {
+                    pistolPrefab = t.gameObject;
+                    break;
+                }
+
+            }
+        }
+        if (pistolPrefab == null)
+        {
+            Debug.LogError("Pistol prefab not found in the scene. Please ensure there is a GameObject named 'Pistol' under a CinemachineCamera.");
+        }
     }
 
     // Update is called once per frame

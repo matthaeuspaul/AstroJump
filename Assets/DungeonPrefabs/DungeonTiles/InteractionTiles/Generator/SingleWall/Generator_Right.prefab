@@ -547,6 +547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerGenerator
   requiredItem: {fileID: 11400000, guid: 4e3b295f21a6e884ebbc817174e7d835, type: 2}
   generatorObject: {fileID: 2702388359987389224}
+  exitHologramMaterial: {fileID: 2100000, guid: 40303cd82f028b74a9f2d4a70ae929fb, type: 2}
 --- !u!4 &4355361835121071077 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 782e1a7cd84c6954fab2b151a7c8a96f, type: 3}
@@ -696,6 +697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerGenerator
   requiredItem: {fileID: 11400000, guid: 4e3b295f21a6e884ebbc817174e7d835, type: 2}
   generatorObject: {fileID: 6277186930034381801}
+  exitHologramMaterial: {fileID: 2100000, guid: 40303cd82f028b74a9f2d4a70ae929fb, type: 2}
 --- !u!4 &5687088824022278948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 782e1a7cd84c6954fab2b151a7c8a96f, type: 3}
