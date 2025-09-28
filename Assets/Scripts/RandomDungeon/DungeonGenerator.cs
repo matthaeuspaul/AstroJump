@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class DungeonGenerator : MonoBehaviour
 {
+#region Information 
     // Directions for tile connections
     enum Direction
     {
@@ -59,17 +60,21 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private List<GameObject> itemPrefabs; // List of item prefabs to spawn in the level
     [SerializeField] private int itemCount; // Number of items to spawn
 
+    #endregion
+
+#region Generate on start
     public void Start()
     {
-        // Generate the level only on the server
-        GenerateLevel();
-        SelectSpawnAndExit();
-        PlaceInteractableElements();
-        PlaceRoof();
-        VisualizePath();
-        SpawnItems();
+        GenerateLevel(); //  Generate the dungeon layout
+        SelectSpawnAndExit(); // Select and place spawn and exit points
+        PlaceInteractableElements(); // Place interactive elements like traps, levers, doors, etc.
+        //PlaceRoof(); // Place roof after tiles to cover the level
+        // activate VisualizePath only for debugging (or cheating)
+        VisualizePath(); // Visualize the main path for debugging
+        // Invoke to ensure Items do not spawn in LoadingScene
+        Invoke("SpawnItems", 0.2f); // spawn items after a short delay
     }
-
+#endregion
     private void GenerateLevel()
     {
         int mapSize = 0;
@@ -205,6 +210,7 @@ public class DungeonGenerator : MonoBehaviour
 
     private bool AreTilesConnected(TileData tileA, TileData tileB, Vector2Int direction)
     {
+        // Check if two tiles are connected in the specified direction
         return HasOpening(tileA, direction) && HasOpening(tileB, Negate(direction));
     }
 
@@ -288,6 +294,7 @@ public class DungeonGenerator : MonoBehaviour
     }
     private bool isTileEmpty(TileInstance tile)
     {
+        // Check if the tile is empty (no interactive elements)
         var data = tile.tileData;
 
         return !data.hasDoor &&
@@ -303,6 +310,7 @@ public class DungeonGenerator : MonoBehaviour
 
     private TileData GetMatchingTile(TileData originalTile, List<TileData> tileList)
     {
+        // Find a tile in tileList that matches the openings of originalTile
         foreach (var tile in tileList)
         {
             if (tile.topOpen == originalTile.topOpen &&
@@ -318,7 +326,7 @@ public class DungeonGenerator : MonoBehaviour
     #region Spawn and Exit Selection
     private void SelectSpawnAndExit()
     {
-
+        // Select spawn and exit tiles ensuring they are empty and a minimum distance apart
         List<TileInstance> emptyTile = new List<TileInstance>();
         int attempts = 0;
         int maxAttempts = 100;
@@ -344,10 +352,12 @@ public class DungeonGenerator : MonoBehaviour
 
         do
         {
+            // randomly select spawn and exit tiles from the list of empty tiles
             spawnTile = emptyTile[Random.Range(0, emptyTile.Count)];
             exitTile = emptyTile[Random.Range(0, emptyTile.Count)];
             attempts++;
         }
+        // Repeat until the tiles are sufficiently apart or max attempts reached
         while (Vector2Int.Distance(spawnTile.gridPosition, exitTile.gridPosition) < minDistanceBetweenSpawnAndExit && attempts < maxAttempts);
 
         if (attempts >= maxAttempts)
@@ -365,6 +375,7 @@ public class DungeonGenerator : MonoBehaviour
         TileInstance generatorTile = FindGeneratorPlacement(emptyTile, exitTile);
         if (generatorTile != null)
         {
+            // Replace matching tile with a generator tile from the generatorTiles list
             ReplaceWithMatchingTile(generatorTile, generatorTiles);
 
             // Link generator to exit with uniqueID
@@ -372,11 +383,13 @@ public class DungeonGenerator : MonoBehaviour
             generatorTile.uniqueID = uniqueID;
             exitTile.uniqueID = uniqueID;
 
+            // Link the generator and exit using their LinkItems components
             var generatorLink = generatorTile.instance.GetComponentInChildren<LinkItems>();
             var exitLink = exitTile.instance.GetComponentInChildren<LinkItems>();
 
             if (generatorLink != null && exitLink != null)
             {
+                // Assign the unique ID to both links
                 generatorLink.linkedItemID = uniqueID;
                 exitLink.linkedItemID = uniqueID;
 
@@ -400,27 +413,31 @@ public class DungeonGenerator : MonoBehaviour
 
     private bool IsOpenOnAllSides(TileData tile)
     {
+        // Check if the tile is open on all sides
         return tile.topOpen && tile.bottomOpen && tile.leftOpen && tile.rightOpen;
     }
     private TileInstance FindGeneratorPlacement(List<TileInstance> emptyTiles, TileInstance exit)
     {
+        // Find a suitable tile for placing the generator
         List<TileInstance> candidates = new List<TileInstance>();
 
         foreach (var tile in emptyTiles)
         {
+            // Skip the exit tile and tiles or if tile data is null
             if (tile == exit || tile.tileData == null) continue;
 
+            // Ensure the tile is sufficiently far from the exit, is empty, and not open on all sides
             float distance = Vector2Int.Distance(tile.gridPosition, exit.gridPosition);
             if (distance >= minGenerDisFromExit && isTileEmpty(tile) && !IsOpenOnAllSides(tile.tileData))
 
             {
-                candidates.Add(tile);
+                candidates.Add(tile); // Add to candidates if it meets criteria
             }
 
         }
         if (candidates.Count == 0) return null;
 
-
+        // Randomly select one of the candidate tiles
         return candidates[Random.Range(0, candidates.Count)];
 
     }
@@ -428,6 +445,7 @@ public class DungeonGenerator : MonoBehaviour
 
     private void ReplaceWithMatchingTile(TileInstance tileInstance, List<TileData> replaceList)
     {
+        // Replace the tile instance with a matching tile from the provided list
         var matchingTile = GetMatchingTile(tileInstance.tileData, replaceList);
         if (matchingTile != null)
         {
@@ -436,7 +454,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 Destroy(tileInstance.instance); // Remove the old instance
             }
-
+            // Instantiate the new tile prefab at the same position
             tileInstance.instance = Instantiate(tileInstance.tileData.prefab, tileInstance.worldPosition, Quaternion.identity, transform);
             tileInstance.instance.name = $"Tile_{tileInstance.gridPosition.x}_{tileInstance.gridPosition.y}_{tileInstance.tileData.name}";
         }
@@ -514,6 +532,7 @@ public class DungeonGenerator : MonoBehaviour
         return null; // No path found   
     }
 
+    // Visualize the found path by changing the material of the tiles in the path
     private void VisualizePath()
     {         // Example usage of FindMainPath to visualize path between spawn and exit
         if (spawnTile != null && exitTile != null)
@@ -547,7 +566,7 @@ public class DungeonGenerator : MonoBehaviour
 
     private int HeuristicCostEstimate(TileInstance a, TileInstance b)
     {
-        // Use Manhattan distance as heuristic
+        // Use Manhattan distance as heuristic for rough estimate
         return Mathf.Abs(a.gridPosition.x - b.gridPosition.x) + Mathf.Abs(a.gridPosition.y - b.gridPosition.y);
     }
 
@@ -614,7 +633,7 @@ public class DungeonGenerator : MonoBehaviour
     // Replace some floor tiles with wall tiles to prevent player from walking around traps or other elements
     private void PlaceInteractableElements()
     {
-
+        // Find the main path from spawn to exit
         List<TileInstance> mainPath = FindMainPath(spawnTile, exitTile);
         if (mainPath == null || mainPath.Count == 0)
         {
@@ -633,13 +652,6 @@ public class DungeonGenerator : MonoBehaviour
                 sidePath.Add(tile); // Collect side tiles that are empty and not occupied
             }
         }
-
-        // Placement rule
-        // Traps: Place on empty floor tiles, avoid walls and tiles adjacent to other interact
-        // Levers: Place on tiles with walls, ensure they are not too close to other levers or doors
-        // Doors: Place on wall tiles, ensure they connect to open paths
-        // Generators: Place on walls, avoid clustering
-        // Pressure Plates: Place on empty floor tiles, avoid clustering
 
         // After placing all interactable elements, pair activators and receivers
         PlaceActivatorReceiverInPairs(mainPath);
@@ -662,6 +674,7 @@ public class DungeonGenerator : MonoBehaviour
 
         while (placed < pairCount && maxAttempts-- > 0)
         {
+            // randomly select an activator and receiver
             TileData activatorTileData = activators[Random.Range(0, activators.Count)];
             TileInstance activatorTile = FindMatchingMapTile(activatorTileData, usedTiles, mainPath);
             if (activatorTile == null)
@@ -681,15 +694,17 @@ public class DungeonGenerator : MonoBehaviour
             ReplaceTileWith(receiverTile, receiverTileData);
             if (receiverTileData.hasDoor)
             {
-                SwapTileBehindDoor(receiverTile, tileOptions.ToList());
+                SwapTileBehindDoor(receiverTile, tileOptions.ToList()); // Replace tile behind door with a wall tile
             }
             placed++;
 
+            // Link the activator and receiver using their LinkItems components
             LinkItems activatorLink = activatorTile.instance.GetComponentInChildren<LinkItems>();
             LinkItems receiverLink = receiverTile.instance.GetComponentInChildren<LinkItems>();
 
             if (activatorLink != null && receiverLink != null)
             {
+                // Assign the unique ID to both links
                 activatorLink.linkedItemID = uniqueID;
                 receiverLink.linkedItemID = uniqueID;
 
@@ -705,14 +720,17 @@ public class DungeonGenerator : MonoBehaviour
             usedTiles.Remove(receiverTile); // Remove receiver from valid tiles to avoid re-selection
         }
     }
-    private bool AreTilesAdjacent(TileInstance a, TileInstance b)
+
+    // keeping this in case I need it later
+   /* private bool AreTilesAdjacent(TileInstance a, TileInstance b)
     {
         int dx = Mathf.Abs(a.gridPosition.x - b.gridPosition.x);
         int dy = Mathf.Abs(a.gridPosition.y - b.gridPosition.y);
         return (dx == 1 && dy == 0) || (dx == 0 && dy == 1);
-    }
+    }*/
     private bool IsEdgeTile(TileInstance tile)
     {
+        // Check if the tile is on the edge of the grid
         int x = tile.gridPosition.x;
         int y = tile.gridPosition.y;
         return !IsInBounds(x - 1, y) || !IsInBounds(x + 1, y) || !IsInBounds(x, y - 1) || !IsInBounds(x, y + 1);
@@ -720,6 +738,7 @@ public class DungeonGenerator : MonoBehaviour
 
     private bool IsNearInteractable(int x, int y)
     {
+        // Check the four adjacent tiles for interactable elements
         Vector2Int[] directions = new Vector2Int[]
         {
             Vector2Int.up,
@@ -730,11 +749,13 @@ public class DungeonGenerator : MonoBehaviour
 
         foreach (var dir in directions)
         {
+            // Calculate the coordinates of the adjacent tile
             int checkX = x + dir.x;
             int checkY = y + dir.y;
 
             if (!IsInBounds(checkX, checkY)) continue;
 
+            // Check if the adjacent tile has any interactable elements
             var neighbor = tileGrid[checkX, checkY];
             if (neighbor == null || neighbor.tileData == null) continue;
 
@@ -751,6 +772,7 @@ public class DungeonGenerator : MonoBehaviour
     }
     private bool HasSameWalls(TileData a, TileData b)
     {
+        // Check if two tiles have the same wall openings
         return a.topOpen == b.topOpen &&
                a.bottomOpen == b.bottomOpen &&
                a.leftOpen == b.leftOpen &&
@@ -966,7 +988,7 @@ public class DungeonGenerator : MonoBehaviour
 
     private void SpawnItems()
     {
-        List<TileInstance> emptyTiles = new List<TileInstance>();
+        Debug.Log($"[SpawnItems] Called in scene: {UnityEngine.SceneManagement.SceneManager.GetActiveScene().name}"); List<TileInstance> emptyTiles = new List<TileInstance>();
         // Collect all empty tiles
         for (int x = 0; x < width; x++)
         {

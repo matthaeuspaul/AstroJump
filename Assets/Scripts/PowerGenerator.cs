@@ -9,9 +9,11 @@ public class PowerGenerator : MonoBehaviour, IInteractable
 
     private bool isActivated = false;
 
-    //<summary>
-    // This method is called when the player interacts with the Power Generator
-    //</summary>
+    ///<summary>
+    /// PowerGenerator:
+    /// This method is called when the player interacts with the Power Generator
+    /// 
+    ///</summary>
     public void Interact()
     {
         if (isActivated) return;
@@ -25,14 +27,17 @@ public class PowerGenerator : MonoBehaviour, IInteractable
             var InvMan = FindFirstObjectByType<InventoryManager>(); // Find the InventoryManager in the scene
             InvMan.ClearItem(); // Remove the used item from inventory
 
+            // Activate the linked exit's trigger collider
             LinkItems link = GetComponent<LinkItems>();
             if (link != null && link.linkedPartner != null)
             {
+                // get all colliders from linked partner
                 Collider[] colliders = link.linkedPartner.GetComponents<Collider>();
                 bool triggerFound = false;
 
                 foreach (var col in colliders)
                 {
+                    // Enable the trigger collider to allow player to exit
                     if (col.isTrigger)
                     {
                         col.enabled = true;
@@ -58,9 +63,9 @@ public class PowerGenerator : MonoBehaviour, IInteractable
         }
     }
 
-    // <summary>
-    // This method checks if the power generator can be interacted with
-    // </summary>
+    /// <summary>
+    /// This method checks if the power generator can be interacted with
+    /// </summary>
     public bool CanInteract()
     {
         if (requiredItem == null) return true; // No item required, always interactable

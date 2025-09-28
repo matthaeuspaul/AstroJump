@@ -402,42 +402,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7346216099227745141, guid: e9b64416d7cbbb54bbe0f0d16918b0c0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2383569766365435936}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9b64416d7cbbb54bbe0f0d16918b0c0, type: 3}
---- !u!1 &675310724348717629 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3726223983613099771, guid: e9b64416d7cbbb54bbe0f0d16918b0c0, type: 3}
-  m_PrefabInstance: {fileID: 4244954352241710278}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6535088797449327289 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6942395432668989055, guid: e9b64416d7cbbb54bbe0f0d16918b0c0, type: 3}
-  m_PrefabInstance: {fileID: 4244954352241710278}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6852820435384676275 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7346216099227745141, guid: e9b64416d7cbbb54bbe0f0d16918b0c0, type: 3}
-  m_PrefabInstance: {fileID: 4244954352241710278}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2383569766365435936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6852820435384676275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66dd15ef642f7a3408e759e4556b8cbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PillarRandomizer
-  pillarPrefabs:
-  - {fileID: 675310724348717629}
-  - {fileID: 6535088797449327289}
-  ticketCount: 0f00000008000000
 --- !u!4 &8841598076672186374 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4637214363500874944, guid: e9b64416d7cbbb54bbe0f0d16918b0c0, type: 3}

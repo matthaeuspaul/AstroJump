@@ -4,10 +4,11 @@ using UnityEngine;
 public class DeathPlane : MonoBehaviour
 {
     /// <summary>
-        ///     DeathPlane:
-        ///     Moves player back to the spawn point in case he falls of the map
-        /// </summary>
-        /// <param name="other"></param>
+    /// DeathPlane:
+    /// Moves player back to the spawn point in case he falls of the map
+    /// Moves items back to the player position + offset in case they fall of the map
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

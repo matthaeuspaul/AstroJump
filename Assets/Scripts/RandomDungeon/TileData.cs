@@ -3,8 +3,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Random Dungeon/Tile Data")]
 public class TileData : ScriptableObject
 {
+    /// <summary>
+    /// TileData:
+    /// Information about a tile used in procedural dungeon generation
+    /// </summary>
+
     // Basic tile properties
-    public int spawnChanceTicket = 1;        // Number of tickets for this tile
+    public int spawnChanceTicket = 1;        // Number of tickets for this tile to influence spawn chance
     public GameObject prefab; // Prefab for the tile
     public bool topOpen;      // Is the top side open
     public bool bottomOpen;   // Is the bottom side open
@@ -20,8 +25,10 @@ public class TileData : ScriptableObject
     public bool hasPortal;          // Does the tile have a portal
     public bool hasPressurePlate;   // Does the tile have a pressure plate
     public bool hasGenerator;       // Does the tile have a generator
-    public bool hasLightActive;     // Does the tile have an active light
-    public bool hasLightInactive;   // Does the tile have an inactive light
+
+    // Lighting elements Placeholder for future use
+    public bool hasLightActive;     // Does the tile have an active light 
+    public bool hasLightInactive;   // Does the tile have an inactive light 
 
     // activator or receiver
 

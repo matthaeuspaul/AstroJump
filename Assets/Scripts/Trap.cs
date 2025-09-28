@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    [SerializeField] private float knockbackForce = 10f; // Force to push the player back
+    [SerializeField] private float knockbackForce = 20f; // Force to push the player back
+
     private void OnTriggerEnter(Collider other)
     {
 

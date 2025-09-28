@@ -247,6 +247,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4535775860052851933, guid: f2852aae10f6a0244a7bfb24dbed7708, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4092776423985775022}
+    - targetCorrespondingSourceObject: {fileID: 4535775860052851933, guid: f2852aae10f6a0244a7bfb24dbed7708, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1848058434241076630}
   m_SourcePrefab: {fileID: 100100000, guid: f2852aae10f6a0244a7bfb24dbed7708, type: 3}
 --- !u!1 &2076907904540069613 stripped
 GameObject:
@@ -272,8 +275,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.017614823, y: 0.020660928, z: 0.010548906}
-  m_Center: {x: -0.000000005960464, y: 0.000022685528, z: 0.0051092356}
+  m_Size: {x: 0.017285477, y: 0.017291198, z: 0.010548906}
+  m_Center: {x: -0.00016462266, y: -0.000030212377, z: 0.0051092356}
 --- !u!95 &4841010572631205160
 Animator:
   serializedVersion: 7
@@ -309,6 +312,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Trap
   knockbackForce: 20
+--- !u!65 &1848058434241076630
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076907904540069613}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.014571979, y: 0.012632968, z: 0.0054528033}
+  m_Center: {x: -0.0025013804, y: 0.000074155265, z: 0.0025611648}
 --- !u!4 &2714054145854100955 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f2852aae10f6a0244a7bfb24dbed7708, type: 3}
