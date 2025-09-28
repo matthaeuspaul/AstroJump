@@ -21,8 +21,8 @@ EditorBuildSettings:
     path: Assets/Scenes/ReferenceScene.unity
     guid: 1404c325e9b39b143bbfe1e624af0ba6
   - enabled: 1
-    path: Assets/Scenes/EnemyAICopy.unity
-    guid: 4d9cc6912f55907448f99412c8579671
+    path: Assets/Scenes/Planet3.unity
+    guid: 9637242c5e520eb49a58018866af4365
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

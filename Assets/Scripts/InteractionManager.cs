@@ -2,6 +2,8 @@ using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
+using UnityEngine.InputSystem;
 
 public class InteractionManager : MonoBehaviour
 {
@@ -15,9 +17,32 @@ public class InteractionManager : MonoBehaviour
     private TMP_Text interactionText; // Text component for displaying prompts
 
 
+
     private void Start()
     {
-        interactionText = interactionPromptObject.GetComponentInChildren<TMP_Text>();
+       // interactionText = interactionPromptObject.GetComponentInChildren<TMP_Text>();
+        Invoke("InitializePrompt", 1f);
+    }
+
+    private void InitializePrompt()
+    { 
+        mainCamera = Camera.main; // Cache the main camera reference
+        if(PersistanceManager.instance != null)
+        {
+            interactionPromptObject = PersistanceManager.instance.interactionPromptObject;
+            if (interactionPromptObject != null)
+            {
+                interactionText = interactionPromptObject.GetComponentInChildren<TMP_Text>();
+            }
+            else
+            {
+                Debug.LogError("Interaction prompt object is not assigned in PersistanceManager.");
+            }
+        }
+        else
+        {
+            Debug.LogError("PersistanceManager instance not found.");
+        }
     }
 
     // Update is called once per frame
@@ -31,8 +56,9 @@ public class InteractionManager : MonoBehaviour
     // </summary>
     public void CheckForInteraction()
         {
-        if (interactionPromptObject == null) return; // Ensure the prompt object is assigned
-        if (mainCamera == null) mainCamera = Camera.main; // Cache the main camera reference
+        //if (interactionPromptObject == null) return; // Ensure the prompt object is assigned
+        //if (mainCamera == null) mainCamera = Camera.main; // Cache the main camera reference
+        if (mainCamera == null || interactionPromptObject == null || interactionText == null) return; // Ensure everything is assigned
 
         // Cast a ray from the center of the screen
         Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));

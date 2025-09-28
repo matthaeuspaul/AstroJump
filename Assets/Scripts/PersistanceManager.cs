@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class PersistanceManager : MonoBehaviour
 {
-    private static PersistanceManager instance;
+    public static PersistanceManager instance { get; private set; }
 
+    public GameObject interactionPromptObject; // UI element to show interaction prompts    
     // Start is called before the first frame update
     void Start()
     {
