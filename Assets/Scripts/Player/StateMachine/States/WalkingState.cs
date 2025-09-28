@@ -3,6 +3,7 @@ using UnityEngine;
 public class WalkingState : IPlayerState
 {
     private Player _player; // Reference to the Player class
+    private Mud mud;
 
     public WalkingState(Player player) // Constructor to initialize the state with a reference to the Player
     {
@@ -10,8 +11,17 @@ public class WalkingState : IPlayerState
     }
     public void Enter()
     {
-        // Set the player's speed to the walking speed when entering the walking state
-        _player._speed = _player._walkSpeed;
+        mud = GameObject.FindFirstObjectByType<Mud>();
+        if (mud.IsMud())
+        {
+            // Reduce the player's speed when in mud
+            _player._speed = _player._walkSpeed * mud.slwowFactor;
+        }
+        else
+        {
+            // Set the player's speed to the walking speed when entering the walking state
+            _player._speed = _player._walkSpeed;
+        }
         /*
         if (_player.rb.linearVelocity.y < -5f) // Schwellenwert nach Bedarf anpassen
         {

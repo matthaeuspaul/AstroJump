@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     private string currentAnimation = ""; // Current animation state
     [SerializeField] private Collider weaponCollider; // Reference to the weapon collider
     [SerializeField] GameObject _pauseMenu; // Reference to the pause menu GameObject
-    [HideInInspector] public float _speed; // Default walking speed
+    /*[HideInInspector]*/ public float _speed; // Default walking speed
     public Gun gun; // Reference to the Gun component for shooting mechanic
     private bool _isGun = false;
     private bool _isSword = false;

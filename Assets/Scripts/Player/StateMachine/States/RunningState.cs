@@ -3,6 +3,7 @@ using UnityEngine;
 public class RunningState : IPlayerState
 {
     private Player _player; // Reference to the Player class
+    private Mud mud;
 
     public RunningState(Player player) // Constructor to initialize the state with a reference to the Player
     {
@@ -10,9 +11,18 @@ public class RunningState : IPlayerState
     }
 
     public void Enter()
-    { 
-        // Set the player's speed to the running speed when entering the running state
-        _player._speed = _player._runSpeed;
+    {
+        mud = GameObject.FindFirstObjectByType<Mud>();
+        if (mud.IsMud())
+        {
+            // Reduce the player's speed when in mud
+            _player._speed  = _player._runSpeed * mud.slwowFactor;
+        }
+        else
+        {
+            // Set the player's speed to the running speed when entering the running state
+            _player._speed = _player._runSpeed;
+        }
         /*
         if (_player.rb.linearVelocity.y < -5f) // Schwellenwert nach Bedarf anpassen
         {
