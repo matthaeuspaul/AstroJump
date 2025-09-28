@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: f81fa19a6964d0f41aa339ca633cd087
+<<<<<<<< HEAD:Assets/Scenes/NewBattlePlanet.unity.meta
+guid: 4a73f3bb535a51540a1b95ab407f4f29
+========
+guid: 9ec6f8480f62b8445b84c6893bcef59d
+>>>>>>>> Dungeon-Generator:Assets/Scenes/Dungeon generator.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

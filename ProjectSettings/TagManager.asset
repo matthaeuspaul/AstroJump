@@ -9,6 +9,7 @@ TagManager:
   - XYZ
   - Item
   - InteractionPrompt
+  - TrackingPoint
   layers:
   - Default
   - TransparentFX
@@ -20,9 +21,9 @@ TagManager:
   - Target
   - Enemy
   - Player
-  - 
-  - 
-  - 
+  - Roof
+  - Minimap
+  - MinimapLight
   - 
   - 
   - 
