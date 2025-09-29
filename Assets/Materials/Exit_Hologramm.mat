@@ -36,6 +36,7 @@ Material:
   disabledShaderPasses:
   - MOTIONVECTORS
   - DepthOnly
+  - SHADOWCASTER
   m_LockedProperties: _Blend
   m_SavedProperties:
     serializedVersion: 3
