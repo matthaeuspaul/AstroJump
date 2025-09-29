@@ -64,7 +64,6 @@ MonoBehaviour:
   currentHealth: 0
   maxOxygen: 100
   currentOxygen: 0
-  GOS: {fileID: 0}
   UI: {fileID: 4910320300047638636}
   lifeBarFilled: {fileID: 3815944867049666959}
   oxygenBarFilled: {fileID: 691717286199229914}
@@ -81,9 +80,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelTracker
   levelNames:
-  - Planet1
-  - ReferenceScene
-  - Planet1
+  - Dungeon2
+  - NewBattlePlanet
+  - Dungeon1
 --- !u!1001 &838905618627871623
 PrefabInstance:
   m_ObjectHideFlags: 0

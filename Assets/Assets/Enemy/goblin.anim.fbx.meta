@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 112416d73794258458697da8b66de0fd
+guid: 43e42555a1346fb469943b63aa26cb32
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material
-    second: {fileID: 2100000, guid: 3187b69e86f9f7843bb8358e8c50d1ef, type: 2}
+    second: {fileID: 2100000, guid: 8bb44290d38a04d48b5c127c924f69e4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -27,7 +27,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -88,12 +88,7 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton:
-    - name: goblin.anim(Clone)
-      parentName: 
-      position: {x: -0.48975334, y: -0.3356896, z: -0.34715182}
-      rotation: {x: -0.5797242, y: -0.13352634, z: -0.09701256, w: 0.79792184}
-      scale: {x: 9.633684, y: 9.633684, z: 9.633685}
+    skeleton: []
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5

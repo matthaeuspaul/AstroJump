@@ -45,7 +45,7 @@ public class PressurePlate : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         // Check if the entering object is tagged as "Player" or "Item"
-        if (other.CompareTag("Player") || other.CompareTag("Item"))
+        if (other.CompareTag("PlayerFoot") || other.CompareTag("Item"))
         {
             objectInside.Add(other); // Add the object to the HashSet
         }

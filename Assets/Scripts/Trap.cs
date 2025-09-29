@@ -5,6 +5,7 @@ public class Trap : MonoBehaviour
 {
     [SerializeField] private float knockbackForce = 20f; // Force to push the player back
     PlayerStatsManager PlayerStatsManager;
+    private Player player;
 
     private void Start()
     {
@@ -18,11 +19,16 @@ public class Trap : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("PlayerFoot"))
         {
             Debug.Log("Player hit the trap!");
             // Add logic to damage the player or trigger an effect
             // push player back to direction they came from
+            if (player == null)
+            {
+                player = FindFirstObjectByType<Player>();
+            }
+            player._speed = 2f;
             Transform playerRoot = other.transform.root;
 
             Rigidbody rb = playerRoot.GetComponent<Rigidbody>();
@@ -38,6 +44,17 @@ public class Trap : MonoBehaviour
 
             }
 
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("PlayerFoot"))
+        {
+            if (player == null)
+            {
+                player = FindFirstObjectByType<Player>();
+            }
+            player._speed = player._walkSpeed;
         }
     }
 }

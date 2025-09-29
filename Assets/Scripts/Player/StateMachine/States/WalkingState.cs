@@ -11,8 +11,11 @@ public class WalkingState : IPlayerState
     }
     public void Enter()
     {
-        mud = GameObject.FindFirstObjectByType<Mud>();
-        if (mud.IsMud())
+        if (mud == null)
+        {
+            mud = GameObject.FindFirstObjectByType<Mud>();
+        }
+        if (mud != null && mud.IsMud())
         {
             // Reduce the player's speed when in mud
             _player._speed = _player._walkSpeed * mud.slwowFactor;
