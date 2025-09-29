@@ -80,10 +80,10 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen and hide it
 
-        AssignGUnReference();
+        AssignGunReference();
     }
 
-    private void AssignGUnReference()
+    private void AssignGunReference()
     {
         // Find all Gun components in the scene even if they are inactive
         Gun[] allGuns = Resources.FindObjectsOfTypeAll<Gun>();
@@ -282,11 +282,12 @@ public class Player : MonoBehaviour
                 _attacking = true;
                 gun.Attack(ctx); // Call the Attack method of the Gun component when the attack input is performed
             }
-            else if (_isSword && isGrounded && !isRunning)
+            else if (_isSword /*&& isGrounded && !isRunning*/)
             {
                 _attacking = true;
+                Debug.Log("Sword attack animation not implemented yet");
                 // Trigger attack animation
-                ChangeAnimation("Sword_Attack", 0.1f);
+                // ChangeAnimation("Sword_Attack1", 0.1f);
             }
         }
         else if (ctx.canceled)
