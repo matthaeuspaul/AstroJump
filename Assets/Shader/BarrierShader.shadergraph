@@ -877,7 +877,7 @@
     "m_Precision": 0,
     "m_PreviewExpanded": true,
     "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
+    "m_PreviewMode": 1,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -979,10 +979,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2299.000244140625,
-            "y": -65.99988555908203,
+            "x": -2295.999755859375,
+            "y": -94.99999237060547,
             "width": 116.0,
-            "height": 34.000022888183597
+            "height": 33.99998092651367
         }
     },
     "m_Slots": [
@@ -1301,10 +1301,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2304.000244140625,
-            "y": -15.999914169311524,
-            "width": 124.000244140625,
-            "height": 34.000022888183597
+            "x": -2300.999755859375,
+            "y": -45.00000762939453,
+            "width": 124.0,
+            "height": 33.99999237060547
         }
     },
     "m_Slots": [
@@ -1661,8 +1661,8 @@
     "m_ObjectId": "888b1e1d64dc41ca9d886373ce32b617",
     "m_Title": "DOTS PATTERN",
     "m_Position": {
-        "x": -2357.000244140625,
-        "y": -172.00003051757813
+        "x": -2356.999755859375,
+        "y": -172.0
     }
 }
 
@@ -1879,7 +1879,7 @@
     "m_AlphaMode": 0,
     "m_RenderFace": 2,
     "m_AlphaClip": false,
-    "m_CastShadows": true,
+    "m_CastShadows": false,
     "m_ReceiveShadows": true,
     "m_DisableTint": false,
     "m_AdditionalMotionVectorMode": 0,
@@ -2296,8 +2296,8 @@
     "m_ObjectId": "dab78b95c774487d88da1bf6add5b12f",
     "m_Title": "NOISE",
     "m_Position": {
-        "x": -2622.000244140625,
-        "y": 834.0
+        "x": -2621.999755859375,
+        "y": 833.9998168945313
     }
 }
 
