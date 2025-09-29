@@ -114,7 +114,7 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        Instantiate(selectedSlot.currentItem.itemPrefab, cameraTransform.position + cameraTransform.forward * 3f, cameraTransform.rotation); 
+        Instantiate(selectedSlot.currentItem.itemPrefab, cameraTransform.position + cameraTransform.forward * 1f, cameraTransform.rotation); 
 
         Debug.Log($"Item {selectedSlot.currentItem.itemName} dropped from inventory.");
         ClearItem();

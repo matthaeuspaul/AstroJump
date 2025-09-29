@@ -2122,10 +2122,10 @@ MonoBehaviour:
   playerPrefab: {fileID: 2414195079615279759, guid: a8af18a9cf4b0ba4f99aaf1f772225af, type: 3}
   cinemachineCamera: {fileID: 1402937283}
   cinemachineMinimap: {fileID: 1344777731}
-  energyOrbPrefab: {fileID: 3211850588248303736, guid: a1ba7f1d48bb0ea448913d56d276d75e, type: 3}
+  energyOrbPrefab: {fileID: 7543819298452476183, guid: 502dc820f40a26242b786d4f85b228d7, type: 3}
   energyOrbCount: 1
   itemPrefabs:
-  - {fileID: 6052665596443679477, guid: 5f0ba82b03ab7364daa4653dd01121aa, type: 3}
+  - {fileID: 4906860221167871262, guid: 56d58f2cb1dfc62418a238ae275aea61, type: 3}
   itemCount: 5
 --- !u!4 &1875358207
 Transform:

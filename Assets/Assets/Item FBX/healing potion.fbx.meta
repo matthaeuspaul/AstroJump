@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 93f2cce46f0cb364289a88e2157be0b7
+guid: 677e5a2d8ade4fa44a623fadbd2c651f
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Kiste
-    second: {fileID: 2100000, guid: cc3068be48ad35b4484d94a8f261c188, type: 2}
+      name: Material.001
+    second: {fileID: 2100000, guid: e2b2b956848569c49bdf5eeea0e4e9db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: de86ce7caf5262747af3ce9a0bbd9e9a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
