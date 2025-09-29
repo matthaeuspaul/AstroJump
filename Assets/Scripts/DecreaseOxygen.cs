@@ -22,8 +22,9 @@ public class DecreaseOxygen : MonoBehaviour
 
         if (PlayerStatsManager.instance.currentOxygen <= 0)
         {
-            PlayerStatsManager.instance.currentHealth -= 5f * Time.deltaTime; // Decrease health when oxygen is zero
-            PlayerStatsManager.instance.currentHealth = Mathf.Clamp(PlayerStatsManager.instance.currentHealth, 0, PlayerStatsManager.instance.maxHealth); // Clamp health between 0 and maxHealth
+            PlayerStatsManager.instance.TakeDamage(5f); // Call TakeDamage method when oxygen is zero
+            //PlayerStatsManager.instance.currentHealth -= 5f * Time.deltaTime; // Decrease health when oxygen is zero
+            // PlayerStatsManager.instance.currentHealth = Mathf.Clamp(PlayerStatsManager.instance.currentHealth, 0, PlayerStatsManager.instance.maxHealth); // Clamp health between 0 and maxHealth
         }
         Debug.Log("Current Health: " + PlayerStatsManager.instance.currentHealth);
     }
