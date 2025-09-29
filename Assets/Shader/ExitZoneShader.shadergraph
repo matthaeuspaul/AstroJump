@@ -481,7 +481,7 @@
     "m_Title": "NOISE",
     "m_Position": {
         "x": -2784.0,
-        "y": 1114.9998779296875
+        "y": 1115.0
     }
 }
 
@@ -1186,7 +1186,7 @@
     "m_Title": "DOTS PATTERN",
     "m_Position": {
         "x": -2433.0,
-        "y": 170.99998474121095
+        "y": 171.0
     }
 }
 
@@ -1671,7 +1671,7 @@
     "m_AlphaMode": 0,
     "m_RenderFace": 2,
     "m_AlphaClip": false,
-    "m_CastShadows": true,
+    "m_CastShadows": false,
     "m_ReceiveShadows": true,
     "m_DisableTint": false,
     "m_AdditionalMotionVectorMode": 0,

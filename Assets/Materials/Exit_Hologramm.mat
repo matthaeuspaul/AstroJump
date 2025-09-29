@@ -36,6 +36,7 @@ Material:
   disabledShaderPasses:
   - MOTIONVECTORS
   - DepthOnly
+  - SHADOWCASTER
   m_LockedProperties: _Blend
   m_SavedProperties:
     serializedVersion: 3
@@ -43,7 +44,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Blend: 2
-    - _DotsNoiseScale: 10
+    - _DotsNoiseScale: 1
     - _DstBlend: 1
     - _QueueControl: 0
     - _SrcBlend: 5

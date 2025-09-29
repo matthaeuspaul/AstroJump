@@ -12,7 +12,7 @@ public class PlayerStatsManager : MonoBehaviour
     public float currentOxygen;
 
     [Header("UI References")]
-    private GameObject GOS; // Reference to the Game Over Screen
+    public GameObject GOS; // Reference to the Game Over Screen
     [SerializeField] private GameObject UI;  // Reference to the main UI
     [SerializeField] private Image lifeBarFilled; // Reference to the health bar UI element
     [SerializeField] private Image oxygenBarFilled; // Reference to the oxygen bar UI element
@@ -132,7 +132,7 @@ public class PlayerStatsManager : MonoBehaviour
 
     public void CheckForDeath()
     {
-        if (currentHealth <= 0 || currentOxygen <= 0)
+        if (currentHealth <= 0)
         {
             // GameObject UI = GameObject.Find("UI");
             if (GOS != null) GOS.SetActive(true); else Debug.Log("GameOverScreen not found.");

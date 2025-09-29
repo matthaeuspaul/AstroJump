@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameOverScreen : MonoBehaviour
 {
     private Player _player; // Reference to the Player script for accessing player state
+    private LevelTracker _levelTracker;
 
     private void Awake()
     {
