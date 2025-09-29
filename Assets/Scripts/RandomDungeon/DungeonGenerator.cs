@@ -68,9 +68,9 @@ public class DungeonGenerator : MonoBehaviour
         GenerateLevel(); //  Generate the dungeon layout
         SelectSpawnAndExit(); // Select and place spawn and exit points
         PlaceInteractableElements(); // Place interactive elements like traps, levers, doors, etc.
-        //PlaceRoof(); // Place roof after tiles to cover the level
+        PlaceRoof(); // Place roof after tiles to cover the level
         // activate VisualizePath only for debugging (or cheating)
-        VisualizePath(); // Visualize the main path for debugging
+        //VisualizePath(); // Visualize the main path for debugging
         // Invoke to ensure Items do not spawn in LoadingScene
         Invoke("SpawnItems", 0.2f); // spawn items after a short delay
     }
