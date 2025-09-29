@@ -78,7 +78,7 @@ public class PlayerStatsManager : MonoBehaviour
                     Debug.Log($"Used {itemData.itemName}, took 20 damage.");
                     return true;
                 case ItemData.ActionType.FillOxygen:
-                    FillOxygen(20);
+                    FillOxygen(50);
                     Debug.Log($"Used {itemData.itemName}, filled 20 oxygen points.");
                     return true;
                 default:
@@ -135,6 +135,12 @@ public class PlayerStatsManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             // GameObject UI = GameObject.Find("UI");
+            if(GOS == null)
+            {
+                GOS = FindObjectsInactiveByName("GameOverScreen");
+                if (GOS == null) Debug.LogWarning("GameOverScreen reference not set in PlayerStatsManager.");
+                else Debug.Log("GameOverScreen reference found.");
+            }
             if (GOS != null) GOS.SetActive(true); else Debug.Log("GameOverScreen not found.");
             if (UI != null) UI.SetActive(false); else Debug.Log("UI not found.");
 

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56c74ca0da8800419d9f94eb37b7618, type: 3}
+  m_Name: SpawnBClosed
+  m_EditorClassIdentifier: Assembly-CSharp::TileData
+  spawnChanceTicket: 1
+  prefab: {fileID: 7439888961184687759, guid: bc4900be815d256409b49097597cbc45, type: 3}
+  topOpen: 1
+  bottomOpen: 0
+  leftOpen: 1
+  rightOpen: 1
+  hasTrap: 0
+  hasLever: 0
+  hasDoor: 0
+  hasSpawnPoint: 1
+  hasPortal: 0
+  hasPressurePlate: 0
+  hasGenerator: 0
+  hasLightActive: 0
+  hasLightInactive: 0
+  isActivator: 0
+  isReceiver: 0

@@ -9,26 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Titlescreen.unity
     guid: 58de5910762cbbd4baf1d2161bc50f8d
   - enabled: 1
-    path: Assets/Scenes/Planet1.unity
-    guid: d42e26b1fc56e684cb74ad44b455477c
-  - enabled: 1
     path: Assets/Scenes/LoadingScene.unity
     guid: 6162c060fbc3c9d418783e30dad16af2
-  - enabled: 1
-    path: Assets/Scenes/ReferenceScene.unity
-    guid: 1404c325e9b39b143bbfe1e624af0ba6
-  - enabled: 1
-    path: Assets/Scenes/Dungeon generator.unity
-    guid: dc52bbe0f8be81040b792b5c0b4658c0
   - enabled: 1
     path: Assets/Scenes/Dungeon1.unity
     guid: 8f9303735b28ecc4885dcd1e8da1848b
   - enabled: 1
     path: Assets/Scenes/Dungeon2.unity
-    guid: df846bc81732bc74ea215fc268be1c10
+    guid: 4994dce90aa860e4b8e3f13720e7c38b
   - enabled: 1
-    path: Assets/Scenes/NewBattlePlanet.unity
-    guid: 4a73f3bb535a51540a1b95ab407f4f29
+    path: Assets/Scenes/BattlePlanet.unity
+    guid: 63dd1b5ea5e1ff4448d2b025d58b9f68
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -22,6 +22,7 @@ public class EnemySpawn : MonoBehaviour
     private float waveTimer = 0f;
     private float nextSceneTimer = 0f;
 
+    private LevelTracker levelTracker;
     private enum WaveState
     {
         WaitingForNextWave,
@@ -39,6 +40,7 @@ public class EnemySpawn : MonoBehaviour
 
     void Start()
     {
+        levelTracker = FindFirstObjectByType<LevelTracker>();
         UpdateWaveInfoUI();
         // Instantly start the first wave
         StartCoroutine(StartNextWaveCoroutine());
@@ -62,7 +64,17 @@ public class EnemySpawn : MonoBehaviour
 
             if (nextSceneTimer >= countdownToNextScene)
             {
+                if (levelTracker.ReachedFinalLevel())
+                {
+                    Debug.Log("Reached final level, loading Endscreen");
+                    LevelLoadingManagerer.instance.StartLevelTransition("Titlescreen");
+                    Cursor.lockState = CursorLockMode.None;
+                    Destroy(GameObject.Find("PersistanceManager(Clone)")); // Destroy the PersistanceManager to reset game state
+                    return;
+                }
+                string nextScene = levelTracker.NextSceneName();
                 LevelLoadingManagerer.instance.StartLevelTransition(nextScene);
+                levelTracker.IncrementLevel();
             }
             return; // Don't process other logic when transitioning
         }

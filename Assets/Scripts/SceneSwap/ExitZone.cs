@@ -26,7 +26,10 @@ public class ExitZone : MonoBehaviour
             if (levelTracker.ReachedFinalLevel())
              {
                  Debug.Log("Reached final level, loading Endscreen");
-                 return;
+                 LevelLoadingManagerer.instance.StartLevelTransition("Titlescreen");
+                 Cursor.lockState = CursorLockMode.None;
+                Destroy(GameObject.Find("PersistanceManager(Clone)")); // Destroy the PersistanceManager to reset game state
+                return;
              }
             // gets the next scene name from LevelTracker
             string nextScene = levelTracker.NextSceneName();
