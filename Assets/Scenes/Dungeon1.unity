@@ -2166,7 +2166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2545693395457189938, guid: d678f243522c162469ff9051dc28c3fb, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3281983460603521593, guid: d678f243522c162469ff9051dc28c3fb, type: 3}
       propertyPath: m_Mesh
@@ -2186,7 +2186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6403012123588788641, guid: d678f243522c162469ff9051dc28c3fb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6475426129211733651, guid: d678f243522c162469ff9051dc28c3fb, type: 3}
       propertyPath: fpsCam
@@ -2194,7 +2194,7 @@ PrefabInstance:
       objectReference: {fileID: 173012605}
     - target: {fileID: 6514242873172106176, guid: d678f243522c162469ff9051dc28c3fb, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2352,7 +2352,7 @@ MonoBehaviour:
   energyOrbPrefab: {fileID: 7543819298452476183, guid: 502dc820f40a26242b786d4f85b228d7, type: 3}
   energyOrbCount: 1
   itemPrefabs:
-  - {fileID: 6719634713402648371, guid: 27b142bbe9ef6da468033688491e3cd8, type: 3}
+  - {fileID: 4906860221167871262, guid: 56d58f2cb1dfc62418a238ae275aea61, type: 3}
   itemCount: 5
 --- !u!4 &1875358207
 Transform:
