@@ -1,0 +1,11 @@
+{
+    "asset": "fe572bc181cfffe41846d975b1840d2d",
+    "fileName": "019994c3-5f21-7302-97d8-21c7655c64d2.pose.json",
+    "prompt": "Sword attack right arm, one swing: windup + slash + back to idle",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 1233469046,
+    "w3CTraceId": "f6f6604be9efa85d62dba08d7ae4bb2c",
+    "isTrimmed": false
+}

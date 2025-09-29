@@ -28,22 +28,44 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.destination = target.position;
+
+        if (agent != null)
+        {
+            agent.updateRotation = false;
+
+            if (target != null)
+            {
+                agent.destination = target.position;
+            }
+        }
     }
 
     private void Update()
     {
-        if (target != null)
+        if (target != null && agent != null)
         {
             agent.destination = target.position;
 
-            // Check if player is in attack range
+            LookAtPlayer();
+
             float distanceToPlayer = Vector3.Distance(transform.position, target.position);
             if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
             {
                 DealDamage(target.gameObject);
                 lastAttackTime = Time.time;
             }
+        }
+    }
+
+    private void LookAtPlayer()
+    { 
+        Vector3 direction = target.position - transform.position;
+        direction.y = 0;
+
+        if (direction.sqrMagnitude > 0.001f) 
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = lookRotation * Quaternion.Euler(0, 90, 0);
         }
     }
 
