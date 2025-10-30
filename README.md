@@ -54,21 +54,21 @@ PROJECT TASKS:
 - performance optimaized and efficient
 - create a trailer
 
-  TOOLS USED:
+TOOLS USED:
 
-  - Unity
-  - C#
-  - Visual Studio
-  - Blender
-  - Substance Painter
-  - Adobe Illustrator
-  - Adobe Indesign
-  - Adobe Photoshop
-  - DaVinci Resolve
-  - OBS Studio
-  - Mixamo for playable Character animation 
-  - Google Docs
-  - Sourcetree
+- Unity
+- C#
+- Visual Studio
+- Blender
+- Substance Painter
+- Adobe Illustrator
+- Adobe Indesign
+- Adobe Photoshop
+- DaVinci Resolve
+- OBS Studio
+- Mixamo for playable Character animation 
+- Google Docs
+- Sourcetree
 
 
  Disclaimer: This project is entirely for educational purpose.
