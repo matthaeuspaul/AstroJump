@@ -16,13 +16,13 @@ public class PauseMenu : MonoBehaviour
     }
     public void Restart()
     {
-        Destroy(GameObject.Find("PersistanceManager")); // Destroy the PersistanceManager to reset game state
+        PersistanceManager.instance.DestoryObject(); // Destroy the PersistanceManager to reset game state
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene to restart the game
         Time.timeScale = 1f; // Ensure the game is unpaused
     }
     public void LoadTitlescreen()
     {
-        Destroy(GameObject.Find("PersistanceManager")); // Destroy the PersistanceManager to reset game state
+        PersistanceManager.instance.DestoryObject(); // Destroy the PersistanceManager to reset game state
         SceneManager.LoadScene("Titlescreen"); // Load the Title Screen scene
         Time.timeScale = 1f; // Ensure the game is unpaused
 

@@ -102,6 +102,14 @@ public class PlayerStatsManager : MonoBehaviour
         UpdateHealthUI();
     }
 
+    public void ResetStats()
+    {
+        currentHealth = maxHealth;
+        UpdateHealthUI();
+        currentOxygen = maxOxygen;
+        UpdateOxygenUI();
+    }
+
     private void FillOxygen(float amount)
     {
         currentOxygen += amount;

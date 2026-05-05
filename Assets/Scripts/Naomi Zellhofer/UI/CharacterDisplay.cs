@@ -37,4 +37,5 @@ public class CharacterDisplay : MonoBehaviour
             Debug.Log("Weiblicher Charakter wird angezeigt");
         }
     }
+
 }
